@@ -20,10 +20,8 @@ public class NPC : MonoBehaviour
 
     private bool _dialoging = false;
 
-    #region 프로퍼티
     public NPCDataSO npcDataSO => _npcDataSO;
     public DialogDataSO dialogDataSO => _dialogDataSO;
-    #endregion
 
     protected virtual void Start()
     {
@@ -34,6 +32,16 @@ public class NPC : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
             TryDialog();
+    }
+
+    private void OnValidate()
+    {
+        if (_npcDataSO == null)
+            return;
+
+        _nameText.SetText(_npcDataSO.npcName);
+        _subNameText.SetText(_npcDataSO.subName);
+        _subNameText.color = _npcDataSO.subColor;
     }
 
     public virtual void TryDialog()
@@ -64,15 +72,5 @@ public class NPC : MonoBehaviour
         {
             _doInteractObj.SetActive(false);
         }
-    }
-
-    private void OnValidate()
-    {
-        if (_npcDataSO == null)
-            return;
-
-        _nameText.SetText(_npcDataSO.npcName);
-        _subNameText.SetText(_npcDataSO.subName);
-        _subNameText.color = _npcDataSO.subColor;
     }
 }

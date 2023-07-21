@@ -14,7 +14,7 @@ public class MonoSingleTon<T> : MonoBehaviour where T : MonoBehaviour
                 instance = FindObjectOfType<T>();
                 if (instance == null)
                 {
-                    //Debug.Log($"{typeof(T)} 오브젝트가 없음");
+                    Debug.LogWarning($"{typeof(T)} instance 없음.");
                 }
             }
             return instance;

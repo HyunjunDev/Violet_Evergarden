@@ -9,6 +9,19 @@ public class ColorHierarchy : MonoBehaviour
     //얘는 하이라키 상에 있는 이 스크립트가 붙어있는 모든 오브젝트를 딕셔너리로 관리하는 거
     private static Dictionary<Object, ColorHierarchy> coloredObjects = new Dictionary<Object, ColorHierarchy>();
 
+    private void Reset()
+    {
+        OnValidate();
+    }
+
+    private void OnValidate()
+    {
+        if (coloredObjects.ContainsKey(this.gameObject) == false)
+        {
+            coloredObjects.Add(this.gameObject, this);
+        }
+    }
+
     static ColorHierarchy()
     {
         EditorApplication.hierarchyWindowItemOnGUI += HandleDraw;
@@ -53,18 +66,5 @@ public class ColorHierarchy : MonoBehaviour
     public string prefix = "@";
     public Color backColor = Color.white;
     public Color fontColor = Color.black;
-
-    private void Reset()
-    {
-        OnValidate();
-    }
-
-    private void OnValidate()
-    {
-        if (coloredObjects.ContainsKey(this.gameObject) == false)
-        {
-            coloredObjects.Add(this.gameObject, this);
-        }
-    }
 #endif
 }

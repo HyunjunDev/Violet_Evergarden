@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoSingleTon<DialogManager>
 {
-    //private Player _player = null;
-
     private Coroutine _dialogCoroutine = null;
     private bool _excuting = false;
     private bool _input = false;
@@ -34,9 +32,21 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         _sb = new StringBuilder();
         _dialogCanvas.SetActive(false);
-        //_player = FindObjectOfType<Player>();
     }
 
+    private void Update()
+    {
+        if (_excuting == false || _input)
+            return;
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            _input = true;
+        }
+    }
+
+    /// <summary>
+    /// Dialog를 강제로 종료시킵니다.
+    /// </summary>
     public void DialogForceExit()
     {
         StopCoroutine(_dialogCoroutine);
@@ -56,21 +66,37 @@ public class DialogManager : MonoSingleTon<DialogManager>
             StartCoroutine(DialogCooltimeCoroutine());
     }
 
-    public bool DialogStart(DialogDataSO data, Action Callback = null)
+
+    /// <summary>
+    /// 다이얼로그를 시작합니다.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="Callback"></param>
+    /// <returns></returns>
+    public bool DialogStart(DialogDataSO data)
+    {
+        return DialogStart(data, null);
+    }
+
+    /// <summary>
+    /// 다이얼로그를 시작합니다. 다이얼로그가 끝난 후 callback을 실행합니다.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="callback"></param>
+    /// <returns></returns>
+    public bool DialogStart(DialogDataSO data, Action callback)
     {
         if (_dialogLock || _excuting)
             return false;
         _excuting = true;
         _input = false;
         _dialogCanvas.SetActive(true);
-        _dialogCoroutine = StartCoroutine(DialogCoroutine(data, Callback));
+        _dialogCoroutine = StartCoroutine(DialogCoroutine(data, callback));
         return true;
     }
 
-    private IEnumerator DialogCoroutine(DialogDataSO data, Action Callback = null)
+    private IEnumerator DialogCoroutine(DialogDataSO data, Action callback = null)
     {
-        //_player.EntityActionExit(ActionType.MeleeAttack, ActionType.Dash, ActionType.Move);
-        //_player.AgentInput.enabled = false;
         _sb.Clear();
         DialogData curData = null;
         for (int i = 0; i < data.dialogDatas.Count; i++)
@@ -104,10 +130,8 @@ public class DialogManager : MonoSingleTon<DialogManager>
             }
         }
 
-        //_player.AgentInput.enabled = true;
         DialogEnd();
-        Callback?.Invoke();
-        //ActionKey로 Aciton
+        callback?.Invoke();
     }
 
     private IEnumerator DialogCooltimeCoroutine()
@@ -115,15 +139,5 @@ public class DialogManager : MonoSingleTon<DialogManager>
         _dialogLock = true;
         yield return new WaitForSeconds(_dialogCooltime);
         _dialogLock = false;
-    }
-
-    private void Update()
-    {
-        if (_excuting == false || _input)
-            return;
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            _input = true;
-        }
     }
 }
