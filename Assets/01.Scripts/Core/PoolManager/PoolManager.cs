@@ -5,7 +5,7 @@ public class PoolManager : MonoSingleTon<PoolManager>
 {
     [SerializeField]
     private PoolDataScriptableObject _poolDataSO = null;
-    private Dictionary<PoolType, Queue<PoolableObject>> _poolDic = new Dictionary<PoolType, Queue<PoolableObject>>();
+    private Dictionary<EPoolType, Queue<PoolableObject>> _poolDic = new Dictionary<EPoolType, Queue<PoolableObject>>();
     private Transform _rootTrm = null;
 
     private void Awake()
@@ -54,7 +54,7 @@ public class PoolManager : MonoSingleTon<PoolManager>
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public PoolableObject Pop(PoolType type)
+    public PoolableObject Pop(EPoolType type)
     {
         if (_poolDic.ContainsKey(type) == false)
         {
@@ -84,7 +84,7 @@ public class PoolManager : MonoSingleTon<PoolManager>
     /// <typeparam name="T"></typeparam>
     /// <param name="type"></param>
     /// <returns></returns>
-    public T Pop<T>(PoolType type)
+    public T Pop<T>(EPoolType type)
     {
         return Pop(type).GetComponent<T>();
     }
@@ -95,7 +95,7 @@ public class PoolManager : MonoSingleTon<PoolManager>
     /// <param name="type"></param>
     /// <param name="parent"></param>
     /// <returns></returns>
-    public PoolableObject Pop(PoolType type, Transform parent)
+    public PoolableObject Pop(EPoolType type, Transform parent)
     {
         PoolableObject target = Pop(type);
         target.transform.SetParent(parent);

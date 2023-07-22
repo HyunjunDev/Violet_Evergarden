@@ -1,5 +1,5 @@
 [System.Serializable]
-public enum PoolType
+public enum EPoolType
 {
     None,
     Audio,
