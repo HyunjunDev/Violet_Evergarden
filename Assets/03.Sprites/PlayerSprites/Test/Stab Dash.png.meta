@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d019c468e441d2345aaaf9030155080d
+guid: d11280c437d42ac4eb774d1cc25f2847
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walk_0
+      name: Stab Dash_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29ee2868895ee4842a1fe9a89fcc60a6
-      internalID: 1195423793
+      spriteID: 4d23d9fb606a08f4dae1643f6a6680cb
+      internalID: 1690044461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_1
+      name: Stab Dash_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcc35b6c1dc8d1d4fa533e1e9651e88f
-      internalID: 2138646498
+      spriteID: 7bd233fa30a813f44aaa3697ae2848bc
+      internalID: 1234666998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_2
+      name: Stab Dash_2
       rect:
         serializedVersion: 2
         x: 128
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44f1e4c7771724b4688e2f8ef34f9c12
-      internalID: -1718992878
+      spriteID: 1236c0c43695f7141a11c3819d84934a
+      internalID: -49785806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_3
+      name: Stab Dash_3
       rect:
         serializedVersion: 2
         x: 192
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d03ac62bbcbc30140bbe4c52e5478abe
-      internalID: -175911396
+      spriteID: 3a0988b3eca111f4595c0d46bb906ffc
+      internalID: 1725326171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_4
+      name: Stab Dash_4
       rect:
         serializedVersion: 2
         x: 256
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 784527db00d91bd469e6f7dae87fa557
-      internalID: -1412414213
+      spriteID: 903c7d5187ebfce40832da9ef7820c9a
+      internalID: -44901654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_5
+      name: Stab Dash_5
       rect:
         serializedVersion: 2
         x: 320
@@ -242,8 +242,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18235a96026cbb741be3de93a9772c3e
-      internalID: 1089581698
+      spriteID: 55185c844e80a0048b742fe0ae4df462
+      internalID: -236263009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stab Dash_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21918ecefb687df479d9ef3aa481759a
+      internalID: -271929148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stab Dash_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 920132ca8f4606040973e6cce09bf779
+      internalID: -767039157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stab Dash_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 756d17890f1fd684480d6696ea539cc1
+      internalID: 28138161
       vertices: []
       indices: 
       edges: []
@@ -259,12 +322,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Walk_0: 1195423793
-      Walk_1: 2138646498
-      Walk_2: -1718992878
-      Walk_3: -175911396
-      Walk_4: -1412414213
-      Walk_5: 1089581698
+      Stab Dash_0: 1690044461
+      Stab Dash_1: 1234666998
+      Stab Dash_2: -49785806
+      Stab Dash_3: 1725326171
+      Stab Dash_4: -44901654
+      Stab Dash_5: -236263009
+      Stab Dash_6: -271929148
+      Stab Dash_7: -767039157
+      Stab Dash_8: 28138161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

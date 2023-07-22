@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d019c468e441d2345aaaf9030155080d
+guid: d5fa734395a9a81429813ada2724ab16
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walk_0
+      name: Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29ee2868895ee4842a1fe9a89fcc60a6
-      internalID: 1195423793
+      spriteID: 480ad7e9f4bd8a048af2736c7baa711e
+      internalID: 1073739676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_1
+      name: Idle_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcc35b6c1dc8d1d4fa533e1e9651e88f
-      internalID: 2138646498
+      spriteID: 3dc7814115621f14cab8cb046c8eef3d
+      internalID: 590828892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_2
+      name: Idle_2
       rect:
         serializedVersion: 2
         x: 128
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44f1e4c7771724b4688e2f8ef34f9c12
-      internalID: -1718992878
+      spriteID: 60a248dc1441eb743a7a62f33bc2480e
+      internalID: 382486739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_3
+      name: Idle_3
       rect:
         serializedVersion: 2
         x: 192
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d03ac62bbcbc30140bbe4c52e5478abe
-      internalID: -175911396
+      spriteID: 9e3013dad4da8d94dbae8a074b3c6424
+      internalID: -1702669835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_4
+      name: Idle_4
       rect:
         serializedVersion: 2
         x: 256
@@ -221,29 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 784527db00d91bd469e6f7dae87fa557
-      internalID: -1412414213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18235a96026cbb741be3de93a9772c3e
-      internalID: 1089581698
+      spriteID: ce637081d8c7f994da71b72c69eb415e
+      internalID: 2108438214
       vertices: []
       indices: 
       edges: []
@@ -259,12 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Walk_0: 1195423793
-      Walk_1: 2138646498
-      Walk_2: -1718992878
-      Walk_3: -175911396
-      Walk_4: -1412414213
-      Walk_5: 1089581698
+      Idle_0: 1073739676
+      Idle_1: 590828892
+      Idle_2: 382486739
+      Idle_3: -1702669835
+      Idle_4: 2108438214
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

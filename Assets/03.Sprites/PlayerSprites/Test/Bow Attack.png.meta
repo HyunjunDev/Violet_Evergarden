@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d019c468e441d2345aaaf9030155080d
+guid: f5fa824dbcb4ba44a88a233c305468e8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walk_0
+      name: Bow Attack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29ee2868895ee4842a1fe9a89fcc60a6
-      internalID: 1195423793
+      spriteID: e6a9ba956ecab2b4181696ed541bec92
+      internalID: -615954760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_1
+      name: Bow Attack_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcc35b6c1dc8d1d4fa533e1e9651e88f
-      internalID: 2138646498
+      spriteID: f53262c8bf66bc742a0516d89bb09a36
+      internalID: 456198811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_2
+      name: Bow Attack_2
       rect:
         serializedVersion: 2
         x: 128
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44f1e4c7771724b4688e2f8ef34f9c12
-      internalID: -1718992878
+      spriteID: c0eb755470d6e994fa1af89cf90af81b
+      internalID: -1763281745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_3
+      name: Bow Attack_3
       rect:
         serializedVersion: 2
         x: 192
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d03ac62bbcbc30140bbe4c52e5478abe
-      internalID: -175911396
+      spriteID: b5ff54fdd23e6964f9212c69428792f3
+      internalID: 703387317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_4
+      name: Bow Attack_4
       rect:
         serializedVersion: 2
         x: 256
@@ -221,29 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 784527db00d91bd469e6f7dae87fa557
-      internalID: -1412414213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18235a96026cbb741be3de93a9772c3e
-      internalID: 1089581698
+      spriteID: f785a1c87719ea7449addc5b26f0642f
+      internalID: 748567490
       vertices: []
       indices: 
       edges: []
@@ -259,12 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Walk_0: 1195423793
-      Walk_1: 2138646498
-      Walk_2: -1718992878
-      Walk_3: -175911396
-      Walk_4: -1412414213
-      Walk_5: 1089581698
+      Bow Attack_0: -615954760
+      Bow Attack_1: 456198811
+      Bow Attack_2: -1763281745
+      Bow Attack_3: 703387317
+      Bow Attack_4: 748567490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
