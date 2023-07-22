@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 149520569}
   - component: {fileID: 149520571}
+  - component: {fileID: 149520573}
   - component: {fileID: 149520572}
   m_Layer: 0
   m_Name: GenCharacter
@@ -197,6 +198,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &149520573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149520568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9060250ebeebda459f9094ed53901b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &285090346
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +643,7 @@ GameObject:
   - component: {fileID: 1715372403}
   - component: {fileID: 1715372402}
   - component: {fileID: 1715372401}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,6 +748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951816144}
   - component: {fileID: 1951816145}
+  - component: {fileID: 1951816147}
   - component: {fileID: 1951816146}
   m_Layer: 0
   m_Name: HanaCharacter
@@ -799,3 +813,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1951816147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951816143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9060250ebeebda459f9094ed53901b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,7 +6,14 @@ public class MoveModule : CharacterModule
 {
     public void Move(float xInput)
     {
-        _myCharacter.Rigid.velocity = _myCharacter.transform.right * xInput * 3f;
+        if(xInput != 0f)
+        { 
+
+        }
+        else
+        {
+
+        }
     }
 
     public override void Exit()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class CharacterModule
@@ -26,4 +27,16 @@ public abstract class CharacterModule
     protected abstract void InitModule();
 
     public abstract void Exit();
+
+    public virtual void UpdateModule() { }
+
+    protected Coroutine StartCoroutine(IEnumerator enumerator)
+    {
+        return _myCharacter.StartCoroutine(enumerator);
+    }
+
+    protected void StopCoroutine(Coroutine coroutine)
+    {
+        _myCharacter.StopCoroutine(coroutine);
+    }
 }
