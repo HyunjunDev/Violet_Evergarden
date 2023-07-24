@@ -10,6 +10,9 @@ public abstract class MyCharacter : MonoBehaviour
 
     protected List<CharacterModule> _modules = new List<CharacterModule>();
 
+    private CharacterMovingManager _characterMovingManager = null;
+    public CharacterMovingManager CharacterMovingManager => _characterMovingManager;
+
     #region 공통 컴포넌트
     private Rigidbody2D _rigid = null;
     public Rigidbody2D Rigid => _rigid;
@@ -17,6 +20,7 @@ public abstract class MyCharacter : MonoBehaviour
 
     protected virtual void Awake()
     {
+        _characterMovingManager = GetComponent<CharacterMovingManager>();   
         _rigid = GetComponent<Rigidbody2D>();
         ModuleSetting();
         for (int i = 0; i < _modules.Count; i++)
