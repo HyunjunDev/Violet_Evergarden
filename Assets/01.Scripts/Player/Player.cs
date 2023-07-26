@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     private int _characterIdx = 0;
     public MyCharacter _currentCharacter = null;
-    public MyCharacter CurrentCharacter => _currentCharacter;
+    public MyCharacter currentCharacter => _currentCharacter;
 
     private PlayerInput _playerInput = null;
 
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         _currentCharacter = _characters[_characterIdx];
         for(int i = 0; i < _characters.Count; i++)
         {
-            _characters[i].TagCharacter(_currentCharacter.CharacterType);
+            _characters[i].TagCharacter(_currentCharacter.characterType);
         }
     }
 }

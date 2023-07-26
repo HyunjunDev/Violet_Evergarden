@@ -13,6 +13,6 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        _player.CurrentCharacter.GetModule<MoveModule>()?.Move(Input.GetAxisRaw("Horizontal"));
+        _player.currentCharacter.GetModule<MoveModule>()?.Move(Input.GetAxisRaw("Horizontal"));
     }
 }

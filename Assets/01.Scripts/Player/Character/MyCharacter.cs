@@ -6,21 +6,24 @@ public abstract class MyCharacter : MonoBehaviour
 {
     [SerializeField]
     private ECharacterType _characterType = ECharacterType.None;
-    public ECharacterType CharacterType => _characterType;
+    public ECharacterType characterType => _characterType;
 
     protected List<CharacterModule> _modules = new List<CharacterModule>();
 
     private CharacterMovingManager _characterMovingManager = null;
-    public CharacterMovingManager CharacterMovingManager => _characterMovingManager;
+    public CharacterMovingManager characterMovingManager => _characterMovingManager;
+    private CharacterCollider _characterCollider = null;
+    public CharacterCollider characterCollider => _characterCollider;
 
     #region 공통 컴포넌트
     private Rigidbody2D _rigid = null;
-    public Rigidbody2D Rigid => _rigid;
+    public Rigidbody2D rigid => _rigid;
     #endregion
 
     protected virtual void Awake()
     {
-        _characterMovingManager = GetComponent<CharacterMovingManager>();   
+        _characterMovingManager = GetComponent<CharacterMovingManager>();
+        _characterCollider = GetComponent<CharacterCollider>();
         _rigid = GetComponent<Rigidbody2D>();
         ModuleSetting();
         for (int i = 0; i < _modules.Count; i++)

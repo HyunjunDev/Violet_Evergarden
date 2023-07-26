@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class CharacterMovingManager : MonoBehaviour
 {
-    private CharacterCollider _characterCollider = null;
-
     [SerializeField]
     private CharacterMoveDataSO _characterMoveDataSO = null;
     private Vector3 _velocity = Vector3.zero;
@@ -17,13 +15,21 @@ public class CharacterMovingManager : MonoBehaviour
     private float _currentHorizontalSpeed = 0f;
     private float _currentVerticalSpeed = 0f;
 
+    public CharacterMoveDataSO characterMoveDataSO => _characterMoveDataSO;
+    public float currentHorizontalSpeed { get => _currentHorizontalSpeed; set => _currentHorizontalSpeed = value; }
+    public float currentVerticalSpeed { get => _currentVerticalSpeed; set => _currentVerticalSpeed = value; }
+
     private void Awake()
     {
-        _characterCollider = GetComponent<CharacterCollider>();
     }
 
     private void Update()
     {
+    }
+
+    private void FixedUpdate()
+    {
+        GetComponent<MyCharacter>().rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
     }
 
     #region Collision

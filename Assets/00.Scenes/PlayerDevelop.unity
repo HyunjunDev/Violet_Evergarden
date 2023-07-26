@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9060250ebeebda459f9094ed53901b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterMoveDataSO: {fileID: 0}
+  _characterMoveDataSO: {fileID: 11400000, guid: 81f95a354caf6894f86e05302e4e0730, type: 2}
 --- !u!61 &1951816148
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -944,3 +944,4 @@ MonoBehaviour:
   _detectorCount: 3
   _detectionRayLength: 0.1
   _rayBuffer: 0.05
+  _coyoteTime: 0.05
