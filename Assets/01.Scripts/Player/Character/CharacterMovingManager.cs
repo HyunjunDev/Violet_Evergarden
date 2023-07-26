@@ -10,16 +10,14 @@ public class CharacterMovingManager : MonoBehaviour
 
     [SerializeField]
     private CharacterMoveDataSO _characterMoveDataSO = null;
-    private Vector3 _velocity = Vector3.zero;
-    private bool _isGrounded = false;
-
-    private Vector3 _lastPosition = Vector3.zero;
-    private float _currentHorizontalSpeed = 0f;
-    private float _currentVerticalSpeed = 0f;
-
     public CharacterMoveDataSO characterMoveDataSO => _characterMoveDataSO;
+
+    private float _currentHorizontalSpeed = 0f;
     public float currentHorizontalSpeed { get => _currentHorizontalSpeed; set => _currentHorizontalSpeed = value; }
+
+    private float _currentVerticalSpeed = 0f;
     public float currentVerticalSpeed { get => _currentVerticalSpeed; set => _currentVerticalSpeed = value; }
+
 
     private void Awake()
     {
@@ -33,6 +31,7 @@ public class CharacterMovingManager : MonoBehaviour
     private void FixedUpdate()
     {
         _myCharacter.rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
+
     }
 
     #region Collision

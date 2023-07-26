@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MoveModule : CharacterModule
 {
-    // 점프 정점에서 1이 됨
-    private float _apexPoint = 0f;
-
     public void Move(float xInput)
     {
         if (_locked)
@@ -30,7 +27,12 @@ public class MoveModule : CharacterModule
                 -moveMgr.characterMoveDataSO.moveClamp, moveMgr.characterMoveDataSO.moveClamp);
 
             // apexBonus 적용
-            var apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _apexPoint;
+            float apexBonus = 0f;
+            if (_myCharacter.GetModule<JumpModule>() != null)
+            {
+                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _myCharacter.GetModule<JumpModule>().apexPoint;
+            }
+
             moveMgr.currentHorizontalSpeed += apexBonus * Time.deltaTime;
         }
         else
@@ -41,8 +43,8 @@ public class MoveModule : CharacterModule
         }
 
         // 왼쪽이나 오른쪽 닿았을 때
-        if (moveMgr.currentHorizontalSpeed > 0 && _myCharacter.characterCollider.GetCollision(EBoundType.Left, false) || 
-            moveMgr.currentHorizontalSpeed < 0 && _myCharacter.characterCollider.GetCollision(EBoundType.Right, false))
+        if (moveMgr.currentHorizontalSpeed < 0f && _myCharacter.characterCollider.GetCollision(EBoundType.Left, false) || 
+            moveMgr.currentHorizontalSpeed > 0f && _myCharacter.characterCollider.GetCollision(EBoundType.Right, false))
         {
             moveMgr.currentHorizontalSpeed = 0;
         }

@@ -16,4 +16,11 @@ MonoBehaviour:
   acceleration: 90
   deAcceleration: 90
   apexBonus: 2
+  fallClamp: -30
+  minFallSpeed: 40
+  maxFallSpeed: 70
+  jumpPower: 12
+  jumpApexThreshold: 10
+  jumpEndEarlyGravityModifier: 3
+  coyoteTime: 0.05
   abc: 0

@@ -7,8 +7,11 @@ public class NPC : MonoBehaviour
 {
     [SerializeField]
     private NPCDataSO _npcDataSO = null;
+    public NPCDataSO npcDataSO => _npcDataSO;
+
     [SerializeField]
     private DialogDataSO _dialogDataSO = null;
+    public DialogDataSO dialogDataSO => _dialogDataSO;
 
     [SerializeField]
     private TextMeshProUGUI _nameText = null;
@@ -20,8 +23,6 @@ public class NPC : MonoBehaviour
 
     private bool _dialoging = false;
 
-    public NPCDataSO npcDataSO => _npcDataSO;
-    public DialogDataSO dialogDataSO => _dialogDataSO;
 
     protected virtual void Start()
     {

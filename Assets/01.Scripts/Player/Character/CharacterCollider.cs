@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,21 +20,18 @@ public class CharacterCollider : MonoBehaviour
     private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
     private bool _colUp, _colRight, _colDown, _colLeft;
 
-    private bool _landingThisFrame = false;
-    private float _timeLeftGrounded = 0f;
+    private Action _onGrounded = null;
+    public Action onGrounded { get => _onGrounded; set => _onGrounded = value; }
 
-    // coyoteTime은 땅을 벗어났을 때 점프할 수 있는 것이 유지되는 시간
-    private bool _coyoteUseable = false;
-    [SerializeField]
-    private float _coyoteTime = 0.05f;
-    private float _coyoteTimer = 0f;
+    private Action _onGroundExited = null;
+    public Action onGroundExited { get => _onGroundExited; set => _onGroundExited = value; }
 
     private void Awake()
     {
         _col = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CheckCollision();
     }
@@ -94,18 +92,17 @@ public class CharacterCollider : MonoBehaviour
 
         // Raycast 쏘기
         var groundedCheck = CheckDetection(_raysDown);
-        _landingThisFrame = false;
         // 저번 프레임에 땅에 닿았고, 이번 프레임에 땅에서 나왔을 때
         if(_colDown && !groundedCheck)
         {
-            _timeLeftGrounded = Time.time;
+            _onGroundExited?.Invoke();
         }
         // 저번 프레임에 공중에 있었고, 이번 프레임에 땅에 닿았을 때
         else if (!_colDown && groundedCheck)
         {
-            _coyoteUseable = true;
-            _landingThisFrame = true;
+            _onGrounded?.Invoke();
         }
+        _colDown = groundedCheck;
         _colUp = CheckDetection(_raysUp);
         _colLeft = CheckDetection(_raysLeft);
         _colRight = CheckDetection(_raysRight);

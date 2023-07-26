@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private List<MyCharacter> _characters = new List<MyCharacter>();
 
     private int _characterIdx = 0;
+
     public MyCharacter _currentCharacter = null;
     public MyCharacter currentCharacter => _currentCharacter;
 

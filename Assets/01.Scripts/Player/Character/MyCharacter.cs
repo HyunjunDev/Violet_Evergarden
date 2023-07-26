@@ -12,10 +12,13 @@ public abstract class MyCharacter : MonoBehaviour
 
     private CharacterMovingManager _characterMovingManager = null;
     public CharacterMovingManager characterMovingManager => _characterMovingManager;
+
     private CharacterCollider _characterCollider = null;
     public CharacterCollider characterCollider => _characterCollider;
+
     private CharacterRenderer _characterRenderer = null;
     public CharacterRenderer characterRenderer => _characterRenderer;
+
     private CharacterAnimation _characterAnimation = null;
     public CharacterAnimation characterAnimation => _characterAnimation;
 
@@ -36,6 +39,14 @@ public abstract class MyCharacter : MonoBehaviour
         for (int i = 0; i < _modules.Count; i++)
         {
             _modules[i].SetCharacter(this);
+        }
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < _modules.Count; i++)
+        {
+            _modules[i].UpdateModule();
         }
     }
 
