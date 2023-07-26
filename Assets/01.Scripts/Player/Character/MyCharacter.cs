@@ -14,6 +14,11 @@ public abstract class MyCharacter : MonoBehaviour
     public CharacterMovingManager characterMovingManager => _characterMovingManager;
     private CharacterCollider _characterCollider = null;
     public CharacterCollider characterCollider => _characterCollider;
+    private CharacterRenderer _characterRenderer = null;
+    public CharacterRenderer characterRenderer => _characterRenderer;
+    private CharacterAnimation _characterAnimation = null;
+    public CharacterAnimation characterAnimation => _characterAnimation;
+
 
     #region 공통 컴포넌트
     private Rigidbody2D _rigid = null;
@@ -24,6 +29,8 @@ public abstract class MyCharacter : MonoBehaviour
     {
         _characterMovingManager = GetComponent<CharacterMovingManager>();
         _characterCollider = GetComponent<CharacterCollider>();
+        _characterRenderer = transform.Find("Renderer").GetComponent<CharacterRenderer>();
+        _characterAnimation = _characterRenderer.GetComponent<CharacterAnimation>();
         _rigid = GetComponent<Rigidbody2D>();
         ModuleSetting();
         for (int i = 0; i < _modules.Count; i++)

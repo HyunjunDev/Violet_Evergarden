@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CharacterMovingManager : MonoBehaviour
 {
+    private MyCharacter _myCharacter = null;
+
     [SerializeField]
     private CharacterMoveDataSO _characterMoveDataSO = null;
     private Vector3 _velocity = Vector3.zero;
@@ -21,6 +23,7 @@ public class CharacterMovingManager : MonoBehaviour
 
     private void Awake()
     {
+        _myCharacter = GetComponent<MyCharacter>();
     }
 
     private void Update()
@@ -29,7 +32,7 @@ public class CharacterMovingManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetComponent<MyCharacter>().rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
+        _myCharacter.rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
     }
 
     #region Collision

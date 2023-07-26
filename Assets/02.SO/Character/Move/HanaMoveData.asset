@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e979d3c5f945364a85d67f94f693eee, type: 3}
   m_Name: HanaMoveData
   m_EditorClassIdentifier: 
-  moveClamp: 13
+  moveClamp: 8
   acceleration: 90
-  deAcceleration: 60
+  deAcceleration: 90
   apexBonus: 2
   abc: 0

@@ -14,6 +14,10 @@ public class MoveModule : CharacterModule
             return;
         }
 
+        // 렌더러, 애니메이션 적용
+        _myCharacter.characterAnimation.MoveInputAnimation(xInput);
+        _myCharacter.characterRenderer.MoveInputFlip(xInput);
+
         CharacterMovingManager moveMgr = _myCharacter.characterMovingManager;
 
         if(xInput != 0f)
@@ -26,7 +30,7 @@ public class MoveModule : CharacterModule
                 -moveMgr.characterMoveDataSO.moveClamp, moveMgr.characterMoveDataSO.moveClamp);
 
             // apexBonus 적용
-            var apexBonus = Mathf.Sign(xInput) * 2f * _apexPoint;
+            var apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _apexPoint;
             moveMgr.currentHorizontalSpeed += apexBonus * Time.deltaTime;
         }
         else
@@ -46,6 +50,7 @@ public class MoveModule : CharacterModule
 
     public override void Exit()
     {
+        _myCharacter.characterMovingManager.currentHorizontalSpeed = 0f;
     }
 
     protected override void InitModule()
