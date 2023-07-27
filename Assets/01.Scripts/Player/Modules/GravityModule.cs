@@ -21,6 +21,11 @@ public class GravityModule : CharacterModule
 
     private void CalculateGravity()
     {
+        if(_locked)
+        {
+            return;
+        }
+
         if (_myCharacter.characterCollider.GetCollision(EBoundType.Down, false))
         {
             // 떨어지고 있을 때 바닥에 닿았다면 속도 초기화

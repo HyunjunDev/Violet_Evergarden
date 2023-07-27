@@ -24,20 +24,15 @@ public class CharacterMovingManager : MonoBehaviour
         _myCharacter = GetComponent<MyCharacter>();
     }
 
-    private void Update()
-    {
-    }
-
     private void FixedUpdate()
     {
         _myCharacter.rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
 
     }
 
-    #region Collision
-    #endregion
-
-    #region Walk
-
-    #endregion
+    public void ResetMovingManager()
+    {
+        _currentHorizontalSpeed = _currentVerticalSpeed = 0f;
+        _myCharacter.rigid.velocity = Vector2.zero;
+    }
 }

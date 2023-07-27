@@ -32,5 +32,10 @@ public class PlayerInput : MonoBehaviour
                 _player.currentCharacter.GetModule<JumpModule>().jumpUp = true;
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            _player.TagCharacter();
+        }
     }
 }

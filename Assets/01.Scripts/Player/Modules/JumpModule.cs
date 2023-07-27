@@ -94,21 +94,21 @@ public class JumpModule : CharacterModule
         if (_jumpDown && _jumpable)
         {
             _myCharacter.characterAnimation.JumpAnimation();
+            Exit();
             _jumpable = false;
-            _jumpDown = false;
             _myCharacter.characterMovingManager.currentVerticalSpeed = _myCharacter.characterMovingManager.characterMoveDataSO.jumpPower;
         }
 
         // ¸Ó¸® ²Ç
-        if (_myCharacter.characterCollider.GetCollision(EBoundType.Up, false) && _myCharacter.rigid.velocity.y > 0f)
+        if (_myCharacter.characterCollider.GetCollision(EBoundType.Up, false) && _myCharacter.characterMovingManager.currentVerticalSpeed > 0f)
         {
-            Debug.Log("¸Ó¸® ²Ç");
             _myCharacter.characterMovingManager.currentVerticalSpeed = 0f;
         }
 
         // »¡¸® ¶³¾îÁö±â
         if (!_myCharacter.characterCollider.GetCollision(EBoundType.Down, false) && !_jumpEndEarly && _jumpUp && _myCharacter.rigid.velocity.y > 0f)
         {
+            _jumpEndEarly = true;
         }
     }
 }

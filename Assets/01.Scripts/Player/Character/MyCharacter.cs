@@ -59,7 +59,16 @@ public abstract class MyCharacter : MonoBehaviour
     /// 캐릭터의 태그 이벤트가 발생할 때 호출됩니다.
     /// </summary>
     /// <param name="characterType"></param>
-    public abstract void TagCharacter(ECharacterType characterType);
+    public abstract void TagCharacter(MyCharacter oldCharacter, MyCharacter changeCharacter, bool myTurn);
+
+    /// <summary>
+    /// 초기화 작업을 수행합니다.
+    /// </summary>
+    public void ResetCharacter()
+    {
+        ExitActionAllModule();
+        _characterMovingManager.ResetMovingManager();
+    }
 
     /// <summary>
     /// 모든 모듈의 Exit 함수를 실행합니다.

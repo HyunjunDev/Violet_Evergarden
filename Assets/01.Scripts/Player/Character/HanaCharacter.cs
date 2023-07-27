@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class HanaCharacter : MyCharacter
 {
-    public override void TagCharacter(ECharacterType characterType)
+    public override void TagCharacter(MyCharacter oldCharacter, MyCharacter changeCharacter, bool myTurn)
     {
-
+        if (myTurn)
+        {
+            gameObject.SetActive(true);
+            transform.position = oldCharacter.transform.position;
+            oldCharacter.gameObject.SetActive(false);
+            characterRenderer.Flip(oldCharacter.characterRenderer.currentFlipState);
+        }
     }
 
     protected override void ModuleSetting()
