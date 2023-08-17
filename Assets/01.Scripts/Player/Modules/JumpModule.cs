@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class JumpModule : CharacterModule
 {
@@ -72,6 +73,9 @@ public class JumpModule : CharacterModule
         }
         Exit();
         _jumpable = true;
+        Vector2 spawnPoint = _myCharacter.transform.position;
+        spawnPoint.y -= 0.3f;
+        GameObject.Instantiate(_myCharacter.LandingParticle, spawnPoint, Quaternion.identity).Play();
     }
 
     private void CalculateJumpApex()
@@ -101,6 +105,10 @@ public class JumpModule : CharacterModule
 
         if (_jumpDown && _jumpable)
         {
+            Vector2 spawnPoint = _myCharacter.transform.position;
+            spawnPoint.y -= 0.3f;
+            GameObject.Instantiate(_myCharacter.JumpParticle, spawnPoint, Quaternion.identity).Play();
+
             _myCharacter.characterAnimation.JumpAnimation();
             Exit();
             _jumpable = false;

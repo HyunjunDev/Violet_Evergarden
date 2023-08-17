@@ -23,6 +23,13 @@ public abstract class MyCharacter : MonoBehaviour
     private CharacterAnimation _characterAnimation = null;
     public CharacterAnimation characterAnimation => _characterAnimation;
 
+    [SerializeField]
+    private ParticleSystem _jumpParticle = null;
+    public ParticleSystem JumpParticle => _jumpParticle;
+
+    [SerializeField]
+    private ParticleSystem _landingParticle = null;
+    public ParticleSystem LandingParticle => _landingParticle;
 
     #region 공통 컴포넌트
     private Rigidbody2D _rigid = null;

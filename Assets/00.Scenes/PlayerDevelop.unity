@@ -2828,6 +2828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterType: 2
+  _jumpParticle: {fileID: 0}
+  _landingParticle: {fileID: 0}
 --- !u!1 &693288439
 GameObject:
   m_ObjectHideFlags: 0
@@ -4440,6 +4442,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterType: 1
+  _jumpParticle: {fileID: 2161081028127047036, guid: 9181a7305253ce844aa00071935e5e2e, type: 3}
+  _landingParticle: {fileID: 645832597855067110, guid: 638b202e477e1af4f8584c9daee411b0, type: 3}
   _dashParticle: {fileID: 293915637098817405, guid: db5f946db3c98b942b3551dc85407472, type: 3}
   _dashTrailParticle: {fileID: 1053582090383664804, guid: 6fe401cd29b70464b8c8072995736944, type: 3}
   _trailColor: {r: 0.83137256, g: 0.30980393, b: 0.79607844, a: 1}
