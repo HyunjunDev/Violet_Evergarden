@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cfb0ab037bdb1f047befb6b28ee56af5
+guid: edc902900c80d22459a1a50dbb67c4fe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,24 +106,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Death_0
+      name: platformerCharacterSheet-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f59f384c8b9d534787d9ffb7a0af397
-      internalID: -1455751029
+      spriteID: bbdbde33fa346514aabd27a8888e7e57
+      internalID: 1117534970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_1
+      name: platformerCharacterSheet-Sheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d77d24030d327124eb582b6e6ee4fdd0
-      internalID: 1497205673
+      spriteID: 0235738a54ffa804e9fbd760c63fff02
+      internalID: 1562990175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_2
+      name: platformerCharacterSheet-Sheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -179,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ec4549725474ef49858a890ffa3162b
-      internalID: -192997491
+      spriteID: 0d76c3514c798dc44b88050cf2508d33
+      internalID: -1770457825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_3
+      name: platformerCharacterSheet-Sheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -200,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48ee22c36e559234d86b502890a4f69b
-      internalID: 2129757426
+      spriteID: 0afdbc8a8b729614396808affa8c9e3c
+      internalID: 1493526272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_4
+      name: platformerCharacterSheet-Sheet_4
       rect:
         serializedVersion: 2
         x: 256
@@ -221,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f45cf72560eb5f41a5691b12d2afcac
-      internalID: -438155446
+      spriteID: 9aada938ba9993b47a8fe65bb929c95c
+      internalID: 1388659222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_5
+      name: platformerCharacterSheet-Sheet_5
       rect:
         serializedVersion: 2
         x: 320
@@ -242,29 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a626d9ca6e561b4798d66adefb7a1e1
-      internalID: 2115525560
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Death_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b2f976c250381f49ba0daae49ddc67d
-      internalID: 1536541004
+      spriteID: 256635bba7957664aa3e82c71fd14d59
+      internalID: -459941245
       vertices: []
       indices: 
       edges: []
@@ -280,13 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Death_0: -1455751029
-      Death_1: 1497205673
-      Death_2: -192997491
-      Death_3: 2129757426
-      Death_4: -438155446
-      Death_5: 2115525560
-      Death_6: 1536541004
+      platformerCharacterSheet-Sheet_0: 1117534970
+      platformerCharacterSheet-Sheet_1: 1562990175
+      platformerCharacterSheet-Sheet_2: -1770457825
+      platformerCharacterSheet-Sheet_3: 1493526272
+      platformerCharacterSheet-Sheet_4: 1388659222
+      platformerCharacterSheet-Sheet_5: -459941245
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

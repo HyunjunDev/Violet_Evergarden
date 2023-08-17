@@ -20,19 +20,12 @@ public class DashModule : CharacterModule
     {
         if(input.sqrMagnitude > 0f)
         {
-            //StartCoroutine(DashCoroutine(input));
-            _myCharacter.LockActionCharacterByModule<JumpModule>(true);
-            _myCharacter.LockActionCharacterByModule<MoveModule>(true);
-            _myCharacter.ExitActionCharacterByModule<JumpModule>();
-            _myCharacter.ExitActionCharacterByModule<MoveModule>();
-            _myCharacter.ExitActionCharacterByModule<GravityModule>();
+            _myCharacter.GetModule<JumpModule>().jumpUp = true;
             Sequence dashSeq = DOTween.Sequence();
-            StartCoroutine(DashCoroutine(input));
             _targetDashPower = input.normalized * _myCharacter.characterMovingManager.characterMoveDataSO.dashPower;
+            _myCharacter.characterAnimation.DashAnimation(_targetDashPower);
             _myCharacter.characterMovingManager.ResetMovingManager();
             _curDash = Vector2.zero;
-            if (_targetDashPower.x < 0.1f)
-                _myCharacter.LockActionCharacterByModule<GravityModule>(true);
             dashSeq.Append(DOTween.To(() => _curDash, x =>
             {
                 _curDash = x;
@@ -43,26 +36,12 @@ public class DashModule : CharacterModule
                 .SetEase(_myCharacter.characterMovingManager.characterMoveDataSO.dashEase);
             dashSeq.AppendCallback(() =>
             {
-                _myCharacter.LockActionCharacterByModule<JumpModule>(false);
-                _myCharacter.LockActionCharacterByModule<MoveModule>(false);
-                _myCharacter.LockActionCharacterByModule<GravityModule>(false);
+                if (_myCharacter.characterMovingManager.currentVerticalSpeed < 0.2f)
+                {
+                    _myCharacter.characterAnimation.IdleAnimation();
+                }
+                _myCharacter.GetModule<JumpModule>().jumpable = true;
             });
         }
-    }
-
-    private IEnumerator DashCoroutine(Vector2 input)
-    {
-        _myCharacter.characterMovingManager.ResetMovingManager();
-        _myCharacter.LockActionCharacterByModule<JumpModule>(true);
-        _myCharacter.LockActionCharacterByModule<MoveModule>(true);
-        _myCharacter.LockActionCharacterByModule<GravityModule>(true);
-        Vector2 dashPower = input.normalized * _myCharacter.characterMovingManager.characterMoveDataSO.dashPower;
-        _myCharacter.characterMovingManager.currentHorizontalSpeed = dashPower.x;
-        _myCharacter.characterMovingManager.currentVerticalSpeed = dashPower.y;
-        yield return new WaitForSeconds(_myCharacter.characterMovingManager.characterMoveDataSO.dashTime);
-        _myCharacter.LockActionCharacterByModule<JumpModule>(false);
-        _myCharacter.LockActionCharacterByModule<MoveModule>(false);
-        _myCharacter.LockActionCharacterByModule<GravityModule>(false);
-        yield break;
     }
 }

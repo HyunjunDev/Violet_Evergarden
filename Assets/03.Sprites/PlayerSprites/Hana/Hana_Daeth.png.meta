@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d11280c437d42ac4eb774d1cc25f2847
+guid: 6f4b0f94838f1a045b69511d5ff00171
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,24 +106,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stab Dash_0
+      name: platformerCharacterSheet5_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d23d9fb606a08f4dae1643f6a6680cb
-      internalID: 1690044461
+      spriteID: a1c4bc7d9b10e4f4c8ecbbdab5f31a3f
+      internalID: 1049188444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_1
+      name: platformerCharacterSheet5_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bd233fa30a813f44aaa3697ae2848bc
-      internalID: 1234666998
+      spriteID: 3aab05bbc6c60054eba322e5f59ce592
+      internalID: -265261950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_2
+      name: platformerCharacterSheet5_2
       rect:
         serializedVersion: 2
         x: 128
@@ -179,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1236c0c43695f7141a11c3819d84934a
-      internalID: -49785806
+      spriteID: a3cf0c9e19b595540b090696068b0f87
+      internalID: -1112424405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_3
+      name: platformerCharacterSheet5_3
       rect:
         serializedVersion: 2
         x: 192
@@ -200,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a0988b3eca111f4595c0d46bb906ffc
-      internalID: 1725326171
+      spriteID: 74c9114612ad4204d890dd988082c5e3
+      internalID: -589857541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_4
+      name: platformerCharacterSheet5_4
       rect:
         serializedVersion: 2
         x: 256
@@ -221,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 903c7d5187ebfce40832da9ef7820c9a
-      internalID: -44901654
+      spriteID: d383de02f6f28134c9de07792c1eb208
+      internalID: 1630216376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_5
+      name: platformerCharacterSheet5_5
       rect:
         serializedVersion: 2
         x: 320
@@ -242,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55185c844e80a0048b742fe0ae4df462
-      internalID: -236263009
+      spriteID: db58b9eff5bf68442aa5d53598170c2f
+      internalID: 1842742965
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_6
+      name: platformerCharacterSheet5_6
       rect:
         serializedVersion: 2
         x: 384
@@ -263,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21918ecefb687df479d9ef3aa481759a
-      internalID: -271929148
+      spriteID: 29f60492c66cb8a43b04883b1803b502
+      internalID: -1152071464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_7
+      name: platformerCharacterSheet5_7
       rect:
         serializedVersion: 2
         x: 448
@@ -284,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 920132ca8f4606040973e6cce09bf779
-      internalID: -767039157
+      spriteID: 83d864a808961044da4eeb55e73f266a
+      internalID: 2051856175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stab Dash_8
+      name: platformerCharacterSheet5_8
       rect:
         serializedVersion: 2
         x: 512
@@ -305,8 +292,155 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 756d17890f1fd684480d6696ea539cc1
-      internalID: 28138161
+      spriteID: b207b958c47212545996a3317e55e6a1
+      internalID: -1882484851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c4bce77de7555e41b4bb25aa2287059
+      internalID: -604885821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19cfe42a0c290a0428ea9a148d5d0ae2
+      internalID: -354984089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ce1a56b8a3178341859967d3e86ec57
+      internalID: -1592422917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95ade7e732a15314aa0da691c1f6d984
+      internalID: 492506728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_13
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37f985ade2a2e874da47cf0e73c21025
+      internalID: 547979871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_14
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab38e3fddb990a4181a7518b2220ed9
+      internalID: -135402437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: platformerCharacterSheet5_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 753772119eaa0334a8e6ae201583d297
+      internalID: 123078401
       vertices: []
       indices: 
       edges: []
@@ -322,15 +456,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Stab Dash_0: 1690044461
-      Stab Dash_1: 1234666998
-      Stab Dash_2: -49785806
-      Stab Dash_3: 1725326171
-      Stab Dash_4: -44901654
-      Stab Dash_5: -236263009
-      Stab Dash_6: -271929148
-      Stab Dash_7: -767039157
-      Stab Dash_8: 28138161
+      platformerCharacterSheet5_0: 1049188444
+      platformerCharacterSheet5_1: -265261950
+      platformerCharacterSheet5_10: -354984089
+      platformerCharacterSheet5_11: -1592422917
+      platformerCharacterSheet5_12: 492506728
+      platformerCharacterSheet5_13: 547979871
+      platformerCharacterSheet5_14: -135402437
+      platformerCharacterSheet5_15: 123078401
+      platformerCharacterSheet5_2: -1112424405
+      platformerCharacterSheet5_3: -589857541
+      platformerCharacterSheet5_4: 1630216376
+      platformerCharacterSheet5_5: 1842742965
+      platformerCharacterSheet5_6: -1152071464
+      platformerCharacterSheet5_7: 2051856175
+      platformerCharacterSheet5_8: -1882484851
+      platformerCharacterSheet5_9: -604885821
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -26,11 +26,35 @@ public class CharacterAnimation : MonoBehaviour
 
     public void JumpAnimation()
     {
+        _animator.SetFloat("YVelocity", 0f);
+        _animator.Rebind();
         _animator.SetTrigger("Jump");
     }
 
     public void MoveInputAnimation(float moveX)
     {
         _animator.SetBool("Move", moveX != 0f);
+    }
+
+    public void DashAnimation(Vector2 dashPower)
+    {
+        float verti = dashPower.y;
+        if(verti > 0f)
+        {
+            _animator.Play("Jump");
+        }
+        else if (verti < 0f)
+        {
+            _animator.Play("Fall");
+        }
+        else
+        {
+            _animator.Play("Dash");
+        }
+    }
+
+    public void IdleAnimation()
+    {
+        _animator.Play("Idle");
     }
 }
