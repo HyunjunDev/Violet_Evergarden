@@ -27,7 +27,7 @@ MonoBehaviour:
   dashTime: 0.15
   dashEase: 18
   fre: 5
-  amp: 2.5
+  amp: 2.8
   animationTime: 0.2
   easeT: 1
   abc: 0

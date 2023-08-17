@@ -7,6 +7,9 @@ public class HanaCharacter : MyCharacter
     [SerializeField]
     private ParticleSystem _dashParticle = null;
     public ParticleSystem DashParticle => _dashParticle;
+    [SerializeField]
+    private ParticleSystem _dashTrailParticle = null;
+    public ParticleSystem DashTrailParticle => _dashTrailParticle;
 
     public override void TagCharacter(MyCharacter oldCharacter, MyCharacter changeCharacter, bool myTurn)
     {

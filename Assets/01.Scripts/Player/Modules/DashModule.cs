@@ -21,13 +21,16 @@ public class DashModule : CharacterModule
         if (input.sqrMagnitude > 0f)
         {
             _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
+            _myCharacter.LockActionCharacterByModule(true, ECharacterModuleType.Jump);
 
-            HanaCharacter hana = _myCharacter as HanaCharacter;
-            GameObject.Instantiate(hana.DashParticle, _myCharacter.transform.position, Quaternion.identity).Play();
             _targetDashPower = input.normalized * _myCharacter.characterMovingManager.characterMoveDataSO.dashPower;
             _myCharacter.characterAnimation.DashAnimation(_targetDashPower);
             _myCharacter.characterMovingManager.ResetMovingManager();
             _curDash = Vector2.zero;
+
+            HanaCharacter hana = _myCharacter as HanaCharacter;
+            GameObject.Instantiate(hana.DashParticle, _myCharacter.transform.position, Quaternion.identity).Play();
+            GameObject.Instantiate(hana.DashTrailParticle, _myCharacter.transform.position, GetDashRotation(_targetDashPower)).Play();
 
             CameraManager.Instance.ShakeCamera(_myCharacter.characterMovingManager.characterMoveDataSO.fre,
                 _myCharacter.characterMovingManager.characterMoveDataSO.amp,
@@ -48,8 +51,17 @@ public class DashModule : CharacterModule
                 {
                     _myCharacter.characterAnimation.IdleAnimation();
                 }
+                _myCharacter.LockActionCharacterByModule(false, ECharacterModuleType.Jump);
                 _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpable = true;
             });
         }
+    }
+
+    private Quaternion GetDashRotation(Vector2 dir)
+    {
+        float angle = Vector2.Angle(Vector2.down, dir);
+        angle *= Mathf.Sign(dir.x);
+        Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
+        return rot;
     }
 }

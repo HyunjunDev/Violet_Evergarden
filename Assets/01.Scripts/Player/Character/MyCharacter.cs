@@ -86,7 +86,7 @@ public abstract class MyCharacter : MonoBehaviour
     /// moduleType에 맞는 모듈을 가져와 잠굼니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public void LockActionCharacterByModule<T>(bool value, params ECharacterModuleType[] moduleTypes)
+    public void LockActionCharacterByModule(bool value, params ECharacterModuleType[] moduleTypes)
     {
         List<CharacterModule> modules = GetModules(moduleTypes);
         foreach (var module in modules)
@@ -125,6 +125,6 @@ public abstract class MyCharacter : MonoBehaviour
         {
             result.Add(GetModule<CharacterModule>(moduleType));
         }
-        return null;
+        return result;
     }
 }
