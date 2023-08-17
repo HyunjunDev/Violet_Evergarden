@@ -20,5 +20,6 @@ public class HanaCharacter : MyCharacter
         _modules.Add(new MoveModule());
         _modules.Add(new GravityModule());
         _modules.Add(new JumpModule());
+        _modules.Add(new DashModule());
     }
 }

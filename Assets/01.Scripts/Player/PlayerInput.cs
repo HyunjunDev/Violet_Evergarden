@@ -37,5 +37,14 @@ public class PlayerInput : MonoBehaviour
         {
             _player.TagCharacter();
         }
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            if(_player.currentCharacter.GetModule<DashModule>() != null)
+            {
+                _player.currentCharacter.GetModule<DashModule>().DashStart(
+                    new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+            }
+        }
     }
 }

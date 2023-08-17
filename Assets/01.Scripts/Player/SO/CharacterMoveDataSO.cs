@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 [CreateAssetMenu(menuName = "SO/CharacterMoveDataSO")]
 public class CharacterMoveDataSO : ScriptableObject
@@ -16,6 +17,10 @@ public class CharacterMoveDataSO : ScriptableObject
     public float jumpApexThreshold = 10f;
     public float jumpEndEarlyGravityModifier = 3f;
     public float coyoteTime = 0.05f;
+    [Header("대시 관련")]
+    public float dashPower = 10f;
+    public float dashTime = 0.3f;
+    public Ease dashEase = Ease.Linear;
     [Header("벽 관련")]
     public float abc = 0f;
 }

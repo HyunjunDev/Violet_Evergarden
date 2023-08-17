@@ -82,6 +82,17 @@ public abstract class MyCharacter : MonoBehaviour
     }
 
     /// <summary>
+    /// moduleType에 맞는 모듈을 가져와 잠굼니다.
+    /// </summary>
+    /// <param name="moduleType"></param>
+    public T LockActionCharacterByModule<T>(bool value) where T : CharacterModule
+    {
+        T module = GetModule<T>();
+        module.locked = value;
+        return module;
+    }
+
+    /// <summary>
     /// moduleType에 맞는 모듈을 가져와 Exit를 실행합니다.
     /// </summary>
     /// <param name="moduleType"></param>
