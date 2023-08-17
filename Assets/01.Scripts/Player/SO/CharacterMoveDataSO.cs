@@ -21,6 +21,11 @@ public class CharacterMoveDataSO : ScriptableObject
     public float dashPower = 10f;
     public float dashTime = 0.3f;
     public Ease dashEase = Ease.Linear;
+
+    public float fre = 10f;
+    public float amp = 3f;
+    public float animationTime = 0.2f;
+    public Ease easeT = Ease.Linear;
     [Header("º® °ü·Ã")]
     public float abc = 0f;
 }
