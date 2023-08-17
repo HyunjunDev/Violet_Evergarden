@@ -19,7 +19,7 @@ MonoBehaviour:
   fallClamp: -25
   minFallSpeed: 15
   maxFallSpeed: 70
-  jumpPower: 8.5
+  jumpPower: 9
   jumpApexThreshold: 10
   jumpEndEarlyGravityModifier: 2.5
   coyoteTime: 0.05
