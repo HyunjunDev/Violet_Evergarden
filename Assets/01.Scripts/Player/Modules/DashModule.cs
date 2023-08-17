@@ -8,8 +8,12 @@ public class DashModule : CharacterModule
     private Vector2 _targetDashPower = Vector2.zero;
     private Vector2 _curDash = Vector2.zero;
 
+    private bool _dashing = false;
+    public bool Dashing => _dashing;
+
     public override void Exit()
     {
+        _dashing = false;
     }
 
     protected override void InitModule()
@@ -20,6 +24,7 @@ public class DashModule : CharacterModule
     {
         if (input.sqrMagnitude > 0f)
         {
+            _dashing = true;
             _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
             _myCharacter.LockActionCharacterByModule(true, ECharacterModuleType.Jump);
 
@@ -54,6 +59,7 @@ public class DashModule : CharacterModule
                 }
                 _myCharacter.LockActionCharacterByModule(false, ECharacterModuleType.Jump);
                 _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpable = true;
+                _dashing = false;
             });
         }
     }

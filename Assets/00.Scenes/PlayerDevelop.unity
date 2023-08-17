@@ -4442,6 +4442,9 @@ MonoBehaviour:
   _characterType: 1
   _dashParticle: {fileID: 293915637098817405, guid: db5f946db3c98b942b3551dc85407472, type: 3}
   _dashTrailParticle: {fileID: 1053582090383664804, guid: 6fe401cd29b70464b8c8072995736944, type: 3}
+  _trailColor: {r: 0.83137256, g: 0.30980393, b: 0.79607844, a: 1}
+  _trailCycle: 0.08
+  _duration: 0.2
 --- !u!50 &1951816146
 Rigidbody2D:
   serializedVersion: 4

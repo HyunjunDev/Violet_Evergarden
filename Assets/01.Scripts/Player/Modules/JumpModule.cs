@@ -62,6 +62,14 @@ public class JumpModule : CharacterModule
 
     private void OnGrounded()
     {
+        DashModule dashModule = _myCharacter.GetModule<DashModule>(ECharacterModuleType.Dash);
+        if (dashModule != null)
+        {
+            if(dashModule.Dashing)
+            {
+                return;
+            }
+        }
         Exit();
         _jumpable = true;
     }
