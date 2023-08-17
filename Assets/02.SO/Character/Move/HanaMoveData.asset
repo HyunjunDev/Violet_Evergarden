@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e979d3c5f945364a85d67f94f693eee, type: 3}
   m_Name: HanaMoveData
   m_EditorClassIdentifier: 
-  moveClamp: 8
-  acceleration: 90
-  deAcceleration: 90
+  moveClamp: 6.5
+  acceleration: 55
+  deAcceleration: 65
   apexBonus: 2
-  fallClamp: -30
-  minFallSpeed: 40
-  maxFallSpeed: 70
-  jumpPower: 12
+  fallClamp: -25
+  minFallSpeed: 15
+  maxFallSpeed: 60
+  jumpPower: 9
   jumpApexThreshold: 10
-  jumpEndEarlyGravityModifier: 3
+  jumpEndEarlyGravityModifier: 2.5
   coyoteTime: 0.05
   abc: 0
