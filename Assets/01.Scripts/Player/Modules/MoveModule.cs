@@ -28,9 +28,9 @@ public class MoveModule : CharacterModule
 
             // apexBonus Àû¿ë
             float apexBonus = 0f;
-            if (_myCharacter.GetModule<JumpModule>() != null)
+            if (_myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump) != null)
             {
-                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _myCharacter.GetModule<JumpModule>().apexPoint;
+                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).apexPoint;
             }
 
             moveMgr.currentHorizontalSpeed += apexBonus * Time.deltaTime;

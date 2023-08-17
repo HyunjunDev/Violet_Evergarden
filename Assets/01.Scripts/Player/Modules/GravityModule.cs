@@ -36,7 +36,7 @@ public class GravityModule : CharacterModule
         }
         else
         {
-            JumpModule jumpModule = _myCharacter.GetModule<JumpModule>();
+            JumpModule jumpModule = _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump);
             float fallSpeed = 0f;
 
             if (jumpModule != null)

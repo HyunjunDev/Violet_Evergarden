@@ -20,7 +20,7 @@ public class DashModule : CharacterModule
     {
         if(input.sqrMagnitude > 0f)
         {
-            _myCharacter.GetModule<JumpModule>().jumpUp = true;
+            _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
             Sequence dashSeq = DOTween.Sequence();
             _targetDashPower = input.normalized * _myCharacter.characterMovingManager.characterMoveDataSO.dashPower;
             _myCharacter.characterAnimation.DashAnimation(_targetDashPower);
@@ -40,7 +40,7 @@ public class DashModule : CharacterModule
                 {
                     _myCharacter.characterAnimation.IdleAnimation();
                 }
-                _myCharacter.GetModule<JumpModule>().jumpable = true;
+                _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpable = true;
             });
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class MyCharacter : MonoBehaviour
@@ -8,7 +9,7 @@ public abstract class MyCharacter : MonoBehaviour
     private ECharacterType _characterType = ECharacterType.None;
     public ECharacterType characterType => _characterType;
 
-    protected List<CharacterModule> _modules = new List<CharacterModule>();
+    protected Dictionary<ECharacterModuleType, CharacterModule> _modulesDic = new Dictionary<ECharacterModuleType, CharacterModule>();
 
     private CharacterMovingManager _characterMovingManager = null;
     public CharacterMovingManager characterMovingManager => _characterMovingManager;
@@ -36,17 +37,17 @@ public abstract class MyCharacter : MonoBehaviour
         _characterAnimation = _characterRenderer.GetComponent<CharacterAnimation>();
         _rigid = GetComponent<Rigidbody2D>();
         ModuleSetting();
-        for (int i = 0; i < _modules.Count; i++)
+        foreach(var module in _modulesDic.Values)
         {
-            _modules[i].SetCharacter(this);
+            module.SetCharacter(this);
         }
     }
 
     private void Update()
     {
-        for (int i = 0; i < _modules.Count; i++)
+        foreach (var module in _modulesDic.Values)
         {
-            _modules[i].UpdateModule();
+            module.UpdateModule();
         }
     }
 
@@ -75,9 +76,9 @@ public abstract class MyCharacter : MonoBehaviour
     /// </summary>
     public void ExitActionAllModule()
     {
-        for(int i = 0; i < _modules.Count; i++) 
+        foreach (var module in _modulesDic.Values)
         {
-            _modules[i].Exit();
+            module.Exit();
         }
     }
 
@@ -85,22 +86,26 @@ public abstract class MyCharacter : MonoBehaviour
     /// moduleType에 맞는 모듈을 가져와 잠굼니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public T LockActionCharacterByModule<T>(bool value) where T : CharacterModule
+    public void LockActionCharacterByModule<T>(bool value, params ECharacterModuleType[] moduleTypes)
     {
-        T module = GetModule<T>();
-        module.locked = value;
-        return module;
+        List<CharacterModule> modules = GetModules(moduleTypes);
+        foreach (var module in modules)
+        {
+            module.locked = value;
+        }
     }
 
     /// <summary>
     /// moduleType에 맞는 모듈을 가져와 Exit를 실행합니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public T ExitActionCharacterByModule<T>() where T : CharacterModule
+    public void ExitActionCharacterByModule(params ECharacterModuleType[] moduleTypes)
     {
-        T module = GetModule<T>();
-        module.Exit();
-        return module;
+        List<CharacterModule> modules = GetModules(moduleTypes);
+        foreach (var module in modules)
+        {
+            module.Exit();
+        }
     }
     
     /// <summary>
@@ -108,8 +113,18 @@ public abstract class MyCharacter : MonoBehaviour
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public T GetModule<T>() where T : CharacterModule
+    public T GetModule<T>(ECharacterModuleType moduleType) where T : CharacterModule
     {
-        return _modules.Find(x => x is T) as T;
+        return _modulesDic[moduleType] as T;
+    }
+
+    public List<CharacterModule> GetModules(params ECharacterModuleType[] moduleTypes)
+    {
+        List<CharacterModule> result = new List<CharacterModule>();
+        foreach (var moduleType in moduleTypes)
+        {
+            result.Add(GetModule<CharacterModule>(moduleType));
+        }
+        return null;
     }
 }

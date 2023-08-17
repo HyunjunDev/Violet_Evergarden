@@ -17,9 +17,9 @@ public class HanaCharacter : MyCharacter
 
     protected override void ModuleSetting()
     {
-        _modules.Add(new MoveModule());
-        _modules.Add(new GravityModule());
-        _modules.Add(new JumpModule());
-        _modules.Add(new DashModule());
+        _modulesDic.Add(ECharacterModuleType.Move, new MoveModule());
+        _modulesDic.Add(ECharacterModuleType.Gravity, new GravityModule());
+        _modulesDic.Add(ECharacterModuleType.Jump, new JumpModule());
+        _modulesDic.Add(ECharacterModuleType.Dash, new DashModule());
     }
 }

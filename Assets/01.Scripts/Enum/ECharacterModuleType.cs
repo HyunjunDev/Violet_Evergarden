@@ -6,5 +6,6 @@ public enum ECharacterModuleType
     Jump,
     Dash,
     ThrowDagger,
-    WallGrab
+    WallGrab,
+    Gravity
 }
