@@ -31,6 +31,7 @@ public class DashModule : CharacterModule
             HanaCharacter hana = _myCharacter as HanaCharacter;
             GameObject.Instantiate(hana.DashParticle, _myCharacter.transform.position, Quaternion.identity).Play();
             GameObject.Instantiate(hana.DashTrailParticle, _myCharacter.transform.position, GetDashRotation(_targetDashPower)).Play();
+            _myCharacter.characterRenderer.TrailStart(hana.trailColor, hana.trailCycle, hana.duration);
 
             CameraManager.Instance.ShakeCamera(_myCharacter.characterMovingManager.characterMoveDataSO.fre,
                 _myCharacter.characterMovingManager.characterMoveDataSO.amp,

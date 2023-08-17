@@ -1,11 +1,20 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterRenderer : MonoBehaviour
 {
     private EFlipState _currentFlipState = EFlipState.None;
     public EFlipState currentFlipState => _currentFlipState;
+    private SpriteRenderer _spriteRenderer = null;
+    private Coroutine _rendererTrailCoroutine = null;
+
+    private void Start()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void MoveInputFlip(float moveX)
     {
@@ -37,5 +46,31 @@ public class CharacterRenderer : MonoBehaviour
         }
         _currentFlipState = flipState;
         transform.localScale = localScale;
+    }
+
+    public void TrailStart(Color trailColor, float trailCycle, float duration)
+    {
+        if (_rendererTrailCoroutine != null)
+            StopCoroutine(_rendererTrailCoroutine);
+        _rendererTrailCoroutine = StartCoroutine(RendererTrailCoroutine(trailColor, trailCycle, duration));
+    }
+
+    private IEnumerator RendererTrailCoroutine(Color trailColor, float trailCycle, float duration)
+    {
+        float time = 0f;
+        while(time <= duration)
+        {
+            SpriteRenderer renderer = new GameObject("DashRendererTrail").AddComponent<SpriteRenderer>();
+            renderer.color = trailColor;
+            renderer.sprite = _spriteRenderer.sprite;
+            renderer.sortingOrder = 1;
+            renderer.DOFade(0f, 0.5f);
+            renderer.transform.position = transform.position;
+            renderer.transform.localScale = transform.localScale;
+            renderer.transform.rotation = transform.rotation;
+
+            yield return new WaitForSeconds(trailCycle);
+            time += trailCycle;
+        }
     }
 }
