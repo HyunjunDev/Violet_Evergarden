@@ -22,6 +22,8 @@ public class DashModule : CharacterModule
         {
             _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
 
+            HanaCharacter hana = _myCharacter as HanaCharacter;
+            GameObject.Instantiate(hana.DashParticle, _myCharacter.transform.position, Quaternion.identity).Play();
             _targetDashPower = input.normalized * _myCharacter.characterMovingManager.characterMoveDataSO.dashPower;
             _myCharacter.characterAnimation.DashAnimation(_targetDashPower);
             _myCharacter.characterMovingManager.ResetMovingManager();

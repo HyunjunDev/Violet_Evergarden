@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class HanaCharacter : MyCharacter
 {
+    [SerializeField]
+    private ParticleSystem _dashParticle = null;
+    public ParticleSystem DashParticle => _dashParticle;
+
     public override void TagCharacter(MyCharacter oldCharacter, MyCharacter changeCharacter, bool myTurn)
     {
         if (myTurn)
