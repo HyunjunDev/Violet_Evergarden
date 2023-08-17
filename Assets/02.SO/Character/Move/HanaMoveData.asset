@@ -18,9 +18,12 @@ MonoBehaviour:
   apexBonus: 2
   fallClamp: -25
   minFallSpeed: 15
-  maxFallSpeed: 60
+  maxFallSpeed: 70
   jumpPower: 9
   jumpApexThreshold: 10
   jumpEndEarlyGravityModifier: 2.5
   coyoteTime: 0.05
+  dashPower: 15
+  dashTime: 0.15
+  dashEase: 18
   abc: 0
