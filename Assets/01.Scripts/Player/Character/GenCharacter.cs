@@ -20,6 +20,5 @@ public class GenCharacter : MyCharacter
         _modulesDic.Add(ECharacterModuleType.Move, new MoveModule());
         _modulesDic.Add(ECharacterModuleType.Gravity, new GravityModule());
         _modulesDic.Add(ECharacterModuleType.Jump, new JumpModule());
-        _modulesDic.Add(ECharacterModuleType.Dash, new DashModule());
     }
 }

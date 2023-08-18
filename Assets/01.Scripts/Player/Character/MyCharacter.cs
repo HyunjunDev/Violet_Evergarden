@@ -122,6 +122,8 @@ public abstract class MyCharacter : MonoBehaviour
     /// <returns></returns>
     public T GetModule<T>(ECharacterModuleType moduleType) where T : CharacterModule
     {
+        if (_modulesDic.ContainsKey(moduleType) == false)
+            return null;
         return _modulesDic[moduleType] as T;
     }
 
