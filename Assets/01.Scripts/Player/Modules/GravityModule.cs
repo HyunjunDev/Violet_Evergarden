@@ -6,6 +6,7 @@ public class GravityModule : PlayerModule
 {
     public override void Exit()
     {
+        _excuting = false;
         _player.movingController.currentVerticalSpeed = 0f;
     }
 
@@ -46,6 +47,7 @@ public class GravityModule : PlayerModule
             }
 
             _player.movingController.currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+            _excuting = fallSpeed > 0f;
 
             if (_player.movingController.currentVerticalSpeed < _player.movingController.characterMoveDataSO.fallClamp)
             {

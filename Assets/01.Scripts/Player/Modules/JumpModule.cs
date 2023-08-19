@@ -61,17 +61,24 @@ public class JumpModule : PlayerModule
         CalculateJump();
     }
 
+    public void JumpRecharge()
+    {
+        _fallSpeed = 0f;
+        _apexPoint = 0f;
+        _jumpDown = false;
+        _jumpable = true;
+    }
+
+    public void JumpEnd()
+    {
+        _jumpUp = true;
+    }
+
     private void OnGrounded()
     {
-        DashModule dashModule = _player.GetModule<DashModule>(EPlayerModuleType.Dash);
-        if (dashModule != null)
-        {
-            if(dashModule.Dashing)
-            {
-                return;
-            }
-        }
-        Exit();
+        _fallSpeed = 0f;
+        _apexPoint = 0f;
+        _jumpDown = false;
         _jumpable = true;
         Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
@@ -105,14 +112,7 @@ public class JumpModule : PlayerModule
 
         if (_jumpDown && _jumpable)
         {
-            Vector2 spawnPoint = _player.transform.position;
-            spawnPoint.y -= 0.3f;
-            GameObject.Instantiate(_player.JumpParticle, spawnPoint, Quaternion.identity).Play();
-
-            _player.playerAnimation.JumpAnimation();
-            Exit();
-            _jumpable = false;
-            _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.jumpPower;
+            JumpStart();
         }
 
         // ¸Ó¸® ²Ç
@@ -126,5 +126,18 @@ public class JumpModule : PlayerModule
         {
             _jumpEndEarly = true;
         }
+    }
+
+    private void JumpStart()
+    {
+        Vector2 spawnPoint = _player.transform.position;
+        spawnPoint.y -= 0.3f;
+        GameObject.Instantiate(_player.JumpParticle, spawnPoint, Quaternion.identity).Play();
+
+        _player.playerAnimation.JumpAnimation();
+        Exit();
+        _jumpDown = false;
+        _jumpable = false;
+        _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.jumpPower;
     }
 }

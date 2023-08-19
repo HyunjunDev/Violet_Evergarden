@@ -45,11 +45,11 @@ public class PlayerInput : MonoBehaviour
         }
 
         DashModule dashModule = _player.GetModule<DashModule>(EPlayerModuleType.Dash);
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (dashModule != null)
         {
-            if(dashModule != null)
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                dashModule.DashStart(_inputVector);
+                dashModule.DashStart();
             }
         }
     }
