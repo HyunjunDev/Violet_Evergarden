@@ -11,17 +11,17 @@ public abstract class MyCharacter : MonoBehaviour
 
     protected Dictionary<ECharacterModuleType, CharacterModule> _modulesDic = new Dictionary<ECharacterModuleType, CharacterModule>();
 
-    private CharacterMovingManager _characterMovingManager = null;
-    public CharacterMovingManager characterMovingManager => _characterMovingManager;
+    private MovingController _characterMovingManager = null;
+    public MovingController characterMovingManager => _characterMovingManager;
 
-    private CharacterCollider _characterCollider = null;
-    public CharacterCollider characterCollider => _characterCollider;
+    private PlayerCollider _characterCollider = null;
+    public PlayerCollider characterCollider => _characterCollider;
 
-    private CharacterRenderer _characterRenderer = null;
-    public CharacterRenderer characterRenderer => _characterRenderer;
+    private PlayerRenderer _characterRenderer = null;
+    public PlayerRenderer characterRenderer => _characterRenderer;
 
-    private CharacterAnimation _characterAnimation = null;
-    public CharacterAnimation characterAnimation => _characterAnimation;
+    private PlayerAnimation _characterAnimation = null;
+    public PlayerAnimation characterAnimation => _characterAnimation;
 
     [SerializeField]
     private ParticleSystem _jumpParticle = null;
@@ -38,15 +38,15 @@ public abstract class MyCharacter : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _characterMovingManager = GetComponent<CharacterMovingManager>();
-        _characterCollider = GetComponent<CharacterCollider>();
-        _characterRenderer = transform.Find("Renderer").GetComponent<CharacterRenderer>();
-        _characterAnimation = _characterRenderer.GetComponent<CharacterAnimation>();
+        _characterMovingManager = GetComponent<MovingController>();
+        _characterCollider = GetComponent<PlayerCollider>();
+        _characterRenderer = transform.Find("Renderer").GetComponent<PlayerRenderer>();
+        _characterAnimation = _characterRenderer.GetComponent<PlayerAnimation>();
         _rigid = GetComponent<Rigidbody2D>();
         ModuleSetting();
         foreach(var module in _modulesDic.Values)
         {
-            module.SetCharacter(this);
+            //module.SettingModule(this);
         }
     }
 

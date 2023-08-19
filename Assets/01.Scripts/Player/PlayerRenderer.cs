@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CharacterRenderer : MonoBehaviour
+public class PlayerRenderer : MonoBehaviour
 {
     private EFlipState _currentFlipState = EFlipState.None;
     public EFlipState currentFlipState => _currentFlipState;

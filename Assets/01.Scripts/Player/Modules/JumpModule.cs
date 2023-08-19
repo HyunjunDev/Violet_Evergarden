@@ -51,7 +51,7 @@ public class JumpModule : CharacterModule
 
     protected override void InitModule()
     {
-        _myCharacter.characterCollider.onGrounded += OnGrounded;
+        _player.playerCollider.onGrounded += OnGrounded;
     }
 
     public override void UpdateModule()
@@ -63,7 +63,7 @@ public class JumpModule : CharacterModule
 
     private void OnGrounded()
     {
-        DashModule dashModule = _myCharacter.GetModule<DashModule>(ECharacterModuleType.Dash);
+        DashModule dashModule = _player.GetModule<DashModule>(ECharacterModuleType.Dash);
         if (dashModule != null)
         {
             if(dashModule.Dashing)
@@ -73,9 +73,9 @@ public class JumpModule : CharacterModule
         }
         Exit();
         _jumpable = true;
-        Vector2 spawnPoint = _myCharacter.transform.position;
+        Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
-        GameObject.Instantiate(_myCharacter.LandingParticle, spawnPoint, Quaternion.identity).Play();
+        GameObject.Instantiate(_player.LandingParticle, spawnPoint, Quaternion.identity).Play();
     }
 
     private void CalculateJumpApex()
@@ -85,14 +85,14 @@ public class JumpModule : CharacterModule
             return;
         }
 
-        if (!_myCharacter.characterCollider.GetCollision(EBoundType.Down, false))
+        if (!_player.playerCollider.GetCollision(EBoundType.Down, false))
         {
             // ÇÑ°è°ªºÎÅÍ 0±îÁö 
-            _apexPoint = Mathf.InverseLerp(_myCharacter.characterMovingManager.characterMoveDataSO.jumpApexThreshold
-                , 0f, Mathf.Abs(_myCharacter.rigid.velocity.y));
+            _apexPoint = Mathf.InverseLerp(_player.movingController.characterMoveDataSO.jumpApexThreshold
+                , 0f, Mathf.Abs(_player.rigid.velocity.y));
 
-            _fallSpeed = Mathf.Lerp(_myCharacter.characterMovingManager.characterMoveDataSO.minFallSpeed,
-                _myCharacter.characterMovingManager.characterMoveDataSO.maxFallSpeed, _apexPoint);
+            _fallSpeed = Mathf.Lerp(_player.movingController.characterMoveDataSO.minFallSpeed,
+                _player.movingController.characterMoveDataSO.maxFallSpeed, _apexPoint);
         }
     }
 
@@ -105,24 +105,24 @@ public class JumpModule : CharacterModule
 
         if (_jumpDown && _jumpable)
         {
-            Vector2 spawnPoint = _myCharacter.transform.position;
+            Vector2 spawnPoint = _player.transform.position;
             spawnPoint.y -= 0.3f;
-            GameObject.Instantiate(_myCharacter.JumpParticle, spawnPoint, Quaternion.identity).Play();
+            GameObject.Instantiate(_player.JumpParticle, spawnPoint, Quaternion.identity).Play();
 
-            _myCharacter.characterAnimation.JumpAnimation();
+            _player.playerAnimation.JumpAnimation();
             Exit();
             _jumpable = false;
-            _myCharacter.characterMovingManager.currentVerticalSpeed = _myCharacter.characterMovingManager.characterMoveDataSO.jumpPower;
+            _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.jumpPower;
         }
 
         // ¸Ó¸® ²Ç
-        if (_myCharacter.characterCollider.GetCollision(EBoundType.Up, false) && _myCharacter.characterMovingManager.currentVerticalSpeed > 0f)
+        if (_player.playerCollider.GetCollision(EBoundType.Up, false) && _player.movingController.currentVerticalSpeed > 0f)
         {
-            _myCharacter.characterMovingManager.currentVerticalSpeed = 0f;
+            _player.movingController.currentVerticalSpeed = 0f;
         }
 
         // »¡¸® ¶³¾îÁö±â
-        if (!_myCharacter.characterCollider.GetCollision(EBoundType.Down, false) && !_jumpEndEarly && _jumpUp && _myCharacter.rigid.velocity.y > 0f)
+        if (!_player.playerCollider.GetCollision(EBoundType.Down, false) && !_jumpEndEarly && _jumpUp && _player.rigid.velocity.y > 0f)
         {
             _jumpEndEarly = true;
         }

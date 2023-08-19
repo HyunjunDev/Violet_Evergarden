@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CharacterCollider : MonoBehaviour
+public class PlayerCollider : MonoBehaviour
 {
+    [SerializeField]
     private BoxCollider2D _col = null;
     private Bounds _characterBounds => _col.bounds;
     [SerializeField]
@@ -26,11 +27,6 @@ public class CharacterCollider : MonoBehaviour
     private Action _onGroundExited = null;
     public Action onGroundExited { get => _onGroundExited; set => _onGroundExited = value; }
 
-    private void Awake()
-    {
-        _col = GetComponent<BoxCollider2D>();
-    }
-
     private void FixedUpdate()
     {
         CheckCollision();
@@ -39,10 +35,6 @@ public class CharacterCollider : MonoBehaviour
     private void OnDrawGizmos()
     {
 #if UNITY_EDITOR
-        if (_col == null)
-        {
-            _col = GetComponent<BoxCollider2D>();
-        }
         if (_col == null)
         {
             return;

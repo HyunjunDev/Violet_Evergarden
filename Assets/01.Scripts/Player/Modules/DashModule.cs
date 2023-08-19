@@ -25,40 +25,39 @@ public class DashModule : CharacterModule
         if (input.sqrMagnitude > 0f)
         {
             _dashing = true;
-            _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
-            _myCharacter.LockActionCharacterByModule(true, ECharacterModuleType.Jump);
+            _player.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
+            _player.LockActionCharacterByModule(true, ECharacterModuleType.Jump);
 
-            _targetDashPower = input.normalized * _myCharacter.characterMovingManager.characterMoveDataSO.dashPower;
-            _myCharacter.characterAnimation.DashAnimation(_targetDashPower);
-            _myCharacter.characterMovingManager.ResetMovingManager();
+            _targetDashPower = input.normalized * _player.movingController.characterMoveDataSO.dashPower;
+            _player.playerAnimation.DashAnimation(_targetDashPower);
+            _player.movingController.ResetMovingManager();
             _curDash = Vector2.zero;
 
-            HanaCharacter hana = _myCharacter as HanaCharacter;
-            GameObject.Instantiate(hana.DashParticle, _myCharacter.transform.position, Quaternion.identity).Play();
-            GameObject.Instantiate(hana.DashTrailParticle, _myCharacter.transform.position, GetDashRotation(_targetDashPower)).Play();
-            _myCharacter.characterRenderer.TrailStart(hana.trailColor, hana.trailCycle, hana.duration);
+            GameObject.Instantiate(_player.DashParticle, _player.transform.position, Quaternion.identity).Play();
+            GameObject.Instantiate(_player.DashTrailParticle, _player.transform.position, GetDashRotation(_targetDashPower)).Play();
+            _player.playerRenderer.TrailStart(_player.trailColor, _player.trailCycle, _player.duration);
 
-            CameraManager.Instance.ShakeCamera(_myCharacter.characterMovingManager.characterMoveDataSO.fre,
-                _myCharacter.characterMovingManager.characterMoveDataSO.amp,
-                _myCharacter.characterMovingManager.characterMoveDataSO.animationTime,
-                _myCharacter.characterMovingManager.characterMoveDataSO.easeT);
+            CameraManager.Instance.ShakeCamera(_player.movingController.characterMoveDataSO.fre,
+                _player.movingController.characterMoveDataSO.amp,
+                _player.movingController.characterMoveDataSO.animationTime,
+                _player.movingController.characterMoveDataSO.easeT);
             Sequence dashSeq = DOTween.Sequence();
             dashSeq.Append(DOTween.To(() => _curDash, x =>
             {
                 _curDash = x;
-                _myCharacter.characterMovingManager.currentHorizontalSpeed = _curDash.x;
-                _myCharacter.characterMovingManager.currentVerticalSpeed = _curDash.y * 0.8f;
-            }, _targetDashPower, _myCharacter.characterMovingManager.characterMoveDataSO.dashTime))
-                .SetEase(_myCharacter.characterMovingManager.characterMoveDataSO.dashEase);
+                _player.movingController.currentHorizontalSpeed = _curDash.x;
+                _player.movingController.currentVerticalSpeed = _curDash.y * 0.8f;
+            }, _targetDashPower, _player.movingController.characterMoveDataSO.dashTime))
+                .SetEase(_player.movingController.characterMoveDataSO.dashEase);
 
             dashSeq.AppendCallback(() =>
             {
-                if (_myCharacter.characterMovingManager.currentVerticalSpeed < 0.2f)
+                if (_player.movingController.currentVerticalSpeed < 0.2f)
                 {
-                    _myCharacter.characterAnimation.IdleAnimation();
+                    _player.playerAnimation.IdleAnimation();
                 }
-                _myCharacter.LockActionCharacterByModule(false, ECharacterModuleType.Jump);
-                _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpable = true;
+                _player.LockActionCharacterByModule(false, ECharacterModuleType.Jump);
+                _player.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpable = true;
                 _dashing = false;
             });
         }

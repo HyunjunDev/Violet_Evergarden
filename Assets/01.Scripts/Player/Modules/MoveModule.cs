@@ -12,10 +12,10 @@ public class MoveModule : CharacterModule
         }
 
         // 렌더러, 애니메이션 적용
-        _myCharacter.characterAnimation.MoveInputAnimation(xInput);
-        _myCharacter.characterRenderer.MoveInputFlip(xInput);
+        _player.playerAnimation.MoveInputAnimation(xInput);
+        _player.playerRenderer.MoveInputFlip(xInput);
 
-        CharacterMovingManager moveMgr = _myCharacter.characterMovingManager;
+        MovingController moveMgr = _player.movingController;
 
         if(xInput != 0f)
         {
@@ -28,9 +28,9 @@ public class MoveModule : CharacterModule
 
             // apexBonus 적용
             float apexBonus = 0f;
-            if (_myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump) != null)
+            if (_player.GetModule<JumpModule>(ECharacterModuleType.Jump) != null)
             {
-                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump).apexPoint;
+                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _player.GetModule<JumpModule>(ECharacterModuleType.Jump).apexPoint;
             }
 
             moveMgr.currentHorizontalSpeed += apexBonus * Time.deltaTime;
@@ -43,8 +43,8 @@ public class MoveModule : CharacterModule
         }
 
         // 왼쪽이나 오른쪽 닿았을 때
-        if (moveMgr.currentHorizontalSpeed < 0f && _myCharacter.characterCollider.GetCollision(EBoundType.Left, false) || 
-            moveMgr.currentHorizontalSpeed > 0f && _myCharacter.characterCollider.GetCollision(EBoundType.Right, false))
+        if (moveMgr.currentHorizontalSpeed < 0f && _player.playerCollider.GetCollision(EBoundType.Left, false) || 
+            moveMgr.currentHorizontalSpeed > 0f && _player.playerCollider.GetCollision(EBoundType.Right, false))
         {
             moveMgr.currentHorizontalSpeed = 0;
         }
@@ -52,7 +52,7 @@ public class MoveModule : CharacterModule
 
     public override void Exit()
     {
-        _myCharacter.characterMovingManager.currentHorizontalSpeed = 0f;
+        _player.movingController.currentHorizontalSpeed = 0f;
     }
 
     protected override void InitModule()

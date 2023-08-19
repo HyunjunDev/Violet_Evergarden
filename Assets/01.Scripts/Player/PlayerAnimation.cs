@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimation : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
     private Animator _animator = null;
-    private MyCharacter _myCharacter = null;
+    private Player _player = null;
 
     private void Awake()
     {
-        _myCharacter = transform.parent.GetComponent<MyCharacter>();
+        _player = transform.parent.GetComponent<Player>();
         _animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        _myCharacter.characterCollider.onGrounded += () => _animator.SetBool("IsGround", true);
-        _myCharacter.characterCollider.onGroundExited += () => _animator.SetBool("IsGround", false);
+        _player.playerCollider.onGrounded += () => _animator.SetBool("IsGround", true);
+        _player.playerCollider.onGroundExited += () => _animator.SetBool("IsGround", false);
     }
 
     private void Update()
     {
-        _animator.SetFloat("YVelocity", _myCharacter.rigid.velocity.y);
+        _animator.SetFloat("YVelocity", _player.rigid.velocity.y);
     }
 
     public void JumpAnimation()

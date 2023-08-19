@@ -6,7 +6,7 @@ public class GravityModule : CharacterModule
 {
     public override void Exit()
     {
-        _myCharacter.characterMovingManager.currentVerticalSpeed = 0f;
+        _player.movingController.currentVerticalSpeed = 0f;
     }
 
     protected override void InitModule()
@@ -26,30 +26,30 @@ public class GravityModule : CharacterModule
             return;
         }
 
-        if (_myCharacter.characterCollider.GetCollision(EBoundType.Down, false))
+        if (_player.playerCollider.GetCollision(EBoundType.Down, false))
         {
             // 떨어지고 있을 때 바닥에 닿았다면 속도 초기화
-            if (_myCharacter.characterMovingManager.currentVerticalSpeed < 0f)
+            if (_player.movingController.currentVerticalSpeed < 0f)
             {
-                _myCharacter.characterMovingManager.currentVerticalSpeed = 0f;
+                _player.movingController.currentVerticalSpeed = 0f;
             }
         }
         else
         {
-            JumpModule jumpModule = _myCharacter.GetModule<JumpModule>(ECharacterModuleType.Jump);
+            JumpModule jumpModule = _player.GetModule<JumpModule>(ECharacterModuleType.Jump);
             float fallSpeed = 0f;
 
             if (jumpModule != null)
             {
-                fallSpeed = jumpModule.jumpEndEarly && _myCharacter.characterMovingManager.currentVerticalSpeed > 0f ?
-                    jumpModule.fallSpeed * _myCharacter.characterMovingManager.characterMoveDataSO.jumpEndEarlyGravityModifier : jumpModule.fallSpeed;
+                fallSpeed = jumpModule.jumpEndEarly && _player.movingController.currentVerticalSpeed > 0f ?
+                    jumpModule.fallSpeed * _player.movingController.characterMoveDataSO.jumpEndEarlyGravityModifier : jumpModule.fallSpeed;
             }
 
-            _myCharacter.characterMovingManager.currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+            _player.movingController.currentVerticalSpeed -= fallSpeed * Time.deltaTime;
 
-            if (_myCharacter.characterMovingManager.currentVerticalSpeed < _myCharacter.characterMovingManager.characterMoveDataSO.fallClamp)
+            if (_player.movingController.currentVerticalSpeed < _player.movingController.characterMoveDataSO.fallClamp)
             {
-                _myCharacter.characterMovingManager.currentVerticalSpeed = _myCharacter.characterMovingManager.characterMoveDataSO.fallClamp;
+                _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.fallClamp;
             }
         }
     }

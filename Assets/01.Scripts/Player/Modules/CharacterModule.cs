@@ -3,10 +3,7 @@ using UnityEngine;
 
 public abstract class CharacterModule
 {
-    [SerializeField]
-    protected ECharacterModuleType _characterModuleType = ECharacterModuleType.None;
-    public ECharacterModuleType characterModuleType => _characterModuleType;
-    protected MyCharacter _myCharacter = null;
+    protected Player _player = null;
 
     protected bool _locked = false;
     public bool locked { get => _locked; set => _locked = value; }
@@ -18,9 +15,9 @@ public abstract class CharacterModule
     /// 캐릭터를 설정합니다.
     /// </summary>
     /// <param name="character"></param>
-    public void SetCharacter(MyCharacter character)
+    public void SettingModule(Player player)
     {
-        _myCharacter = character;
+        _player = player;
         InitModule();
     }
 
@@ -32,11 +29,11 @@ public abstract class CharacterModule
 
     protected Coroutine StartCoroutine(IEnumerator enumerator)
     {
-        return _myCharacter.StartCoroutine(enumerator);
+        return _player.StartCoroutine(enumerator);
     }
 
     protected void StopCoroutine(Coroutine coroutine)
     {
-        _myCharacter.StopCoroutine(coroutine);
+        _player.StopCoroutine(coroutine);
     }
 }

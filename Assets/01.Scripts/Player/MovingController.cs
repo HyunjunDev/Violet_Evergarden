@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CharacterMovingManager : MonoBehaviour
+public class MovingController : MonoBehaviour
 {
-    private MyCharacter _myCharacter = null;
+    private Player _player = null;
 
     [SerializeField]
     private CharacterMoveDataSO _characterMoveDataSO = null;
@@ -21,18 +21,18 @@ public class CharacterMovingManager : MonoBehaviour
 
     private void Awake()
     {
-        _myCharacter = GetComponent<MyCharacter>();
+        _player = GetComponent<Player>();
     }
 
     private void FixedUpdate()
     {
-        _myCharacter.rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
+        _player.rigid.velocity = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed);
 
     }
 
     public void ResetMovingManager()
     {
         _currentHorizontalSpeed = _currentVerticalSpeed = 0f;
-        _myCharacter.rigid.velocity = Vector2.zero;
+        _player.rigid.velocity = Vector2.zero;
     }
 }

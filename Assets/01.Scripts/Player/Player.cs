@@ -7,106 +7,130 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private ECharacterType _startCharacterType = ECharacterType.Hana;
-
-    private List<MyCharacter> _characters = new List<MyCharacter>();
-
-    private int _characterIdx = 0;
-
-    private MyCharacter _currentCharacter = null;
-    public MyCharacter currentCharacter => _currentCharacter;
+    private ECharacterType _currentCharacterType = ECharacterType.Hana;
+    private Dictionary<ECharacterModuleType, CharacterModule> _modules = new Dictionary<ECharacterModuleType, CharacterModule>();
 
     private PlayerInput _playerInput = null;
+    public PlayerInput playerInput => _playerInput;
+    private MovingController _movingController = null;
+    public MovingController movingController => _movingController;
+    private PlayerRenderer _playerRenderer = null;
+    public PlayerRenderer playerRenderer => _playerRenderer;
+    private PlayerAnimation _playerAnimation = null;
+    public PlayerAnimation playerAnimation => _playerAnimation;
+    private PlayerCollider _playerCollider = null;
+    public PlayerCollider playerCollider => _playerCollider;
+    private Rigidbody2D _rigid = null;
+    public Rigidbody2D rigid => _rigid;
+
+    [SerializeField]
+    private ParticleSystem _jumpParticle = null;
+    public ParticleSystem JumpParticle => _jumpParticle;
+    [SerializeField]
+    private ParticleSystem _landingParticle = null;
+    public ParticleSystem LandingParticle => _landingParticle;
+    [SerializeField]
+    private ParticleSystem _dashParticle = null;
+    public ParticleSystem DashParticle => _dashParticle;
+    [SerializeField]
+    private ParticleSystem _dashTrailParticle = null;
+    public ParticleSystem DashTrailParticle => _dashTrailParticle;
+    [SerializeField]
+    private Color _trailColor = Color.white;
+    public Color trailColor => _trailColor;
+    [SerializeField]
+    private float _trailCycle = 0.08f;
+    public float trailCycle => _trailCycle;
+    [SerializeField]
+    private float _duration = 0.2f;
+    public float duration => _duration;
 
     private void Awake()
     {
+        _rigid = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
-        _characters = transform.Find("CharacterContainer").GetComponentsInChildren<MyCharacter>().ToList();
-        SetStartCharacter();
+        _movingController = GetComponent<MovingController>();
+        _playerCollider = GetComponent<PlayerCollider>();
+        _playerRenderer = transform.Find("Renderer").GetComponent<PlayerRenderer>();
+        _playerAnimation = _playerRenderer.GetComponent<PlayerAnimation>();
+        _modules.Add(ECharacterModuleType.Move, new MoveModule());
+        _modules.Add(ECharacterModuleType.Gravity, new GravityModule());
+        _modules.Add(ECharacterModuleType.Jump, new JumpModule());
+        _modules.Add(ECharacterModuleType.Dash, new DashModule());
+        foreach(var module in  _modules.Values)
+        {
+            module.SettingModule(this);
+        }
     }
 
-    private void SetStartCharacter()
+    private void Update()
     {
-        for (int i = 0; i < _characters.Count; i++)
+        ModuleUpdate();
+    }
+
+    private void ModuleUpdate()
+    {
+        foreach(var module in _modules.Values)
         {
-            if (_characters[i].characterType == _startCharacterType)
-            {
-                _currentCharacter = _characters[i];
-                _characters[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                _characters[i].gameObject.SetActive(false);
-            }
+            module.UpdateModule();
+        }
+    }
+
+    public void AttachModule()
+    {
+
+    }
+
+    public void DetachModule()
+    {
+
+    }
+
+    /// <summary>
+    /// moduleType에 맞는 모듈을 가져와 잠굼니다.
+    /// </summary>
+    /// <param name="moduleType"></param>
+    public void LockActionCharacterByModule(bool value, params ECharacterModuleType[] moduleTypes)
+    {
+        List<CharacterModule> modules = GetModules(moduleTypes);
+        foreach (var module in modules)
+        {
+            module.locked = value;
         }
     }
 
     /// <summary>
-    /// 모든 캐릭터의 리셋을 수행합니다.
+    /// moduleType에 맞는 모듈을 가져와 Exit를 실행합니다.
     /// </summary>
-    public void ResetAllCharacters()
+    /// <param name="moduleType"></param>
+    public void ExitActionCharacterByModule(params ECharacterModuleType[] moduleTypes)
     {
-        for(int i = 0; i < _characters.Count; i++)
+        List<CharacterModule> modules = GetModules(moduleTypes);
+        foreach (var module in modules)
         {
-            _characters[i].ResetCharacter();
+            module.Exit();
         }
     }
 
     /// <summary>
-    /// characterType에 맞는 캐릭터를 가져와 위치와 회전값을 설정합니다.
-    /// </summary>
-    /// <param name="characterType"></param>
-    public void SetPositionAndRotationCharacter(ECharacterType characterType, Vector3 position, Quaternion rotation)
-    {
-        GetCharacter(characterType).transform.SetPositionAndRotation(position, rotation);
-    }
-
-    /// <summary>
-    /// 캐릭터를 태그합니다. 리스트 안에 있는 순서대로 태그됩니다.
-    /// </summary>
-    public void TagCharacter()
-    {
-        _characterIdx = (_characterIdx + 1) % _characters.Count;
-        CharacterChange();
-    }
-
-    /// <summary>
-    /// characterType에 맞는 캐릭터로 태그합니다.
-    /// </summary>
-    public void TagCharacter(ECharacterType characterType)
-    {
-        _characterIdx = _characters.IndexOf(GetCharacter(characterType));
-        CharacterChange();
-    }
-
-    private void CharacterChange()
-    {
-        MyCharacter oldCharacter = _currentCharacter;
-        _currentCharacter = _characters[_characterIdx];
-        for (int i = 0; i < _characters.Count; i++)
-        {
-            _characters[i].TagCharacter(oldCharacter, _currentCharacter, _characters[i].characterType == _currentCharacter.characterType);
-        }
-        ResetAllCharacters();
-    }
-
-    /// <summary>
-    /// characterType에 맞는 캐릭터를 반환합니다.
-    /// </summary>
-    /// <param name="characterType"></param>
-    /// <returns></returns>
-    public MyCharacter GetCharacter(ECharacterType characterType)
-    {
-        return _characters.Find(x => x.characterType == characterType);
-    }
-
-    /// <summary>
-    /// T 타입의 캐릭터를 반환합니다.
+    /// T 타입에 맞는 모듈을 가져옵니다.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public T GetCharacter<T>() where T : MyCharacter
+    public T GetModule<T>(ECharacterModuleType moduleType) where T : CharacterModule
     {
-        return _characters.Find(x => x is T) as T;
+        if (_modules.ContainsKey(moduleType) == false)
+            return null;
+        return _modules[moduleType] as T;
+    }
+
+    public List<CharacterModule> GetModules(params ECharacterModuleType[] moduleTypes)
+    {
+        List<CharacterModule> result = new List<CharacterModule>();
+        foreach (var moduleType in moduleTypes)
+        {
+            result.Add(GetModule<CharacterModule>(moduleType));
+        }
+        return result;
     }
 }
