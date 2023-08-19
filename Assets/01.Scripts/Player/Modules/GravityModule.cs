@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityModule : CharacterModule
+public class GravityModule : PlayerModule
 {
     public override void Exit()
     {
@@ -36,7 +36,7 @@ public class GravityModule : CharacterModule
         }
         else
         {
-            JumpModule jumpModule = _player.GetModule<JumpModule>(ECharacterModuleType.Jump);
+            JumpModule jumpModule = _player.GetModule<JumpModule>(EPlayerModuleType.Jump);
             float fallSpeed = 0f;
 
             if (jumpModule != null)

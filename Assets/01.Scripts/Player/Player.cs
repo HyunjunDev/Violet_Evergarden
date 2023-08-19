@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
-    private Dictionary<ECharacterModuleType, CharacterModule> _modules = new Dictionary<ECharacterModuleType, CharacterModule>();
+    private Dictionary<EPlayerModuleType, PlayerModule> _modules = new Dictionary<EPlayerModuleType, PlayerModule>();
 
     private PlayerInput _playerInput = null;
     public PlayerInput playerInput => _playerInput;
@@ -53,10 +53,10 @@ public class Player : MonoBehaviour
         _playerCollider = GetComponent<PlayerCollider>();
         _playerRenderer = transform.Find("Renderer").GetComponent<PlayerRenderer>();
         _playerAnimation = _playerRenderer.GetComponent<PlayerAnimation>();
-        _modules.Add(ECharacterModuleType.Move, new MoveModule());
-        _modules.Add(ECharacterModuleType.Gravity, new GravityModule());
-        _modules.Add(ECharacterModuleType.Jump, new JumpModule());
-        _modules.Add(ECharacterModuleType.Dash, new DashModule());
+        _modules.Add(EPlayerModuleType.Move, new MoveModule());
+        _modules.Add(EPlayerModuleType.Gravity, new GravityModule());
+        _modules.Add(EPlayerModuleType.Jump, new JumpModule());
+        _modules.Add(EPlayerModuleType.Dash, new DashModule());
         foreach(var module in  _modules.Values)
         {
             module.SettingModule(this);
@@ -90,9 +90,9 @@ public class Player : MonoBehaviour
     /// moduleType에 맞는 모듈을 가져와 잠굼니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public void LockActionCharacterByModule(bool value, params ECharacterModuleType[] moduleTypes)
+    public void LockActionCharacterByModule(bool value, params EPlayerModuleType[] moduleTypes)
     {
-        List<CharacterModule> modules = GetModules(moduleTypes);
+        List<PlayerModule> modules = GetModules(moduleTypes);
         foreach (var module in modules)
         {
             module.locked = value;
@@ -103,9 +103,9 @@ public class Player : MonoBehaviour
     /// moduleType에 맞는 모듈을 가져와 Exit를 실행합니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public void ExitActionCharacterByModule(params ECharacterModuleType[] moduleTypes)
+    public void ExitActionCharacterByModule(params EPlayerModuleType[] moduleTypes)
     {
-        List<CharacterModule> modules = GetModules(moduleTypes);
+        List<PlayerModule> modules = GetModules(moduleTypes);
         foreach (var module in modules)
         {
             module.Exit();
@@ -117,19 +117,19 @@ public class Player : MonoBehaviour
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public T GetModule<T>(ECharacterModuleType moduleType) where T : CharacterModule
+    public T GetModule<T>(EPlayerModuleType moduleType) where T : PlayerModule
     {
         if (_modules.ContainsKey(moduleType) == false)
             return null;
         return _modules[moduleType] as T;
     }
 
-    public List<CharacterModule> GetModules(params ECharacterModuleType[] moduleTypes)
+    public List<PlayerModule> GetModules(params EPlayerModuleType[] moduleTypes)
     {
-        List<CharacterModule> result = new List<CharacterModule>();
+        List<PlayerModule> result = new List<PlayerModule>();
         foreach (var moduleType in moduleTypes)
         {
-            result.Add(GetModule<CharacterModule>(moduleType));
+            result.Add(GetModule<PlayerModule>(moduleType));
         }
         return result;
     }

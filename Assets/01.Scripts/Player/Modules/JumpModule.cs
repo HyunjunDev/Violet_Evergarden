@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class JumpModule : CharacterModule
+public class JumpModule : PlayerModule
 {
     private float _fallSpeed = 0f;
     public float fallSpeed => _fallSpeed;
@@ -63,7 +63,7 @@ public class JumpModule : CharacterModule
 
     private void OnGrounded()
     {
-        DashModule dashModule = _player.GetModule<DashModule>(ECharacterModuleType.Dash);
+        DashModule dashModule = _player.GetModule<DashModule>(EPlayerModuleType.Dash);
         if (dashModule != null)
         {
             if(dashModule.Dashing)

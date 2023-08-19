@@ -9,8 +9,8 @@ public class MovingController : MonoBehaviour
     private Player _player = null;
 
     [SerializeField]
-    private CharacterMoveDataSO _characterMoveDataSO = null;
-    public CharacterMoveDataSO characterMoveDataSO => _characterMoveDataSO;
+    private PlayerMoveDataSO _characterMoveDataSO = null;
+    public PlayerMoveDataSO characterMoveDataSO => _characterMoveDataSO;
 
     private float _currentHorizontalSpeed = 0f;
     public float currentHorizontalSpeed { get => _currentHorizontalSpeed; set => _currentHorizontalSpeed = value; }

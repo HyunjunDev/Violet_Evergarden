@@ -7,6 +7,10 @@ public class PlayerInput : MonoBehaviour
 {
     private Player _player = null;
 
+    private Vector2 _inputVector = Vector2.zero;
+    public Vector2 InputVector => _inputVector;
+    public Vector2 NormalizedInputVector => _inputVector.normalized;
+
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -19,26 +23,33 @@ public class PlayerInput : MonoBehaviour
 
     private void GetInput()
     {
-        _player.GetModule<MoveModule>(ECharacterModuleType.Move)?.Move(Input.GetAxisRaw("Horizontal"));
+        _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (_player.GetModule<JumpModule>(ECharacterModuleType.Jump) != null)
+        MoveModule moveModule = _player.GetModule<MoveModule>(EPlayerModuleType.Move);
+        if(moveModule != null)
+        {
+            moveModule.Move(_inputVector.x);
+        }
+
+        JumpModule jumpModule = _player.GetModule<JumpModule>(EPlayerModuleType.Jump);
+        if (jumpModule != null)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _player.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpDown = true;
+                jumpModule.jumpDown = true;
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                _player.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
+                jumpModule.jumpUp = true;
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Z))
+        DashModule dashModule = _player.GetModule<DashModule>(EPlayerModuleType.Dash);
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(_player.GetModule<DashModule>(ECharacterModuleType.Dash) != null)
+            if(dashModule != null)
             {
-                _player.GetModule<DashModule>(ECharacterModuleType.Dash).DashStart(
-                    new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+                dashModule.DashStart(_inputVector);
             }
         }
     }

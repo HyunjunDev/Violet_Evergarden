@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class CharacterModule
+public abstract class PlayerModule
 {
     protected Player _player = null;
 

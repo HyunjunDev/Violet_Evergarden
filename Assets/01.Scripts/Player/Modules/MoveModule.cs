@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveModule : CharacterModule
+public class MoveModule : PlayerModule
 {
     public void Move(float xInput)
     {
@@ -28,9 +28,9 @@ public class MoveModule : CharacterModule
 
             // apexBonus Àû¿ë
             float apexBonus = 0f;
-            if (_player.GetModule<JumpModule>(ECharacterModuleType.Jump) != null)
+            if (_player.GetModule<JumpModule>(EPlayerModuleType.Jump) != null)
             {
-                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _player.GetModule<JumpModule>(ECharacterModuleType.Jump).apexPoint;
+                apexBonus = Mathf.Sign(xInput) * moveMgr.characterMoveDataSO.apexBonus * _player.GetModule<JumpModule>(EPlayerModuleType.Jump).apexPoint;
             }
 
             moveMgr.currentHorizontalSpeed += apexBonus * Time.deltaTime;

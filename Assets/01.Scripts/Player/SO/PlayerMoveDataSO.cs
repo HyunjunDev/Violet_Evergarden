@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
-[CreateAssetMenu(menuName = "SO/CharacterMoveDataSO")]
-public class CharacterMoveDataSO : ScriptableObject
+[CreateAssetMenu(menuName = "SO/PlayerMoveDataSO")]
+public class PlayerMoveDataSO : ScriptableObject
 {
     [Header("이동 관련")]
     public float moveClamp = 13f;

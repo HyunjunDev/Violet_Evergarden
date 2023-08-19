@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class DashModule : CharacterModule
+public class DashModule : PlayerModule
 {
     private Vector2 _targetDashPower = Vector2.zero;
     private Vector2 _curDash = Vector2.zero;
@@ -25,11 +25,11 @@ public class DashModule : CharacterModule
         if (input.sqrMagnitude > 0f)
         {
             _dashing = true;
-            _player.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpUp = true;
-            _player.LockActionCharacterByModule(true, ECharacterModuleType.Jump);
+            _player.GetModule<JumpModule>(EPlayerModuleType.Jump).jumpUp = true;
+            _player.LockActionCharacterByModule(true, EPlayerModuleType.Jump);
 
             _targetDashPower = input.normalized * _player.movingController.characterMoveDataSO.dashPower;
-            _player.playerAnimation.DashAnimation(_targetDashPower);
+            _player.playerAnimation.DashAnimation();
             _player.movingController.ResetMovingManager();
             _curDash = Vector2.zero;
 
@@ -56,8 +56,8 @@ public class DashModule : CharacterModule
                 {
                     _player.playerAnimation.IdleAnimation();
                 }
-                _player.LockActionCharacterByModule(false, ECharacterModuleType.Jump);
-                _player.GetModule<JumpModule>(ECharacterModuleType.Jump).jumpable = true;
+                _player.LockActionCharacterByModule(false, EPlayerModuleType.Jump);
+                _player.GetModule<JumpModule>(EPlayerModuleType.Jump).jumpable = true;
                 _dashing = false;
             });
         }

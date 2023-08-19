@@ -8,6 +8,7 @@ public class PlayerRenderer : MonoBehaviour
 {
     private EFlipState _currentFlipState = EFlipState.None;
     public EFlipState currentFlipState => _currentFlipState;
+
     private SpriteRenderer _spriteRenderer = null;
     private Coroutine _rendererTrailCoroutine = null;
 

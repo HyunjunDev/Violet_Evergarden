@@ -36,9 +36,9 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("Move", moveX != 0f);
     }
 
-    public void DashAnimation(Vector2 dashPower)
+    public void DashAnimation()
     {
-        float verti = dashPower.y;
+        float verti = _player.playerInput.InputVector.y;
         if(verti > 0f)
         {
             _animator.Play("Jump");

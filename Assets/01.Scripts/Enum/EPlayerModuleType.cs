@@ -1,5 +1,5 @@
 [System.Serializable]
-public enum ECharacterModuleType
+public enum EPlayerModuleType
 {
     None,
     Move,
