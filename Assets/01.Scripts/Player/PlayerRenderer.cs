@@ -49,7 +49,7 @@ public class PlayerRenderer : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    public void TrailStart(Color trailColor, float trailCycle, float duration)
+    public void StartTrail(Color trailColor, float trailCycle, float duration)
     {
         if (_rendererTrailCoroutine != null)
             StopCoroutine(_rendererTrailCoroutine);
@@ -59,17 +59,13 @@ public class PlayerRenderer : MonoBehaviour
     private IEnumerator RendererTrailCoroutine(Color trailColor, float trailCycle, float duration)
     {
         float time = 0f;
-        while(time <= duration)
+        while (time <= duration)
         {
-            SpriteRenderer renderer = new GameObject("DashRendererTrail").AddComponent<SpriteRenderer>();
-            renderer.color = trailColor;
-            renderer.sprite = _spriteRenderer.sprite;
-            renderer.sortingOrder = 1;
-            renderer.DOFade(0f, 0.5f);
-            renderer.transform.position = transform.position;
-            renderer.transform.localScale = transform.localScale;
-            renderer.transform.rotation = transform.rotation;
-
+            TrailPoolable trailPoolable = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
+            trailPoolable.StartTrail(_spriteRenderer.sprite, trailColor, trailCycle, duration);
+            trailPoolable.transform.position = transform.position;
+            trailPoolable.transform.localScale = transform.localScale;
+            trailPoolable.transform.rotation = transform.rotation;
             yield return new WaitForSeconds(trailCycle);
             time += trailCycle;
         }

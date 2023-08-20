@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExploParticle : MonoBehaviour
+public class ParticlePool : PoolableObject
 {
     private ParticleSystem _particleSystem = null;
 
-    private void Start()
+    public override void PopInit()
+    {
+        _particleSystem.Play();
+    }
+
+    public override void PushInit()
+    {
+    }
+
+    public override void StartInit()
     {
         _particleSystem = GetComponent<ParticleSystem>();
     }
 
     private void Update()
     {
-        if(_particleSystem == null)
-        {
-            return;
-        }
-
         if(_particleSystem.particleCount == 0)
         {
-            _particleSystem.Stop();
+            PoolManager.Instance.Push(this);
         }
     }
 }

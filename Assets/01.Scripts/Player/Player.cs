@@ -25,18 +25,6 @@ public class Player : MonoBehaviour
     public Rigidbody2D rigid => _rigid;
 
     [SerializeField]
-    private ParticleSystem _jumpParticle = null;
-    public ParticleSystem JumpParticle => _jumpParticle;
-    [SerializeField]
-    private ParticleSystem _landingParticle = null;
-    public ParticleSystem LandingParticle => _landingParticle;
-    [SerializeField]
-    private ParticleSystem _dashParticle = null;
-    public ParticleSystem DashParticle => _dashParticle;
-    [SerializeField]
-    private ParticleSystem _dashTrailParticle = null;
-    public ParticleSystem DashTrailParticle => _dashTrailParticle;
-    [SerializeField]
     private Color _trailColor = Color.white;
     public Color trailColor => _trailColor;
     [SerializeField]

@@ -105,7 +105,8 @@ public class JumpModule : PlayerModule
         JumpRecharge();
         Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
-        GameObject.Instantiate(_player.LandingParticle, spawnPoint, Quaternion.identity).Play();
+        GameObject landingParticle = PoolManager.Instance.Pop(EPoolType.LandingParticle).gameObject;
+        landingParticle.transform.position = spawnPoint;
     }
 
     private void CalculateJumpApex()
@@ -156,7 +157,8 @@ public class JumpModule : PlayerModule
     {
         Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
-        GameObject.Instantiate(_player.JumpParticle, spawnPoint, Quaternion.identity).Play();
+        GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;
+        jumpParticle.transform.position = spawnPoint;
 
         _player.playerAnimation.JumpAnimation();
         Exit();

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4758175876806147093}
   - component: {fileID: 293915637098817405}
   - component: {fileID: 491988895039671921}
-  - component: {fileID: -3106174535081292696}
+  - component: {fileID: 360484668251500527}
   m_Layer: 0
   m_Name: DashParticle_Flower
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &293915637098817405
 ParticleSystem:
@@ -4856,9 +4856,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 1302603047
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4889,7 +4889,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-3106174535081292696
+--- !u!114 &360484668251500527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4898,6 +4898,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7064337668638572470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e815b4c5033246449df8ca79fdb145b, type: 3}
+  m_Script: {fileID: 11500000, guid: 23e64ffd3805ea644b20852000443d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 0

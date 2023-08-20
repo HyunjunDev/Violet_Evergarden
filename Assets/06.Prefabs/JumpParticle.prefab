@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2210713750054123405}
   - component: {fileID: 2161081028127047036}
   - component: {fileID: 7999734011007886293}
-  - component: {fileID: 8213984407326545957}
+  - component: {fileID: 2927894585612805429}
   m_Layer: 0
   m_Name: JumpParticle
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &2161081028127047036
 ParticleSystem:
@@ -4854,9 +4854,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 1302603047
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4887,7 +4887,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8213984407326545957
+--- !u!114 &2927894585612805429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4896,7 +4896,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7858896272379935730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d97ced75175bbdc4ca9b3a69ac00eb9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 23e64ffd3805ea644b20852000443d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleTime: 1.62
+  poolType: 0

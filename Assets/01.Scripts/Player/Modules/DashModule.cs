@@ -42,9 +42,12 @@ public class DashModule : PlayerModule
         _curDash = Vector2.zero;
 
         //Effect
-        GameObject.Instantiate(_player.DashParticle, _player.transform.position, Quaternion.identity).Play();
-        GameObject.Instantiate(_player.DashTrailParticle, _player.transform.position, GetDashRotation(_targetDashPower)).Play();
-        _player.playerRenderer.TrailStart(_player.trailColor, _player.trailCycle, _player.duration);
+        GameObject dashTrailParticle = PoolManager.Instance.Pop(EPoolType.HanaDashParticle).gameObject;
+        dashTrailParticle.transform.position = _player.transform.position;
+        dashTrailParticle.transform.rotation = GetDashRotation(_targetDashPower);
+        GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
+        dashFlowerParticle.transform.position = _player.transform.position;
+        _player.playerRenderer.StartTrail(_player.trailColor, _player.trailCycle, _player.duration);
         CameraManager.Instance.ShakeCamera(_player.movingController.characterMoveDataSO.fre,
             _player.movingController.characterMoveDataSO.amp,
             _player.movingController.characterMoveDataSO.animationTime,
