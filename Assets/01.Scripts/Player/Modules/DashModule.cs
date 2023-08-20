@@ -38,7 +38,7 @@ public class DashModule : PlayerModule
         _player.playerAnimation.SetDashParameter(true);
 
         //DashPowerSetting
-        _targetDashPower = input * _player.movingController.characterMoveDataSO.dashPower;
+        _targetDashPower = input * _player.DashDataSO.dashPower;
         _curDash = Vector2.zero;
 
         //Effect
@@ -47,11 +47,11 @@ public class DashModule : PlayerModule
         dashTrailParticle.transform.rotation = GetDashRotation(_targetDashPower);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
         dashFlowerParticle.transform.position = _player.transform.position;
-        _player.playerRenderer.StartTrail(_player.trailColor, _player.trailCycle, _player.duration);
-        CameraManager.Instance.ShakeCamera(_player.movingController.characterMoveDataSO.fre,
-            _player.movingController.characterMoveDataSO.amp,
-            _player.movingController.characterMoveDataSO.animationTime,
-            _player.movingController.characterMoveDataSO.easeT);
+        _player.playerRenderer.StartTrail(_player.DashDataSO.trailColor, _player.DashDataSO.trailCycle, _player.DashDataSO.duration);
+        CameraManager.Instance.ShakeCamera(_player.DashDataSO.frequency,
+            _player.DashDataSO.amplitude,
+            _player.DashDataSO.shakeTime,
+            _player.DashDataSO.easeType);
 
         //Jump
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpEnd();
@@ -60,8 +60,8 @@ public class DashModule : PlayerModule
         //DashSeq
         _dashSeq?.Kill();
         _dashSeq = DOTween.Sequence();
-        _dashSeq.Append(DOTween.To(() => _curDash, SettingDashSpeed, _targetDashPower, _player.movingController.characterMoveDataSO.dashTime))
-            .SetEase(_player.movingController.characterMoveDataSO.dashEase);
+        _dashSeq.Append(DOTween.To(() => _curDash, SettingDashSpeed, _targetDashPower, _player.DashDataSO.dashTime))
+            .SetEase(_player.DashDataSO.dashEase);
         _dashSeq.AppendCallback(DashEnd);
     }
 

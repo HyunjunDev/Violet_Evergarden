@@ -91,7 +91,7 @@ public class JumpModule : PlayerModule
 
     private IEnumerator CoyoteCoroutine()
     {
-        yield return new WaitForSeconds(_player.movingController.characterMoveDataSO.coyoteTime);
+        yield return new WaitForSeconds(_player.JumpDataSO.coyoteTime);
         if (_player.CheckExcutingModules(EPlayerModuleType.Dash))
         {
             yield break;
@@ -119,11 +119,11 @@ public class JumpModule : PlayerModule
         if (!_player.playerCollider.GetCollision(EBoundType.Down, false))
         {
             // 한계값부터 0까지 
-            _apexPoint = Mathf.InverseLerp(_player.movingController.characterMoveDataSO.jumpApexThreshold
+            _apexPoint = Mathf.InverseLerp(_player.JumpDataSO.jumpApexThreshold
                 , 0f, Mathf.Abs(_player.rigid.velocity.y));
 
-            _fallSpeed = Mathf.Lerp(_player.movingController.characterMoveDataSO.minFallSpeed,
-                _player.movingController.characterMoveDataSO.maxFallSpeed, _apexPoint);
+            _fallSpeed = Mathf.Lerp(_player.GravityDataSO.minFallSpeed,
+                _player.GravityDataSO.maxFallSpeed, _apexPoint);
         }
     }
 
@@ -165,6 +165,6 @@ public class JumpModule : PlayerModule
         _excuting = true;
         _jumpDown = false;
         _jumpable = false;
-        _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.jumpPower;
+        _player.movingController.currentVerticalSpeed = _player.JumpDataSO.jumpPower;
     }
 }

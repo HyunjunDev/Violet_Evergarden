@@ -3966,7 +3966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9060250ebeebda459f9094ed53901b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterMoveDataSO: {fileID: 11400000, guid: 81f95a354caf6894f86e05302e4e0730, type: 2}
 --- !u!114 &1103412439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3992,9 +3991,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentCharacterType: 1
-  _trailColor: {r: 0.83137256, g: 0.30980393, b: 0.79607844, a: 1}
-  _trailCycle: 0.08
-  _duration: 0.2
+  _dashDataSO: {fileID: 11400000, guid: 16d699ec7838c8a499a373fc4025046e, type: 2}
+  _movementDataSO: {fileID: 11400000, guid: 81f95a354caf6894f86e05302e4e0730, type: 2}
+  _gravityDataSO: {fileID: 11400000, guid: 74fbfca1b8d8169429be0dae4c42684b, type: 2}
+  _jumpDataSO: {fileID: 11400000, guid: 49528dca1719e0443862e16a4839edd5, type: 2}
 --- !u!4 &1103412441
 Transform:
   m_ObjectHideFlags: 0

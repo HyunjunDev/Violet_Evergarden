@@ -11,28 +11,37 @@ public class Player : MonoBehaviour
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
     private Dictionary<EPlayerModuleType, PlayerModule> _modules = new Dictionary<EPlayerModuleType, PlayerModule>();
 
-    private PlayerInput _playerInput = null;
-    public PlayerInput playerInput => _playerInput;
-    private MovingController _movingController = null;
-    public MovingController movingController => _movingController;
+    #region Data
+    [SerializeField]
+    private DashDataSO _dashDataSO = null;
+    public DashDataSO DashDataSO => _dashDataSO;
+    [SerializeField]
+    private MovementDataSO _movementDataSO = null;
+    public MovementDataSO MovementDataSO => _movementDataSO;
+    [SerializeField]
+    private GravityDataSO _gravityDataSO = null;
+    public GravityDataSO GravityDataSO => _gravityDataSO;
+    [SerializeField]
+    private JumpDataSO _jumpDataSO = null;
+    public JumpDataSO JumpDataSO => _jumpDataSO;
+    #endregion
+
+    #region Renderer
     private PlayerRenderer _playerRenderer = null;
     public PlayerRenderer playerRenderer => _playerRenderer;
     private PlayerAnimation _playerAnimation = null;
     public PlayerAnimation playerAnimation => _playerAnimation;
+    #endregion
+
+    private PlayerInput _playerInput = null;
+    public PlayerInput playerInput => _playerInput;
     private PlayerCollider _playerCollider = null;
     public PlayerCollider playerCollider => _playerCollider;
     private Rigidbody2D _rigid = null;
     public Rigidbody2D rigid => _rigid;
 
-    [SerializeField]
-    private Color _trailColor = Color.white;
-    public Color trailColor => _trailColor;
-    [SerializeField]
-    private float _trailCycle = 0.08f;
-    public float trailCycle => _trailCycle;
-    [SerializeField]
-    private float _duration = 0.2f;
-    public float duration => _duration;
+    private MovingController _movingController = null;
+    public MovingController movingController => _movingController;
 
     private void Awake()
     {
@@ -46,7 +55,7 @@ public class Player : MonoBehaviour
         _modules.Add(EPlayerModuleType.Gravity, new GravityModule());
         _modules.Add(EPlayerModuleType.Jump, new JumpModule());
         _modules.Add(EPlayerModuleType.Dash, new DashModule());
-        foreach(var module in  _modules.Values)
+        foreach (var module in _modules.Values)
         {
             module.SettingModule(this);
         }
@@ -59,7 +68,7 @@ public class Player : MonoBehaviour
 
     private void ModuleUpdate()
     {
-        foreach(var module in _modules.Values)
+        foreach (var module in _modules.Values)
         {
             module.UpdateModule();
         }

@@ -43,15 +43,15 @@ public class GravityModule : PlayerModule
             if (jumpModule != null)
             {
                 fallSpeed = jumpModule.jumpEndEarly && _player.movingController.currentVerticalSpeed > 0f ?
-                    jumpModule.fallSpeed * _player.movingController.characterMoveDataSO.jumpEndEarlyGravityModifier : jumpModule.fallSpeed;
+                    jumpModule.fallSpeed * _player.JumpDataSO.jumpEndEarlyGravityModifier : jumpModule.fallSpeed;
             }
 
             _player.movingController.currentVerticalSpeed -= fallSpeed * Time.deltaTime;
             _excuting = fallSpeed > 0f;
 
-            if (_player.movingController.currentVerticalSpeed < _player.movingController.characterMoveDataSO.fallClamp)
+            if (_player.movingController.currentVerticalSpeed < _player.GravityDataSO.fallClamp)
             {
-                _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.fallClamp;
+                _player.movingController.currentVerticalSpeed = _player.GravityDataSO.fallClamp;
             }
         }
     }
