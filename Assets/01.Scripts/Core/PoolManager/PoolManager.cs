@@ -56,7 +56,7 @@ public class PoolManager : MonoSingleTon<PoolManager>
     /// <returns></returns>
     public PoolableObject Pop(EPoolType type)
     {
-        if (_poolDic.ContainsKey(type) == false)
+        if (!_poolDic.ContainsKey(type))
         {
             Debug.LogError("타입에 맞는 키 없음.");
             return null;

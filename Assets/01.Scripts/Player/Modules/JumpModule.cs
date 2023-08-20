@@ -18,7 +18,7 @@ public class JumpModule : PlayerModule
         get => _jumpDown;
         set
         {
-            if (_jumpable == false)
+            if (!_jumpable)
             {
                 return;
             }

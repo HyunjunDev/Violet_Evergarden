@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
     /// <returns></returns>
     public T GetModule<T>(EPlayerModuleType moduleType) where T : PlayerModule
     {
-        if (_modules.ContainsKey(moduleType) == false)
+        if (!_modules.ContainsKey(moduleType))
             return null;
         return _modules[moduleType] as T;
     }

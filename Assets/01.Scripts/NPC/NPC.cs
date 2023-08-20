@@ -47,7 +47,7 @@ public class NPC : MonoBehaviour
 
     public virtual void TryDialog()
     {
-        if (_doInteractObj.activeSelf == false || _dialoging || _dialogDataSO == null)
+        if (!_doInteractObj.activeSelf || _dialoging || _dialogDataSO == null)
             return;
         if(DialogManager.Instance.DialogStart(_dialogDataSO, () => { _dialogDataSO = _dialogDataSO.nextData; _dialoging = false; }))
         {

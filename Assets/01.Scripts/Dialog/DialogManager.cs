@@ -36,7 +36,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
 
     private void Update()
     {
-        if (_excuting == false || _input)
+        if (!_excuting || _input)
             return;
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
         {
@@ -62,7 +62,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
         _excuting = false;
         _input = false;
         _dialogCanvas.SetActive(false);
-        if (_dialogLock == false)
+        if (!_dialogLock)
             StartCoroutine(DialogCooltimeCoroutine());
     }
 

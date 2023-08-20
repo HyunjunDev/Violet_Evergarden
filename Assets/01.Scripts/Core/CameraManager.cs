@@ -14,7 +14,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private void Awake()
     {
-        if(_vCam == null)
+        if (_vCam == null)
         {
             Debug.LogError("VCam ¾øÀ½.");
             return;
@@ -24,18 +24,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void ResetCamera()
     {
-        if (_seq != null)
-        {
-            _seq.Kill();
-        }
+        _seq?.Kill();
     }
 
     public void ShakeCamera(float frequency, float amplitude, float animationTime, Ease easeType)
     {
-        if(_seq != null)
-        {
-            _seq.Kill();
-        }
+        _seq?.Kill();
         _noise.m_AmplitudeGain = amplitude;
         _noise.m_FrequencyGain = frequency;
         _seq = DOTween.Sequence();
