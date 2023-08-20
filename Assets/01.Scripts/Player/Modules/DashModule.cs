@@ -35,6 +35,11 @@ public class DashModule : PlayerModule
         //Reset
         _player.movingController.ResetMovingManager();
         _player.playerAnimation.DashAnimation();
+        _player.playerAnimation.SetDashParameter(true);
+
+        //DashPowerSetting
+        _targetDashPower = input * _player.movingController.characterMoveDataSO.dashPower;
+        _curDash = Vector2.zero;
 
         //Effect
         GameObject.Instantiate(_player.DashParticle, _player.transform.position, Quaternion.identity).Play();
@@ -45,13 +50,9 @@ public class DashModule : PlayerModule
             _player.movingController.characterMoveDataSO.animationTime,
             _player.movingController.characterMoveDataSO.easeT);
 
-        //DashPowerSetting
-        _targetDashPower = input * _player.movingController.characterMoveDataSO.dashPower;
-        _curDash = Vector2.zero;
-
         //Jump
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpEnd();
-        _player.LockActionCharacterByModule(true, EPlayerModuleType.Jump);
+        _player.LockModules(true, EPlayerModuleType.Jump);
 
         //DashSeq
         _dashSeq?.Kill();
@@ -70,7 +71,8 @@ public class DashModule : PlayerModule
 
     private void DashEnd()
     {
-        _player.LockActionCharacterByModule(false, EPlayerModuleType.Jump);
+        _player.playerAnimation.SetDashParameter(false);
+        _player.LockModules(false, EPlayerModuleType.Jump);
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpRecharge();
         _excuting = false;
     }

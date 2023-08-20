@@ -33,9 +33,7 @@ public class JumpModule : PlayerModule
     public bool jumpEndEarly => _jumpEndEarly;
 
     // coyoteTime은 땅을 벗어났을 때 점프할 수 있는 것이 유지되는 시간
-    private bool _coyoteUseable = false;
-    public bool cotoyeUseable => _coyoteUseable;
-    private float _coyoteTimer = 0f;
+    private Coroutine _coyoteCoroutine = null;
 
     private bool _jumpable = false;
     public bool jumpable { get => _jumpable; set => _jumpable = value; }
@@ -52,6 +50,7 @@ public class JumpModule : PlayerModule
     protected override void InitModule()
     {
         _player.playerCollider.onGrounded += OnGrounded;
+        _player.playerCollider.onGroundExited += OnGroundExited;
     }
 
     public override void UpdateModule()
@@ -72,14 +71,38 @@ public class JumpModule : PlayerModule
     public void JumpEnd()
     {
         _jumpUp = true;
+        _excuting = false;
+    }
+
+    private void OnGroundExited()
+    {
+        if(_player.CheckExcutingModules(EPlayerModuleType.Dash))
+        {
+            return;
+        }
+
+        if(_coyoteCoroutine != null)
+        {
+            StopCoroutine(_coyoteCoroutine);
+        }
+
+        _coyoteCoroutine = StartCoroutine(CoyoteCoroutine());
+    }
+
+    private IEnumerator CoyoteCoroutine()
+    {
+        yield return new WaitForSeconds(_player.movingController.characterMoveDataSO.coyoteTime);
+        if (_player.CheckExcutingModules(EPlayerModuleType.Dash))
+        {
+            yield break;
+        }
+        _jumpable = false;
     }
 
     private void OnGrounded()
     {
-        _fallSpeed = 0f;
-        _apexPoint = 0f;
-        _jumpDown = false;
-        _jumpable = true;
+        _excuting = false;
+        JumpRecharge();
         Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
         GameObject.Instantiate(_player.LandingParticle, spawnPoint, Quaternion.identity).Play();
@@ -124,6 +147,7 @@ public class JumpModule : PlayerModule
         // 빨리 떨어지기
         if (!_player.playerCollider.GetCollision(EBoundType.Down, false) && !_jumpEndEarly && _jumpUp && _player.rigid.velocity.y > 0f)
         {
+            _excuting = false;
             _jumpEndEarly = true;
         }
     }
@@ -136,6 +160,7 @@ public class JumpModule : PlayerModule
 
         _player.playerAnimation.JumpAnimation();
         Exit();
+        _excuting = true;
         _jumpDown = false;
         _jumpable = false;
         _player.movingController.currentVerticalSpeed = _player.movingController.characterMoveDataSO.jumpPower;

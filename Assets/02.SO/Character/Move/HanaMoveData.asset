@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HanaMoveData
   m_EditorClassIdentifier: 
   moveClamp: 6.5
-  acceleration: 55
+  acceleration: 55.2
   deAcceleration: 65
   apexBonus: 2
   fallClamp: -25
@@ -22,7 +22,7 @@ MonoBehaviour:
   jumpPower: 9
   jumpApexThreshold: 10
   jumpEndEarlyGravityModifier: 2.5
-  coyoteTime: 0.05
+  coyoteTime: 0.02
   dashPower: 15
   dashTime: 0.15
   dashEase: 18

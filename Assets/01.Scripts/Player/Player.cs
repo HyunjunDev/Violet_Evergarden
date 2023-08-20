@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -87,10 +88,26 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// moduleType에 맞는 모듈을 가져와 실행 검사를 합니다.
+    /// </summary>
+    /// <param name="moduleTypes"></param>
+    /// <returns></returns>
+    public bool CheckExcutingModules(params EPlayerModuleType[] moduleTypes)
+    {
+        List<PlayerModule> modules = GetModules(moduleTypes);
+        foreach (var module in modules)
+        {
+            if (module.excuting)
+                return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     /// moduleType에 맞는 모듈을 가져와 잠굼니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public void LockActionCharacterByModule(bool value, params EPlayerModuleType[] moduleTypes)
+    public void LockModules(bool value, params EPlayerModuleType[] moduleTypes)
     {
         List<PlayerModule> modules = GetModules(moduleTypes);
         foreach (var module in modules)
@@ -103,7 +120,7 @@ public class Player : MonoBehaviour
     /// moduleType에 맞는 모듈을 가져와 Exit를 실행합니다.
     /// </summary>
     /// <param name="moduleType"></param>
-    public void ExitActionCharacterByModule(params EPlayerModuleType[] moduleTypes)
+    public void ExitModules(params EPlayerModuleType[] moduleTypes)
     {
         List<PlayerModule> modules = GetModules(moduleTypes);
         foreach (var module in modules)

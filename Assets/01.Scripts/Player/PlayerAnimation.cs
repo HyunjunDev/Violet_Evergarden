@@ -53,6 +53,11 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void SetDashParameter(bool value)
+    {
+        _animator.SetBool("Dash", value);
+    }
+
     public void IdleAnimation()
     {
         _animator.Play("Idle");
