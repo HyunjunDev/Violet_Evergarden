@@ -116,6 +116,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
                     if (_input)
                     {
                         _input = false;
+                        Debug.Log("พฦคำ");
                         _dialogText.SetText(targetText);
                         break;
                     }
