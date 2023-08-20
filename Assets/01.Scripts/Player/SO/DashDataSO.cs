@@ -12,6 +12,7 @@ public class DashDataSO : ScriptableObject
     public float dashPower = 10f;
     public float dashTime = 0.3f;
     public Ease dashEase = Ease.Linear;
+    public float dashRechargeTime = 0.5f;
 
     [Header("Camera")]
     public float frequency = 10f;

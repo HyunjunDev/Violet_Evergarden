@@ -8,6 +8,9 @@ public class DashModule : PlayerModule
     private Vector2 _targetDashPower = Vector2.zero;
     private Vector2 _curDash = Vector2.zero;
 
+    private bool _dashable = true;
+    private Coroutine _groundDashRechargeCoroutine = null;
+
     private Sequence _dashSeq = null;
 
     public override void Exit()
@@ -19,17 +22,25 @@ public class DashModule : PlayerModule
 
     protected override void InitModule()
     {
+        _player.playerCollider.onGrounded += OnGrounded;
+    }
+
+    private void OnGrounded()
+    {
+        _dashable = true;
+
     }
 
     public void DashStart()
     {
         Vector2 input = _player.playerInput.NormalizedInputVector;
 
-        if (!(input.sqrMagnitude > 0f))
+        if (!(input.sqrMagnitude > 0f) || !_dashable)
         {
             return;
         }
 
+        _dashable = false; 
         _excuting = true;
 
         //Reset
@@ -78,6 +89,23 @@ public class DashModule : PlayerModule
         _player.LockModules(false, EPlayerModuleType.Jump);
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpRecharge();
         _excuting = false;
+        DashRecharge();
+    }
+
+    private void DashRecharge()
+    {
+        if (_groundDashRechargeCoroutine != null)
+            StopCoroutine(_groundDashRechargeCoroutine);
+        _groundDashRechargeCoroutine = StartCoroutine(GroundDashRechargeCoroutine());
+    }
+
+    private IEnumerator GroundDashRechargeCoroutine()
+    {
+        yield return new WaitForSeconds(_player.DashDataSO.dashRechargeTime);
+        if(_player.playerCollider.GetCollision(EBoundType.Down, false))
+        {
+            _dashable = true;
+        }
     }
 
     private Quaternion GetDashRotation(Vector2 dir)
