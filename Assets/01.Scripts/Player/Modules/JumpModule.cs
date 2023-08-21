@@ -155,6 +155,11 @@ public class JumpModule : PlayerModule
 
     private void JumpStart()
     {
+        if(_player.CheckExcutingModules(EPlayerModuleType.WallGrab))
+        {
+            //º®ÂÀ
+        }
+
         Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
         GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;
