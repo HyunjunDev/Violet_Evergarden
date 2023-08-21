@@ -13,8 +13,6 @@ public class DashModule : PlayerModule
 
     private Sequence _dashSeq = null;
 
-    ParticleSystem _parti = null;
-
     public override void Exit()
     {
         _dashSeq?.Kill();
@@ -25,13 +23,11 @@ public class DashModule : PlayerModule
     protected override void InitModule()
     {
         _player.playerCollider.onGrounded += OnGrounded;
-        _parti = _player.transform.Find("JumpParticle").GetComponent<ParticleSystem>();
     }
 
     private void OnGrounded()
     {
         _dashable = true;
-        _parti.Play();
     }
 
     public void DashStart()
@@ -45,7 +41,6 @@ public class DashModule : PlayerModule
 
         _dashable = false; 
         _excuting = true;
-        _parti.Stop();
 
         //Reset
         _player.movingController.ResetMovingManager();
@@ -108,7 +103,6 @@ public class DashModule : PlayerModule
         if(_player.playerCollider.GetCollision(EBoundType.Down, false))
         {
             _dashable = true;
-            _parti.Play();
         }
     }
 

@@ -7820,6 +7820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 693288439}
+  timeDelay: 0.25
 --- !u!1 &546407806
 GameObject:
   m_ObjectHideFlags: 0
@@ -7972,7 +7973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
@@ -8206,7 +8207,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: 834.90894, y: 114.5643, z: -436.34805}
 --- !u!114 &717983560
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -8941,7 +8942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe352c6f8be74e40bfbb6bbf964abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentCharacterType: 1
+  _currentCharacterType: 0
   _dashDataSO: {fileID: 11400000, guid: 16d699ec7838c8a499a373fc4025046e, type: 2}
   _movementDataSO: {fileID: 11400000, guid: 81f95a354caf6894f86e05302e4e0730, type: 2}
   _gravityDataSO: {fileID: 11400000, guid: 74fbfca1b8d8169429be0dae4c42684b, type: 2}
@@ -9458,6 +9459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 448640864}
+  timeDelay: 0.25
 --- !u!60 &1400873075
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -9515,7 +9517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400873073}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.78, y: 0, z: 0}
+  m_LocalPosition: {x: 28, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

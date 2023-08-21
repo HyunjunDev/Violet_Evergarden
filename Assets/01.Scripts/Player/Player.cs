@@ -87,8 +87,8 @@ public class Player : MonoBehaviour
                 break;
             case ECharacterType.Gen:
                 DetachModule(EPlayerModuleType.Dash);
-                //AttachModule(EPlayerModuleType.WallGrab, new DashModule());
-                //AttachModule(EPlayerModuleType.ThrowDagger, new DashModule());
+                AttachModule(EPlayerModuleType.WallGrab, new WallGrabModule());
+                AttachModule(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
                 break;
             default:
                 break;

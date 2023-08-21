@@ -6,6 +6,8 @@ public class Room : MonoBehaviour
 {
     public GameObject virtualCam;
 
+    public float timeDelay = 0.25f;
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") && !collision.isTrigger)
@@ -19,6 +21,15 @@ public class Room : MonoBehaviour
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             virtualCam.SetActive(false);
+            StartCoroutine(TimeDelay(timeDelay));
         }
+    }
+
+
+    IEnumerator TimeDelay(float time)
+    {
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(time);
+        Time.timeScale = 1.0f;
     }
 }
