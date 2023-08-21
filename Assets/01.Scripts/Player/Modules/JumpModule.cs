@@ -78,6 +78,7 @@ public class JumpModule : PlayerModule
     {
         if(_player.CheckExcutingModules(EPlayerModuleType.Dash))
         {
+            _jumpable = false;
             return;
         }
 
