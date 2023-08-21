@@ -24,6 +24,19 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetFloat("YVelocity", _player.rigid.velocity.y);
     }
 
+    public void DeathAnimation()
+    {
+        _animator.Rebind();
+        _animator.Play("Death");
+        _animator.Update(0);
+    }
+
+    public void ResetUpLayer()
+    {
+        _animator.Play("UpLayerEmpty");
+        _animator.Update(0);
+    }
+
     public void JumpAnimation()
     {
         _animator.SetFloat("YVelocity", 0f);

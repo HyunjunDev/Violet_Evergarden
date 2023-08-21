@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.R))
         {
-            _player.TagCharacter();
+            _player.TagWithInput();
         }
 
         MoveModule moveModule = _player.GetModule<MoveModule>(EPlayerModuleType.Move);

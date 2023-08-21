@@ -10,7 +10,13 @@ public class PlayerCollider : MonoBehaviour
     private BoxCollider2D _col = null;
     private Bounds _characterBounds => _col.bounds;
     [SerializeField]
-    private LayerMask _groundLayer = 0;
+    private LayerMask _downLayer = 0;
+    [SerializeField]
+    private LayerMask _leftLayer = 0;
+    [SerializeField]
+    private LayerMask _rightLayer = 0;
+    [SerializeField]
+    private LayerMask _upLayer = 0;
     [SerializeField]
     private int _detectorCount = 3;
     [SerializeField]
@@ -77,13 +83,38 @@ public class PlayerCollider : MonoBehaviour
         return false;
     }
 
+    public bool GetCollision(EBoundType boundType, LayerMask layerMask)
+    {
+        return CheckDetection(GetRayRange(boundType), layerMask);
+    }
+
+    private RayRange GetRayRange(EBoundType boundType)
+    {
+        switch (boundType)
+        {
+            case EBoundType.None:
+                break;
+            case EBoundType.Up:
+                return _raysUp;
+            case EBoundType.Down:
+                return _raysDown;
+            case EBoundType.Left:
+                return _raysLeft;
+            case EBoundType.Right:
+                return _raysRight;
+            default:
+                break;
+        }
+        return default(RayRange);
+    }
+
     private void CheckCollision()
     {
         // 상,하,좌,우 RayRange 계산
         CalculateRayRanged();
 
         // Raycast 쏘기
-        var groundedCheck = CheckDetection(_raysDown);
+        var groundedCheck = CheckDetection(_raysDown, _downLayer);
         // 저번 프레임에 땅에 닿았고, 이번 프레임에 땅에서 나왔을 때
         if(_colDown && !groundedCheck)
         {
@@ -95,15 +126,15 @@ public class PlayerCollider : MonoBehaviour
             _onGrounded?.Invoke();
         }
         _colDown = groundedCheck;
-        _colUp = CheckDetection(_raysUp);
-        _colLeft = CheckDetection(_raysLeft);
-        _colRight = CheckDetection(_raysRight);
+        _colUp = CheckDetection(_raysUp, _upLayer);
+        _colLeft = CheckDetection(_raysLeft, _leftLayer);
+        _colRight = CheckDetection(_raysRight, _rightLayer);
     }
 
-    private bool CheckDetection(RayRange range)
+    private bool CheckDetection(RayRange range, LayerMask layerMask)
     {
         // EvaluateRayPositions 함수로 추출된 위치에서 range의 Dir 방향으로 Ray를 쏴 맞은 것이 있다면 true 반환
-        return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, _groundLayer));
+        return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, layerMask));
     }
 
     private void ShootDebugRay(RayRange range)
@@ -112,7 +143,7 @@ public class PlayerCollider : MonoBehaviour
         RaycastHit2D hit;
         foreach (var ray in rayStarts)
         {
-            hit = Physics2D.Raycast(ray, range.Dir, _detectionRayLength, _groundLayer);
+            hit = Physics2D.Raycast(ray, range.Dir, _detectionRayLength, _downLayer);
             if (hit)
             {
                 Gizmos.color = Color.red;
