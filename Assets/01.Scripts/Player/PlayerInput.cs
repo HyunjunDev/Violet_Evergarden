@@ -25,6 +25,11 @@ public class PlayerInput : MonoBehaviour
     {
         _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            _player.TagCharacter();
+        }
+
         MoveModule moveModule = _player.GetModule<MoveModule>(EPlayerModuleType.Move);
         if(moveModule != null)
         {
@@ -34,11 +39,11 @@ public class PlayerInput : MonoBehaviour
         JumpModule jumpModule = _player.GetModule<JumpModule>(EPlayerModuleType.Jump);
         if (jumpModule != null)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 jumpModule.jumpDown = true;
             }
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 jumpModule.jumpUp = true;
             }

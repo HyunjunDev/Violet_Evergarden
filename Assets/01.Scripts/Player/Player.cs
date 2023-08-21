@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -74,14 +75,44 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AttachModule()
+    public void TagCharacter()
     {
-
+        // 0, 1
+        _currentCharacterType = (ECharacterType)((int)(_currentCharacterType + 1) % ((int)ECharacterType.Size));
+        switch (_currentCharacterType)
+        {
+            case ECharacterType.Hana:
+                DetachModule(EPlayerModuleType.WallGrab, EPlayerModuleType.ThrowDagger);
+                AttachModule(EPlayerModuleType.Dash, new DashModule());
+                break;
+            case ECharacterType.Gen:
+                DetachModule(EPlayerModuleType.Dash);
+                //AttachModule(EPlayerModuleType.WallGrab, new DashModule());
+                //AttachModule(EPlayerModuleType.ThrowDagger, new DashModule());
+                break;
+            default:
+                break;
+        }
     }
 
-    public void DetachModule()
+    public void AttachModule(EPlayerModuleType moduleType, PlayerModule module)
     {
+        if (!_modules.ContainsKey(moduleType))
+        {
+            _modules.Add(moduleType, module);
+            module.SettingModule(this);
+        }
+    }
 
+    public void DetachModule(params EPlayerModuleType[] moduleTypes)
+    {
+        foreach(var moduleType in moduleTypes)
+        {
+            if (_modules.ContainsKey(moduleType))
+            {
+                _modules.Remove(moduleType);
+            }
+        }
     }
 
     /// <summary>
@@ -143,7 +174,11 @@ public class Player : MonoBehaviour
         List<PlayerModule> result = new List<PlayerModule>();
         foreach (var moduleType in moduleTypes)
         {
-            result.Add(GetModule<PlayerModule>(moduleType));
+            PlayerModule module = GetModule<PlayerModule>(moduleType);
+            if(module != null)
+            {
+                result.Add(module);
+            }
         }
         return result;
     }
