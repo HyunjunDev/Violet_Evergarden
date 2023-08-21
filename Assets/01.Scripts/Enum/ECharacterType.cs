@@ -1,6 +1,7 @@
 public enum ECharacterType
 {
-    None,
+    None = -1,
     Hana,
-    Gen
+    Gen,
+    Size
 }
