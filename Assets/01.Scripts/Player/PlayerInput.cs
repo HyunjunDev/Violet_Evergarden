@@ -41,7 +41,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                jumpModule.jumpDown = true;
+                jumpModule.JumpKeyDown();
             }
             if (Input.GetKeyUp(KeyCode.C))
             {
