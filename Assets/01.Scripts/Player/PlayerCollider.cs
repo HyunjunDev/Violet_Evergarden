@@ -8,6 +8,7 @@ public class PlayerCollider : MonoBehaviour
 {
     [SerializeField]
     private BoxCollider2D _col = null;
+    public BoxCollider2D Col => _col;
     private Bounds _characterBounds => _col.bounds;
     [SerializeField]
     private LayerMask _downLayer = 0;

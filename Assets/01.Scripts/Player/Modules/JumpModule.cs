@@ -93,7 +93,7 @@ public class JumpModule : PlayerModule
             return;
         }
 
-        if(_coyoteCoroutine != null)
+        if (_coyoteCoroutine != null)
         {
             StopCoroutine(_coyoteCoroutine);
         }
@@ -104,10 +104,11 @@ public class JumpModule : PlayerModule
     private IEnumerator CoyoteCoroutine()
     {
         yield return new WaitForSeconds(_player.JumpDataSO.coyoteTime);
-        if (_player.CheckExcutingModules(EPlayerModuleType.Dash))
+        if (_player.CheckExcutingModules(EPlayerModuleType.Dash) || _player.playerCollider.GetCollision(EBoundType.Down, false))
         {
             yield break;
         }
+
         _jumpable = false;
     }
 

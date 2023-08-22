@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 public class DaggerPoolable : PoolableObject
 {
@@ -65,9 +66,18 @@ public class DaggerPoolable : PoolableObject
 
     private void Contact(RaycastHit2D hit)
     {
-        Vector3 direction;
-        float distance;
-        //bool overlapped = Physics.ComputePenetration(_player.playerCollider, hit.point, _player.transform.rotation, hit.collider, hit.transform.position, hit.transform.rotation, out direction, out distance);
+        GameObject colliderObject = new GameObject("DynamicCollider");
+        BoxCollider2D col = colliderObject.AddComponent<BoxCollider2D>();
+        col.size = _player.playerCollider.Col.size;
+        col.offset = _player.playerCollider.Col.offset;
+        colliderObject.transform.position = new Vector3(hit.point.x, hit.point.y, 0);
+
+        ColliderDistance2D dis = Physics2D.Distance(col, hit.collider);
+        //Debug.Log(dis.distance);
+        _player.transform.position = (Vector3)hit.point + ((Vector3)_dir * dis.distance * 2f);  
+
         PoolManager.Instance.Push(this);
+
+        Destroy(colliderObject);
     }
 }
