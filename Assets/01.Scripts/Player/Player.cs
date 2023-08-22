@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         _modules.Add(EPlayerModuleType.Gravity, new GravityModule());
         _modules.Add(EPlayerModuleType.Jump, new JumpModule());
         _modules.Add(EPlayerModuleType.Dash, new DashModule());
+        _modules.Add(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
         foreach (var module in _modules.Values)
         {
             module.SettingModule(this);

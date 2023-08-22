@@ -57,5 +57,14 @@ public class PlayerInput : MonoBehaviour
                 dashModule.DashStart();
             }
         }
+
+        ThrowDaggerModule throwDaggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
+        if(throwDaggerModule != null)
+        {
+            if(Input.GetKeyUp(KeyCode.V))
+            {
+                throwDaggerModule.ThrowStart();
+            }
+        }
     }
 }

@@ -54,7 +54,7 @@ public class DashModule : PlayerModule
         //Effect
         GameObject dashTrailParticle = PoolManager.Instance.Pop(EPoolType.HanaDashParticle).gameObject;
         dashTrailParticle.transform.position = _player.transform.position;
-        dashTrailParticle.transform.rotation = GetDashRotation(_targetDashPower);
+        dashTrailParticle.transform.rotation = Utility.GetDashRotation(_targetDashPower, 90);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
         dashFlowerParticle.transform.position = _player.transform.position;
         _player.playerRenderer.StartTrail(_player.DashDataSO.trailColor, _player.DashDataSO.trailCycle, _player.DashDataSO.duration);
@@ -104,13 +104,5 @@ public class DashModule : PlayerModule
         {
             _dashable = true;
         }
-    }
-
-    private Quaternion GetDashRotation(Vector2 dir)
-    {
-        float angle = Vector2.Angle(Vector2.down, dir);
-        angle *= Mathf.Sign(dir.x);
-        Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
-        return rot;
     }
 }

@@ -8,4 +8,6 @@ public enum EPoolType
     LandingParticle,
     HanaDashParticle,
     HanaFlowerParticle,
+    Dagger,
+
 }
