@@ -7,5 +7,7 @@ public enum EPlayerModuleType
     Dash,
     ThrowDagger,
     WallGrab,
-    Gravity
+    Gravity,
+    Death,
+    Size
 }

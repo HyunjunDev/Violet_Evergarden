@@ -52,15 +52,16 @@ public class Player : MonoBehaviour
         _playerCollider = GetComponent<PlayerCollider>();
         _playerRenderer = transform.Find("Renderer").GetComponent<PlayerRenderer>();
         _playerAnimation = _playerRenderer.GetComponent<PlayerAnimation>();
+
         _modules.Add(EPlayerModuleType.Move, new MoveModule());
         _modules.Add(EPlayerModuleType.Gravity, new GravityModule());
         _modules.Add(EPlayerModuleType.Jump, new JumpModule());
-        _modules.Add(EPlayerModuleType.Dash, new DashModule());
-        _modules.Add(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
+        _modules.Add(EPlayerModuleType.Death, new DeathModule());
         foreach (var module in _modules.Values)
         {
             module.SettingModule(this);
         }
+        TagCharacter(_currentCharacterType);
     }
 
     private void Update()
@@ -76,10 +77,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TagCharacter()
+    public void TagWithInput()
+    {
+        TagCharacter((ECharacterType)((int)(_currentCharacterType + 1) % ((int)ECharacterType.Size)));
+    }
+
+    private void TagCharacter(ECharacterType targetType)
     {
         // 0, 1
-        _currentCharacterType = (ECharacterType)((int)(_currentCharacterType + 1) % ((int)ECharacterType.Size));
+        _currentCharacterType = targetType;
         switch (_currentCharacterType)
         {
             case ECharacterType.Hana:
@@ -117,7 +123,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// moduleType¿¡ ¸Â´Â ¸ðµâÀ» °¡Á®¿Í ½ÇÇà °Ë»ç¸¦ ÇÕ´Ï´Ù.
+    /// moduleTypeï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ç¸¦ ï¿½Õ´Ï´ï¿½.
     /// </summary>
     /// <param name="moduleTypes"></param>
     /// <returns></returns>
@@ -133,7 +139,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// moduleType¿¡ ¸Â´Â ¸ðµâÀ» °¡Á®¿Í Àá±À´Ï´Ù.
+    /// moduleTypeï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
     /// </summary>
     /// <param name="moduleType"></param>
     public void LockModules(bool value, params EPlayerModuleType[] moduleTypes)
@@ -146,7 +152,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// moduleType¿¡ ¸Â´Â ¸ðµâÀ» °¡Á®¿Í Exit¸¦ ½ÇÇàÇÕ´Ï´Ù.
+    /// moduleTypeï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Exitï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
     /// <param name="moduleType"></param>
     public void ExitModules(params EPlayerModuleType[] moduleTypes)
@@ -158,8 +164,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    public EPlayerModuleType[] GetAllModuleType()
+    {
+        List<EPlayerModuleType> moduleTypes = new List<EPlayerModuleType>();
+        for(int i = 0; i < (int)EPlayerModuleType.Size; i++)
+        {
+            moduleTypes.Add((EPlayerModuleType)i);
+        }
+        return moduleTypes.ToArray();
+    }
+
     /// <summary>
-    /// T Å¸ÀÔ¿¡ ¸Â´Â ¸ðµâÀ» °¡Á®¿É´Ï´Ù.
+    /// T Å¸ï¿½Ô¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>

@@ -13,18 +13,7 @@ public class JumpModule : PlayerModule
     public float apexPoint => _apexPoint;
 
     private bool _jumpDown = false;
-    public bool jumpDown
-    {
-        get => _jumpDown;
-        set
-        {
-            if (!_jumpable)
-            {
-                return;
-            }
-            _jumpDown = value;
-        }
-    }
+    public bool jumpDown => _jumpDown;
 
     private bool _jumpUp = false;
     public bool jumpUp { get => _jumpUp; set => _jumpUp = value; }
@@ -37,6 +26,8 @@ public class JumpModule : PlayerModule
 
     private bool _jumpable = false;
     public bool jumpable { get => _jumpable; set => _jumpable = value; }
+
+    private Coroutine _jumpDownCoroutine = null;
 
     public override void Exit()
     {
@@ -60,6 +51,26 @@ public class JumpModule : PlayerModule
         CalculateJump();
     }
 
+    public void JumpKeyDown()
+    {
+        /*if(!_jumpable)
+        {
+            return;
+        }*/
+        if(_jumpDownCoroutine != null)
+        {
+            StopCoroutine(_jumpDownCoroutine);
+        }
+        _jumpDownCoroutine = StartCoroutine(JumpDownCoroutine());
+    }
+
+    private IEnumerator JumpDownCoroutine()
+    {
+        _jumpDown = true;
+        yield return new WaitForSeconds(0.1f);
+        _jumpDown = false;
+    }
+
     public void JumpRecharge()
     {
         _fallSpeed = 0f;
@@ -78,6 +89,7 @@ public class JumpModule : PlayerModule
     {
         if(_player.CheckExcutingModules(EPlayerModuleType.Dash))
         {
+            _jumpable = false;
             return;
         }
 

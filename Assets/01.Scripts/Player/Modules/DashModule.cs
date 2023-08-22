@@ -34,7 +34,7 @@ public class DashModule : PlayerModule
     {
         Vector2 input = _player.playerInput.NormalizedInputVector;
 
-        if (!(input.sqrMagnitude > 0f) || !_dashable)
+        if (!(input.sqrMagnitude > 0f) || !_dashable || _locked)
         {
             return;
         }
