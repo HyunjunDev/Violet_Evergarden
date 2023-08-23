@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff35ca395819b64cbe8b560d5cba910, type: 3}
+  m_Name: PlayerTagData
+  m_EditorClassIdentifier: 
+  hanaAnimatorController: {fileID: 22100000, guid: 0fb3caad494efd944b80f1ef9044944d, type: 2}
+  genAnimatorController: {fileID: 22100000, guid: a499b47105a3f2240850bf38b8094de4, type: 2}
+  frequency: 10
+  amplitude: 3
+  shakeTime: 0.2
+  easeType: 1

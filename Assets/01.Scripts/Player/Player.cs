@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private ECharacterType _currentCharacterType = ECharacterType.Hana;
+    private ECharacterType _startCharcterType = ECharacterType.Hana;
+
     private Dictionary<EPlayerModuleType, PlayerModule> _modules = new Dictionary<EPlayerModuleType, PlayerModule>();
 
     [SerializeField]
@@ -30,6 +32,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private JumpDataSO _jumpDataSO = null;
     public JumpDataSO JumpDataSO => _jumpDataSO;
+    [SerializeField]
+    private TagDataSO _tagDataSO = null;
+    public TagDataSO TagDataSO => _tagDataSO;
     //[SerializeField]
     //private ThrowDaggerDataSO _throwDaggerSO = null;
     //public ThrowDaggerDataSO ThrowDaggerSO => _throwDaggerSO;
@@ -65,11 +70,18 @@ public class Player : MonoBehaviour
         _modules.Add(EPlayerModuleType.Gravity, new GravityModule());
         _modules.Add(EPlayerModuleType.Jump, new JumpModule());
         _modules.Add(EPlayerModuleType.Death, new DeathModule());
+        _modules.Add(EPlayerModuleType.Tag, new TagModule());
         foreach (var module in _modules.Values)
         {
             module.SettingModule(this);
         }
-        TagCharacter(_currentCharacterType);
+    }
+
+    private void Start()
+    {
+        //TagCharacter(_currentCharacterType);
+        GetModule<TagModule>(EPlayerModuleType.Tag).
+            TagCharacter(_startCharcterType);
     }
 
     private void Update()
@@ -82,33 +94,6 @@ public class Player : MonoBehaviour
         foreach (var module in _modules.Values)
         {
             module.UpdateModule();
-        }
-    }
-
-    public void TagWithInput()
-    {
-        TagCharacter((ECharacterType)((int)(_currentCharacterType + 1) % ((int)ECharacterType.Size)));
-    }
-
-    private void TagCharacter(ECharacterType targetType)
-    {
-        // 0, 1
-        _currentCharacterType = targetType;
-        switch (_currentCharacterType)
-        {
-            case ECharacterType.Hana:
-                DetachModule(EPlayerModuleType.WallGrab, EPlayerModuleType.ThrowDagger);
-                AttachModule(EPlayerModuleType.Dash, new DashModule());
-                _playerAnimation.ChangeAnimator(_hanaAnimatorController);
-                break;
-            case ECharacterType.Gen:
-                DetachModule(EPlayerModuleType.Dash);
-                AttachModule(EPlayerModuleType.WallGrab, new WallGrabModule());
-                AttachModule(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
-                _playerAnimation.ChangeAnimator(_genAnimatorController);
-                break;
-            default:
-                break;
         }
     }
 

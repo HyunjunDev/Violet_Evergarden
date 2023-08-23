@@ -25,13 +25,17 @@ public class PlayerInput : MonoBehaviour
     {
         _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if(Input.GetKeyDown(KeyCode.R))
+        TagModule tagModule = _player.GetModule<TagModule>(EPlayerModuleType.Tag);
+        if (tagModule != null)
         {
-            _player.TagWithInput();
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                tagModule.TagWithInput();
+            }
         }
 
         MoveModule moveModule = _player.GetModule<MoveModule>(EPlayerModuleType.Move);
-        if(moveModule != null)
+        if (moveModule != null)
         {
             moveModule.Move(_inputVector.x);
         }
@@ -49,19 +53,16 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        DashModule dashModule = _player.GetModule<DashModule>(EPlayerModuleType.Dash);
-        if (dashModule != null)
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            DashModule dashModule = _player.GetModule<DashModule>(EPlayerModuleType.Dash);
+            if (dashModule != null)
             {
                 dashModule.DashStart();
             }
-        }
 
-        ThrowDaggerModule throwDaggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
-        if(throwDaggerModule != null)
-        {
-            if(Input.GetKeyUp(KeyCode.V))
+            ThrowDaggerModule throwDaggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
+            if (throwDaggerModule != null)
             {
                 throwDaggerModule.ThrowStart();
             }
