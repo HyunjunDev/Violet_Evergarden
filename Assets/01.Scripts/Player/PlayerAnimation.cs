@@ -24,6 +24,15 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetFloat("YVelocity", _player.rigid.velocity.y);
     }
 
+    public void ChangeAnimator(RuntimeAnimatorController runtimeAnimatorController)
+    {
+        if(_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+        _animator.runtimeAnimatorController = runtimeAnimatorController;
+    }
+
     public void DeathAnimation()
     {
         _animator.Rebind();

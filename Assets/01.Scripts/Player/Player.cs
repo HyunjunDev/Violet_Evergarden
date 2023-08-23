@@ -12,6 +12,11 @@ public class Player : MonoBehaviour
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
     private Dictionary<EPlayerModuleType, PlayerModule> _modules = new Dictionary<EPlayerModuleType, PlayerModule>();
 
+    [SerializeField]
+    private RuntimeAnimatorController _hanaAnimatorController = null;
+    [SerializeField]
+    private RuntimeAnimatorController _genAnimatorController = null;
+
     #region Data
     [SerializeField]
     private DashDataSO _dashDataSO = null;
@@ -25,6 +30,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private JumpDataSO _jumpDataSO = null;
     public JumpDataSO JumpDataSO => _jumpDataSO;
+    //[SerializeField]
+    //private ThrowDaggerDataSO _throwDaggerSO = null;
+    //public ThrowDaggerDataSO ThrowDaggerSO => _throwDaggerSO;
     #endregion
 
     #region Renderer
@@ -91,11 +99,13 @@ public class Player : MonoBehaviour
             case ECharacterType.Hana:
                 DetachModule(EPlayerModuleType.WallGrab, EPlayerModuleType.ThrowDagger);
                 AttachModule(EPlayerModuleType.Dash, new DashModule());
+                _playerAnimation.ChangeAnimator(_hanaAnimatorController);
                 break;
             case ECharacterType.Gen:
                 DetachModule(EPlayerModuleType.Dash);
                 AttachModule(EPlayerModuleType.WallGrab, new WallGrabModule());
                 AttachModule(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
+                _playerAnimation.ChangeAnimator(_genAnimatorController);
                 break;
             default:
                 break;
