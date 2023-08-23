@@ -74,7 +74,7 @@ public class DaggerPoolable : PoolableObject
 
         ColliderDistance2D dis = Physics2D.Distance(col, hit.collider);
         //Debug.Log(dis.distance);
-        _player.transform.position = (Vector3)hit.point + ((Vector3)_dir * dis.distance * 2f);  
+        _player.transform.position = (Vector3)hit.point + (transform.right * -dis.distance);  
 
         PoolManager.Instance.Push(this);
 
