@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 6449601249071655941}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4518338165993786059
 MonoBehaviour:
@@ -57,6 +57,7 @@ MonoBehaviour:
   _gravityDataSO: {fileID: 11400000, guid: 74fbfca1b8d8169429be0dae4c42684b, type: 2}
   _jumpDataSO: {fileID: 11400000, guid: 49528dca1719e0443862e16a4839edd5, type: 2}
   _tagDataSO: {fileID: 11400000, guid: 5b044fbb1339156479fe1a1ac7fb12d0, type: 2}
+  _daggerDataSO: {fileID: 11400000, guid: 0c9006676949ee7469bd3814d70415da, type: 2}
 --- !u!114 &5491729354542080619
 MonoBehaviour:
   m_ObjectHideFlags: 0

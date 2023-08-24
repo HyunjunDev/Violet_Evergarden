@@ -20,13 +20,7 @@ public class DaggerPoolable : PoolableObject
         set { _dir = value; }
     }
 
-    private float _speed = 10;
-    public float Speed => _speed;
-
     private Rigidbody2D rb;
-
-    [SerializeField]
-    private LayerMask _layerMask = 0;
 
     private void Awake()
     {
@@ -35,13 +29,13 @@ public class DaggerPoolable : PoolableObject
 
     private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.05f, transform.right, 0.1f, _layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.05f, transform.right, 0.1f, _player.DaggerDataSO.layerMask);
         Debug.DrawRay(transform.position, transform.right * 0.1f, Color.red);
         if (hit.collider != null)
         {
             Contact(hit);
         }
-        rb.velocity = _dir * _speed;
+        rb.velocity = _dir * _player.DaggerDataSO.speed;
     }
 
     public void SetRotation()
@@ -73,8 +67,8 @@ public class DaggerPoolable : PoolableObject
         colliderObject.transform.position = new Vector3(hit.point.x, hit.point.y, 0);
 
         ColliderDistance2D dis = Physics2D.Distance(col, hit.collider);
-        //Debug.Log(dis.distance);
-        _player.transform.position = (Vector3)hit.point + (transform.right * -dis.distance);  
+        Vector2 endPosition = hit.point + transform.right * -col.size * 0.5f;
+        _player.transform.position = endPosition;
 
         PoolManager.Instance.Push(this);
 
