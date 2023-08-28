@@ -100,7 +100,7 @@ public class DashModule : PlayerModule
     private IEnumerator GroundDashRechargeCoroutine()
     {
         yield return new WaitForSeconds(_player.DashDataSO.dashRechargeTime);
-        if(_player.playerCollider.GetCollision(EBoundType.Down, false))
+        if(_player.playerCollider.GetCollision(EBoundType.Down))
         {
             _dashable = true;
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
@@ -21,6 +22,8 @@ public class DaggerPoolable : PoolableObject
     }
 
     private Rigidbody2D rb;
+
+    private Coroutine _contactCoroutine = null;
 
     private void Awake()
     {
@@ -50,7 +53,10 @@ public class DaggerPoolable : PoolableObject
 
     public override void PushInit()
     {
-
+        if (_contactCoroutine != null)
+        {
+            StopCoroutine(_contactCoroutine);
+        }
     }
 
     public override void StartInit()
@@ -60,18 +66,34 @@ public class DaggerPoolable : PoolableObject
 
     private void Contact(RaycastHit2D hit)
     {
+        if (_contactCoroutine != null)
+        {
+            StopCoroutine(_contactCoroutine);
+        }
+        _contactCoroutine = StartCoroutine(ColliderCheck(hit));
+    }
+
+    private IEnumerator ColliderCheck(RaycastHit2D hit)
+    {
         GameObject colliderObject = new GameObject("DynamicCollider");
         BoxCollider2D col = colliderObject.AddComponent<BoxCollider2D>();
         col.size = _player.playerCollider.Col.size;
         col.offset = _player.playerCollider.Col.offset;
         colliderObject.transform.position = new Vector3(hit.point.x, hit.point.y, 0);
-
         ColliderDistance2D dis = Physics2D.Distance(col, hit.collider);
         Vector2 endPosition = hit.point + transform.right * -col.size * 0.5f;
         _player.transform.position = endPosition;
 
-        PoolManager.Instance.Push(this);
+        yield return new WaitForFixedUpdate();
+        _player.playerCollider.CheckCollision();
+        if (_player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right)
+            || !_player.playerCollider.GetCollision(EBoundType.Up) || !_player.playerCollider.GetCollision(EBoundType.Down))
+        {
+            _player.movingController.ResetMovingManager();
+            _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).StartWallGrab();
+        }
 
         Destroy(colliderObject);
+        PoolManager.Instance.Push(this);
     }
 }

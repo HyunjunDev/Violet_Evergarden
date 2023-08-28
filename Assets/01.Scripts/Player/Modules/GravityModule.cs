@@ -27,7 +27,7 @@ public class GravityModule : PlayerModule
             return;
         }
 
-        if (_player.playerCollider.GetCollision(EBoundType.Down, false))
+        if (_player.playerCollider.GetCollision(EBoundType.Down))
         {
             // 떨어지고 있을 때 바닥에 닿았다면 속도 초기화
             if (_player.movingController.currentVerticalSpeed < 0f)
