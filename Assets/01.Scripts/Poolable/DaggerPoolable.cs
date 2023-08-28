@@ -82,14 +82,7 @@ public class DaggerPoolable : PoolableObject
         Vector2 distance = new Vector2(col.size.x * hit.normal.x, col.size.y * hit.normal.y) * 0.5f;
         _player.transform.position = hit.point + distance;
         yield return new WaitForFixedUpdate();
-        _player.playerCollider.CheckCollision();
-        if (_player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right)
-            || !_player.playerCollider.GetCollision(EBoundType.Up) || !_player.playerCollider.GetCollision(EBoundType.Down))
-        {
-            _player.movingController.ResetMovingManager();
-            _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).StartWallGrab();
-        }
-
+        _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).TryWallGrab();
         Destroy(colliderObject);
         PoolManager.Instance.Push(this);
     }

@@ -38,11 +38,17 @@ public class WallGrabModule : PlayerModule
         }
     }
 
-    public void StartWallGrab()
+    public void TryWallGrab()
     {
-        _excuting = true;
-        keepTimer = 0f;
-        _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpRecharge();
-        _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 0.2f;
+        _player.playerCollider.CheckCollision();
+        if (_player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right)
+            || !_player.playerCollider.GetCollision(EBoundType.Up) || !_player.playerCollider.GetCollision(EBoundType.Down))
+        {
+            _player.movingController.ResetMovingManager();
+            _excuting = true;
+            keepTimer = 0f;
+            _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpRecharge();
+            _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 0.2f;
+        }
     }
 }
