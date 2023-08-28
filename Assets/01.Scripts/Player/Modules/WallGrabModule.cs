@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class WallGrabModule : PlayerModule
 {
-    private float keepTimer = 0f;
+    private float _keepTimer = 0f;
+    private EFlipState _enterWallFlipState = EFlipState.None;
+    public EFlipState EnterWallFlipState => _enterWallFlipState;
 
     public override void Exit()
     {
         _excuting = false;
-        keepTimer = 0f;
+        _keepTimer = 0f;
         _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 1f;
         _player.playerCollider.onGroundExited?.Invoke();
     }
@@ -26,8 +28,8 @@ public class WallGrabModule : PlayerModule
             return;
         }
 
-        keepTimer += Time.deltaTime;
-        if(keepTimer <= Time.fixedDeltaTime * 3f)
+        _keepTimer += Time.deltaTime;
+        if(_keepTimer <= Time.fixedDeltaTime * 3f)
         {
             return;
         }
@@ -46,9 +48,10 @@ public class WallGrabModule : PlayerModule
         {
             _player.movingController.ResetMovingManager();
             _excuting = true;
-            keepTimer = 0f;
+            _keepTimer = 0f;
             _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpRecharge();
-            _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 0.2f;
+            _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 0.1f;
+            _enterWallFlipState = _player.playerRenderer.currentFlipState;
         }
     }
 }

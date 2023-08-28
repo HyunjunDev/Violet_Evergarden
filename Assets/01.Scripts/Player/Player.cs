@@ -14,11 +14,6 @@ public class Player : MonoBehaviour
 
     private Dictionary<EPlayerModuleType, PlayerModule> _modules = new Dictionary<EPlayerModuleType, PlayerModule>();
 
-    [SerializeField]
-    private RuntimeAnimatorController _hanaAnimatorController = null;
-    [SerializeField]
-    private RuntimeAnimatorController _genAnimatorController = null;
-
     #region Data
     [SerializeField]
     private DashDataSO _dashDataSO = null;

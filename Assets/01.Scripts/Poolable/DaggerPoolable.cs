@@ -32,7 +32,7 @@ public class DaggerPoolable : PoolableObject
 
     private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.05f, transform.right, 0.1f, _player.DaggerDataSO.layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.25f, transform.right, 0.35f, _player.DaggerDataSO.layerMask);
         Debug.DrawRay(transform.position, transform.right * 0.1f, Color.red);
         if (hit.collider != null)
         {
@@ -82,7 +82,11 @@ public class DaggerPoolable : PoolableObject
         Vector2 distance = new Vector2(col.size.x * hit.normal.x, col.size.y * hit.normal.y) * 0.5f;
         _player.transform.position = hit.point + distance;
         yield return new WaitForFixedUpdate();
-        _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).TryWallGrab();
+        WallGrabModule wallGrabModule = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab);
+        if (wallGrabModule != null)
+        {
+            wallGrabModule.TryWallGrab();
+        }
         Destroy(colliderObject);
         PoolManager.Instance.Push(this);
     }

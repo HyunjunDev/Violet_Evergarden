@@ -158,6 +158,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256

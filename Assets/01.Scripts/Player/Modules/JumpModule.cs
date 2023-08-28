@@ -168,16 +168,25 @@ public class JumpModule : PlayerModule
 
     private void JumpStart()
     {
-        if(_player.CheckExcutingModules(EPlayerModuleType.WallGrab))
+        Vector2 spawnPoint = _player.transform.position;
+        Quaternion rot = Quaternion.identity;
+
+        if (_player.CheckExcutingModules(EPlayerModuleType.WallGrab))
         {
             //º®ÂÀ
             _player.ExitModules(EPlayerModuleType.WallGrab);
+            bool isLeft = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).EnterWallFlipState == EFlipState.Left;
+            rot = Quaternion.Euler(0f, 0f, isLeft ? -90f : 90f);
+            spawnPoint.x += isLeft ? -0.25f : 0.25f;
+            //spawnPoint.y -= 0.05f;
+        }
+        else
+        {
+            spawnPoint.y -= 0.3f;
         }
 
-        Vector2 spawnPoint = _player.transform.position;
-        spawnPoint.y -= 0.3f;
         GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;
-        jumpParticle.transform.position = spawnPoint;
+        jumpParticle.transform.SetPositionAndRotation(spawnPoint, rot);
 
         _player.playerAnimation.JumpAnimation();
         Exit();

@@ -24,12 +24,13 @@ public class TagModule : PlayerModule
     }
 
     public void TagCharacter(ECharacterType targetType)
-    { 
+    {
         // 0, 1
         _currentCharacterType = targetType;
         switch (_currentCharacterType)
         {
             case ECharacterType.Hana:
+                _player.ExitModules(EPlayerModuleType.WallGrab, EPlayerModuleType.ThrowDagger);
                 _player.DetachModule(EPlayerModuleType.WallGrab, EPlayerModuleType.ThrowDagger);
                 _player.AttachModule(EPlayerModuleType.Dash, new DashModule());
                 _player.playerAnimation.ChangeAnimator(_player.TagDataSO.hanaAnimatorController);
@@ -37,6 +38,7 @@ public class TagModule : PlayerModule
                 dashFlowerParticle.transform.position = _player.transform.position;
                 break;
             case ECharacterType.Gen:
+                _player.ExitModules(EPlayerModuleType.Dash);
                 _player.DetachModule(EPlayerModuleType.Dash);
                 _player.AttachModule(EPlayerModuleType.WallGrab, new WallGrabModule());
                 _player.AttachModule(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
