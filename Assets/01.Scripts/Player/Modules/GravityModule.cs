@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GravityModule : PlayerModule
 {
+    public float gravityModifier = 1f;
+
     public override void Exit()
     {
         _excuting = false;
@@ -46,7 +48,7 @@ public class GravityModule : PlayerModule
                     jumpModule.fallSpeed * _player.JumpDataSO.jumpEndEarlyGravityModifier : jumpModule.fallSpeed;
             }
 
-            _player.movingController.currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+            _player.movingController.currentVerticalSpeed -= fallSpeed * gravityModifier * Time.deltaTime;
             _excuting = fallSpeed > 0f;
 
             if (_player.movingController.currentVerticalSpeed < _player.GravityDataSO.fallClamp)

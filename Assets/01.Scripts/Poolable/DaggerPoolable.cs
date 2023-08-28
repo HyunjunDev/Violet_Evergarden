@@ -79,11 +79,8 @@ public class DaggerPoolable : PoolableObject
         BoxCollider2D col = colliderObject.AddComponent<BoxCollider2D>();
         col.size = _player.playerCollider.Col.size;
         col.offset = _player.playerCollider.Col.offset;
-        colliderObject.transform.position = new Vector3(hit.point.x, hit.point.y, 0);
-        ColliderDistance2D dis = Physics2D.Distance(col, hit.collider);
-        Vector2 endPosition = hit.point + transform.right * -col.size * 0.5f;
-        _player.transform.position = endPosition;
-
+        Vector2 distance = new Vector2(col.size.x * hit.normal.x, col.size.y * hit.normal.y) * 0.5f;
+        _player.transform.position = hit.point + distance;
         yield return new WaitForFixedUpdate();
         _player.playerCollider.CheckCollision();
         if (_player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right)
