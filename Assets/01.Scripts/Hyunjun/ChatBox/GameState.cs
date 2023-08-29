@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum ObjectType
 {
     NONE,
@@ -14,9 +13,9 @@ public enum ObjectType
 [MoonSharpUserData]
 public class GameState
 {
-    private ObjectType _selectedObj;
+    private string _selectedObj = "ENEMY";
 
-    public ObjectType SelectedObj
+    public string SelectedObj
     {
         get { return _selectedObj; }
         [MoonSharpHidden]
@@ -35,6 +34,6 @@ public class GameState
     [MoonSharpHidden]
     public GameState()
     {
-        Objs=new Dictionary<ObjectType, GameObject>();
+        Objs = new Dictionary<ObjectType, GameObject>();
     }
 }

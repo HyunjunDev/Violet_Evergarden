@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using MoonSharp.Interpreter;
 
 public class LuaCommands : MonoBehaviour
 {
@@ -18,12 +17,22 @@ public class LuaCommands : MonoBehaviour
 
     }
 
-    public static void BiggerObject(ObjectType name,Dictionary<ObjectType, GameObject> obj)
+    public void BiggerObject(ObjectType name, GameState gameState)
     {
         GameObject val = null;
-        if (obj.TryGetValue(name,out val))
+        if (gameState.Objs.TryGetValue(name, out val))
         {
             val.transform.localScale *= 2f;
         }
+    }
+
+    public void DebugText(string text)
+    {
+        Debug.Log(text);
+    }
+
+    public void PrintFromLua(string message)
+    {
+        Debug.Log("Lua says: " + message);
     }
 }

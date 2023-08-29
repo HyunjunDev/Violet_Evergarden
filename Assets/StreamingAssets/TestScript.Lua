@@ -1,10 +1,6 @@
-local TestBranch = function ()
-     
-end
-
-local main = function()
-    BiggerPlayer(State.SelectedObj, State.Objs);
-    coroutine.yield();
+function main()
+    local objectType = "PLAYER" 
+    unity:BiggerObject("sdfjdsf")
 end
 
 return main

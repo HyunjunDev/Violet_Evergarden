@@ -44,28 +44,22 @@ public class CmdManager : MonoBehaviour
 
     public void EnterCmd()
     {
-        CheckCmd(inputField.text);
+        CheckCmd(inputField.text);  
         inputField.text = "";
     }
 
+    // 만약에 /Big이나 /Small만 쳤을 때 string[1]이 없는 경우도 고려하기 ㅎㅎ
     public void CheckCmd(string text)
     {
-        string[] words = text.Split(' ');
-        ObjectType objType = (ObjectType)Enum.Parse(typeof(ObjectType), words[1].ToUpperInvariant());
-        lua.LuaGameState.SelectedObj = objType;
-        switch(words[0])
-        {
-            case "/Big":
-            case "/Small":
-                lua.AdvanceScript();
-                break;
-        }
+        
+        //string[] words = text.Split(' ');
+        //switch(words[0])
+        //{
+        //    case "/Big":
+        //    case "/Small":
+        //        ObjectType objType = (ObjectType)Enum.Parse(typeof(ObjectType), words[1].ToUpperInvariant());
+        //        lua.LuaGameState.SelectedObj = objType;
+        //        break;
+        //}
     }
-}
-
-[Serializable]
-public class Message
-{
-    public string text;
-    public TextMeshProUGUI textObject;
 }
