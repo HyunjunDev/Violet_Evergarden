@@ -1,6 +1,7 @@
-function main()
-    local objectType = "PLAYER" 
-    unity:BiggerObject("sdfjdsf")
+function DEBUG_TEXT(str)
+    Unity:DebugText(str)
 end
 
-return main
+function SET_SCALE_OBJ(name, scale)
+    Unity:SetScaleObj(name,scale)
+end
