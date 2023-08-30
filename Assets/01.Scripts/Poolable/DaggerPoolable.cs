@@ -25,9 +25,12 @@ public class DaggerPoolable : PoolableObject
 
     private Coroutine _contactCoroutine = null;
 
+    private TrailRenderer _trailRenderer = null;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        _trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void FixedUpdate()
@@ -49,6 +52,11 @@ public class DaggerPoolable : PoolableObject
 
     public override void PopInit()
     {
+        if(_trailRenderer != null)
+        {
+            _trailRenderer.Clear();
+            _trailRenderer.BakeMesh(new Mesh());
+        }
     }
 
     public override void PushInit()
@@ -56,6 +64,11 @@ public class DaggerPoolable : PoolableObject
         if (_contactCoroutine != null)
         {
             StopCoroutine(_contactCoroutine);
+        }
+        if (_trailRenderer != null)
+        {
+            _trailRenderer.Clear();
+            _trailRenderer.BakeMesh(new Mesh());
         }
     }
 
@@ -87,6 +100,12 @@ public class DaggerPoolable : PoolableObject
         {
             wallGrabModule.TryWallGrab();
         }
+
+        GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
+        landedParticle.transform.position = _player.transform.position;
+
+
+
         Destroy(colliderObject);
         PoolManager.Instance.Push(this);
     }

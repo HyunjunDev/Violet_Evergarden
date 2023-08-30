@@ -10,4 +10,6 @@ public enum EPoolType
     HanaFlowerParticle,
     Dagger,
     GenDaggerParticle,
+    GenDaggerLandedParticle,
+    GenThrowDaggerParticle,
 }

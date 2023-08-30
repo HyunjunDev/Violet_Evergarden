@@ -178,7 +178,6 @@ public class JumpModule : PlayerModule
             bool isLeft = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).EnterWallFlipState == EFlipState.Left;
             rot = Quaternion.Euler(0f, 0f, isLeft ? -90f : 90f);
             spawnPoint.x += isLeft ? -0.25f : 0.25f;
-            //spawnPoint.y -= 0.05f;
         }
         else
         {
