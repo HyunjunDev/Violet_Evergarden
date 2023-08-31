@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4cc198283bd36458bc22aac54e3363, type: 3}
   m_Name: PlayerThrowDaggerData
   m_EditorClassIdentifier: 
-  trailColor: {r: 1, g: 1, b: 1, a: 1}
-  trailCycle: 0.08
-  duration: 0.2
+  trailData: {fileID: 11400000, guid: 4c1d1e2b063487042a4c1521e739554d, type: 2}
   startAlpha: 0.5
   animationTime: 0.5
   th_shakeCameraData: {fileID: 11400000, guid: 59a9aab8bd1d0fa46ad793b2311920c6, type: 2}

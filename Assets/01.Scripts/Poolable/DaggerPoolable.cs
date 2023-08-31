@@ -108,7 +108,7 @@ public class DaggerPoolable : PoolableObject
         ThrowDaggerModule daggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
         if (daggerModule != null)
         {
-            daggerModule.Landed(startPosition, endPosition);
+            daggerModule.Landed(hit.point, startPosition, endPosition);
         }
 
         Destroy(colliderObject);

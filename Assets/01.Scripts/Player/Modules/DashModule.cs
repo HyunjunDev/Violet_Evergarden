@@ -58,7 +58,7 @@ public class DashModule : PlayerModule
         dashTrailParticle.transform.rotation = Utility.GetRotationByVector(_targetDashPower, 90);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
         dashFlowerParticle.transform.position = _player.transform.position;
-        _player.playerRenderer.StartTrail(_player.DashDataSO.trailColor, _player.DashDataSO.trailCycle, _player.DashDataSO.duration);
+        _player.playerRenderer.StartTrail(_player.DashDataSO.trailCycle, _player.DashDataSO.duration, _player.DashDataSO.trailData);
         CameraManager.Instance.ShakeCamera(_player.DashDataSO.shakeCameraData);
 
         //Jump

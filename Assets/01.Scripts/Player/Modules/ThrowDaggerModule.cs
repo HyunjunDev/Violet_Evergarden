@@ -41,16 +41,24 @@ public class ThrowDaggerModule : PlayerModule
         CameraManager.Instance.ShakeCamera(_player.ThrowDaggerDataSO.th_shakeCameraData);
     }
 
-    public void Landed(Vector2 startPosition, Vector2 endPosition)
+    public void Landed(Vector2 hitPosition, Vector2 startPosition, Vector2 endPosition)
     {
         //LandedParticle
         GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
-        landedParticle.transform.position = _player.transform.position;
+        landedParticle.transform.position = hitPosition;
 
         //FadeUI
         UIManager.Instance.FadeStart(0.5f, 0f, 0.5f);
 
         //Trail
+        float t = 0f;
+        for (int i = 0; i < 5; i++)
+        {
+            TrailPoolable trail = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
+            trail.transform.position = Vector2.Lerp(startPosition, endPosition, t);
+            trail.StartTrail(_player.playerRenderer.spriteRenderer.sprite, _player.ThrowDaggerDataSO.trailData);
+            t += 0.2f;
+        }
 
         //Shake Camera
         CameraManager.Instance.ShakeCamera(_player.ThrowDaggerDataSO.la_shakeCameraData);

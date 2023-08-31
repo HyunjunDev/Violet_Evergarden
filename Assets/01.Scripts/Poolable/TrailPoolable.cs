@@ -24,13 +24,14 @@ public class TrailPoolable : PoolableObject
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void StartTrail(Sprite sprite, Color trailColor, float trailCycle, float duration)
+    public void StartTrail(Sprite sprite, TrailDataSO data)
     {
-        _spriteRenderer.color = trailColor;
+        _spriteRenderer.color = data.trailColor;
         _spriteRenderer.sprite = sprite;
         _trailSeq?.Kill();
         _trailSeq = DOTween.Sequence();
-        _trailSeq.Append(_spriteRenderer.DOFade(0f, 0.5f));
+        _trailSeq.AppendInterval(data.duration);
+        _trailSeq.Append(_spriteRenderer.DOFade(0f, data.fadeOutTime));
         _trailSeq.AppendCallback(() =>
         {
             PoolManager.Instance.Push(this);

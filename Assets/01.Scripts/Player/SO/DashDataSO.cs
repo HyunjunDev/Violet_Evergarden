@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Player/DashDataSO")]
 public class DashDataSO : ScriptableObject
 {
-    public Color trailColor = Color.white;
     public float trailCycle = 0.08f;
     public float duration = 0.2f;
+    public TrailDataSO trailData;
 
     [Space(20f)]
     public float dashPower = 10f;

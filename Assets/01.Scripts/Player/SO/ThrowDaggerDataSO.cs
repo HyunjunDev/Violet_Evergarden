@@ -6,10 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Player/ThrowDaggerData")]
 public class ThrowDaggerDataSO : ScriptableObject
 {
-    [Header("잔상 색")]
-    public Color trailColor = Color.white;
-    public float trailCycle = 0.08f;
-    public float duration = 0.2f;
+    [Header("잔상")]
+    public TrailDataSO trailData;
 
     [Header("페이드 이미지")]
     public float startAlpha = 0.5f;
