@@ -60,12 +60,8 @@ public class PlayerCollider : MonoBehaviour
     /// boundType 방향으로 충돌이 되었는지 검사합니다. collisionUpdate를 true로 설정하면 충돌 재검사를 시행합니다.
     /// </summary>
     /// <param name="asd"></param>
-    public bool GetCollision(EBoundType boundType, bool collisionUpdate)
+    public bool GetCollision(EBoundType boundType)
     {
-        if(collisionUpdate)
-        {
-            CheckCollision();
-        }
         switch (boundType)
         {
             case EBoundType.None:
@@ -109,7 +105,7 @@ public class PlayerCollider : MonoBehaviour
         return default(RayRange);
     }
 
-    private void CheckCollision()
+    public void CheckCollision()
     {
         // 상,하,좌,우 RayRange 계산
         CalculateRayRanged();

@@ -41,8 +41,8 @@ public class MoveModule : PlayerModule
         }
 
         // 왼쪽이나 오른쪽 닿았을 때
-        if (_player.movingController.currentHorizontalSpeed < 0f && _player.playerCollider.GetCollision(EBoundType.Left, false) || 
-            _player.movingController.currentHorizontalSpeed > 0f && _player.playerCollider.GetCollision(EBoundType.Right, false))
+        if (_player.movingController.currentHorizontalSpeed < 0f && _player.playerCollider.GetCollision(EBoundType.Left) || 
+            _player.movingController.currentHorizontalSpeed > 0f && _player.playerCollider.GetCollision(EBoundType.Right))
         {
             _player.movingController.currentHorizontalSpeed = 0;
         }

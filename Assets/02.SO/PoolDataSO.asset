@@ -34,3 +34,9 @@ MonoBehaviour:
   - spawnCount: 5
     poolType: 8
     obj: {fileID: 2237241085823842932, guid: ef60f1a86a5f3284db129ff135d0b2cc, type: 3}
+  - spawnCount: 5
+    poolType: 10
+    obj: {fileID: 4647778071393525432, guid: 7cd33f3c9519dd1429c42f9b99ce0339, type: 3}
+  - spawnCount: 5
+    poolType: 9
+    obj: {fileID: 2698393032010668681, guid: 81e247dd350049c4087ec9d9a6ace753, type: 3}

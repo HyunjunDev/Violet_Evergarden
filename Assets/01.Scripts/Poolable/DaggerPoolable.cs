@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
@@ -22,14 +23,19 @@ public class DaggerPoolable : PoolableObject
 
     private Rigidbody2D rb;
 
+    private Coroutine _contactCoroutine = null;
+
+    private TrailRenderer _trailRenderer = null;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        _trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.05f, transform.right, 0.1f, _player.DaggerDataSO.layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.25f, transform.right, 0.35f, _player.DaggerDataSO.layerMask);
         Debug.DrawRay(transform.position, transform.right * 0.1f, Color.red);
         if (hit.collider != null)
         {
@@ -46,11 +52,24 @@ public class DaggerPoolable : PoolableObject
 
     public override void PopInit()
     {
+        if(_trailRenderer != null)
+        {
+            _trailRenderer.Clear();
+            _trailRenderer.BakeMesh(new Mesh());
+        }
     }
 
     public override void PushInit()
     {
-
+        if (_contactCoroutine != null)
+        {
+            StopCoroutine(_contactCoroutine);
+        }
+        if (_trailRenderer != null)
+        {
+            _trailRenderer.Clear();
+            _trailRenderer.BakeMesh(new Mesh());
+        }
     }
 
     public override void StartInit()
@@ -60,18 +79,34 @@ public class DaggerPoolable : PoolableObject
 
     private void Contact(RaycastHit2D hit)
     {
+        if (_contactCoroutine != null)
+        {
+            StopCoroutine(_contactCoroutine);
+        }
+        _contactCoroutine = StartCoroutine(ColliderCheck(hit));
+    }
+
+    private IEnumerator ColliderCheck(RaycastHit2D hit)
+    {
         GameObject colliderObject = new GameObject("DynamicCollider");
         BoxCollider2D col = colliderObject.AddComponent<BoxCollider2D>();
         col.size = _player.playerCollider.Col.size;
         col.offset = _player.playerCollider.Col.offset;
-        colliderObject.transform.position = new Vector3(hit.point.x, hit.point.y, 0);
+        Vector2 distance = new Vector2(col.size.x * hit.normal.x, col.size.y * hit.normal.y) * 0.5f;
+        _player.transform.position = hit.point + distance;
+        yield return new WaitForFixedUpdate();
+        WallGrabModule wallGrabModule = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab);
+        if (wallGrabModule != null)
+        {
+            wallGrabModule.TryWallGrab();
+        }
 
-        ColliderDistance2D dis = Physics2D.Distance(col, hit.collider);
-        Vector2 endPosition = hit.point + transform.right * -col.size * 0.5f;
-        _player.transform.position = endPosition;
+        GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
+        landedParticle.transform.position = _player.transform.position;
 
-        PoolManager.Instance.Push(this);
+
 
         Destroy(colliderObject);
+        PoolManager.Instance.Push(this);
     }
 }

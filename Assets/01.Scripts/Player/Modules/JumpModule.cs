@@ -104,7 +104,7 @@ public class JumpModule : PlayerModule
     private IEnumerator CoyoteCoroutine()
     {
         yield return new WaitForSeconds(_player.JumpDataSO.coyoteTime);
-        if (_player.CheckExcutingModules(EPlayerModuleType.Dash) || _player.playerCollider.GetCollision(EBoundType.Down, false))
+        if (_player.CheckExcutingModules(EPlayerModuleType.Dash, EPlayerModuleType.WallGrab) || _player.playerCollider.GetCollision(EBoundType.Down))
         {
             yield break;
         }
@@ -129,7 +129,7 @@ public class JumpModule : PlayerModule
             return;
         }
 
-        if (!_player.playerCollider.GetCollision(EBoundType.Down, false))
+        if (!_player.playerCollider.GetCollision(EBoundType.Down))
         {
             // ÇÑ°è°ªºÎÅÍ 0±îÁö 
             _apexPoint = Mathf.InverseLerp(_player.JumpDataSO.jumpApexThreshold
@@ -153,13 +153,13 @@ public class JumpModule : PlayerModule
         }
 
         // ¸Ó¸® ²Ç
-        if (_player.playerCollider.GetCollision(EBoundType.Up, false) && _player.movingController.currentVerticalSpeed > 0f)
+        if (_player.playerCollider.GetCollision(EBoundType.Up) && _player.movingController.currentVerticalSpeed > 0f)
         {
             _player.movingController.currentVerticalSpeed = 0f;
         }
 
         // »¡¸® ¶³¾îÁö±â
-        if (!_player.playerCollider.GetCollision(EBoundType.Down, false) && !_jumpEndEarly && _jumpUp && _player.rigid.velocity.y > 0f)
+        if (!_player.playerCollider.GetCollision(EBoundType.Down) && !_jumpEndEarly && _jumpUp && _player.rigid.velocity.y > 0f)
         {
             _excuting = false;
             _jumpEndEarly = true;
@@ -168,15 +168,24 @@ public class JumpModule : PlayerModule
 
     private void JumpStart()
     {
-        if(_player.CheckExcutingModules(EPlayerModuleType.WallGrab))
+        Vector2 spawnPoint = _player.transform.position;
+        Quaternion rot = Quaternion.identity;
+
+        if (_player.CheckExcutingModules(EPlayerModuleType.WallGrab))
         {
             //º®ÂÀ
+            _player.ExitModules(EPlayerModuleType.WallGrab);
+            bool isLeft = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).EnterWallFlipState == EFlipState.Left;
+            rot = Quaternion.Euler(0f, 0f, isLeft ? -90f : 90f);
+            spawnPoint.x += isLeft ? -0.25f : 0.25f;
+        }
+        else
+        {
+            spawnPoint.y -= 0.3f;
         }
 
-        Vector2 spawnPoint = _player.transform.position;
-        spawnPoint.y -= 0.3f;
         GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;
-        jumpParticle.transform.position = spawnPoint;
+        jumpParticle.transform.SetPositionAndRotation(spawnPoint, rot);
 
         _player.playerAnimation.JumpAnimation();
         Exit();
