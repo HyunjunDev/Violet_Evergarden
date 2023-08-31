@@ -52,12 +52,12 @@ public class ThrowDaggerModule : PlayerModule
 
         //Trail
         float t = 0f;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             TrailPoolable trail = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
             trail.transform.position = Vector2.Lerp(startPosition, endPosition, t);
             trail.StartTrail(_player.playerRenderer.spriteRenderer.sprite, _player.ThrowDaggerDataSO.trailData);
-            t += 0.2f;
+            t += 0.25f;
         }
 
         //Shake Camera
