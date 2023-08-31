@@ -45,6 +45,11 @@ public class UnityAPI
             LuaCommands.Instance.SetScaleObj(objType, scale);
         }
     }
+
+    public void Help()
+    {
+        LuaCommands.Instance.Help();
+    }
 }
 
 public class LuaCommands : MonoBehaviour
@@ -80,5 +85,10 @@ public class LuaCommands : MonoBehaviour
     public void SetScaleObj(ObjectType objType, float scale)
     {
         gameinfo.Objs[objType].transform.localScale = new Vector3(scale, scale, scale);
+    }
+
+    public void Help()
+    {
+        DebugController.Instance.ShowHelp = true;
     }
 }

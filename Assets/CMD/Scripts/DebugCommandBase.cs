@@ -8,6 +8,7 @@ public enum FuncType
     NONE,
     DEBUG_TEXT,
     SET_SCALE_OBJ,
+    HELP
 }
 
 public class DebugCommand

@@ -11,13 +11,24 @@ public class DebugController : MonoBehaviour
 
     private Script luaScript;
 
+    private static DebugController instance;
+    public static DebugController Instance => instance;
+
     bool showConsole;
+    bool showHelp;
+    public bool ShowHelp
+    {
+        get { return showHelp; }
+        set { showHelp = value; }
+    }
 
     string input;
 
+    Vector2 scroll;
+
     public static DebugCommand DEBUG_TEXT;
     public static DebugCommand SET_SCALE_OBJ;
-
+    public static DebugCommand HELP;
 
     public List<object> commandList;
 
@@ -38,14 +49,19 @@ public class DebugController : MonoBehaviour
 
     private void Awake()
     {
-        DEBUG_TEXT = new DebugCommand("debug_text", "Debug Text", FuncType.DEBUG_TEXT);
+        instance = this;
 
-        SET_SCALE_OBJ = new DebugCommand("set_scale", "Scale Obj", FuncType.SET_SCALE_OBJ);
+        DEBUG_TEXT = new DebugCommand("debug_text", "Debug chat", FuncType.DEBUG_TEXT);
+
+        SET_SCALE_OBJ = new DebugCommand("set_scale", "Adjust the scale value of the desired object", FuncType.SET_SCALE_OBJ);
+
+        HELP = new DebugCommand("help", "Shows a list of commands", FuncType.HELP);
 
         commandList = new List<object>
         {
             DEBUG_TEXT,
             SET_SCALE_OBJ,
+            HELP
         };
     }
 
@@ -79,10 +95,35 @@ public class DebugController : MonoBehaviour
 
         float y = 0f;
 
-        GUI.Box(new Rect(0, y, Screen.width, 120), "");
-        GUI.backgroundColor = new Color(0, 0, 0, 0);
         GUIStyle gUIStyle = new GUIStyle(GUI.skin.textField);
-        gUIStyle.fontSize = UnityEngine.Screen.width / 25;
+        gUIStyle.fontSize = UnityEngine.Screen.width / 55;
+
+        if (showHelp)
+        {
+            GUI.Box(new Rect(0, y, Screen.width, 150),"");
+
+            Rect viewport = new Rect(0, 0, Screen.width - 30, 45 * commandList.Count);
+
+            scroll = GUI.BeginScrollView(new Rect(0, y + 5f, Screen.width, 150), scroll, viewport);
+
+            for(int i=0;i<commandList.Count; i++)
+            {
+                DebugCommand command = commandList[i] as DebugCommand;
+
+                string label = $"{command.commandId} - {command.CommandDescription}";
+
+                Rect labelRect = new Rect(5, 45 * i, viewport.width, 45);
+
+                GUI.Label(labelRect, label, gUIStyle);
+            }
+            GUI.EndScrollView();
+
+
+            y += 150;
+        }
+
+        GUI.Box(new Rect(0, y, Screen.width, 60), "");
+        GUI.backgroundColor = new Color(0, 0, 0, 0);
         if (GUI.GetNameOfFocusedControl() == "")
         {
             if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return))
@@ -96,7 +137,7 @@ public class DebugController : MonoBehaviour
             }
         }
         GUI.SetNextControlName("");
-        input = GUI.TextField(new Rect(10f, y + 10f, Screen.width - 20f, 90f), input, gUIStyle);
+        input = GUI.TextField(new Rect(10f, y + 10f, Screen.width - 20f, 45f), input, gUIStyle);
         GUI.FocusControl("");
     }
 
@@ -118,6 +159,10 @@ public class DebugController : MonoBehaviour
                     case FuncType.SET_SCALE_OBJ:
                         if (properties.Length == 3)
                             RunLuaFunction(command.funcType.ToString(), properties[1], properties[2]);
+                        break;
+                    case FuncType.HELP:
+                        if (properties.Length == 1)
+                            RunLuaFunction(command.funcType.ToString());
                         break;
                 }
             }
