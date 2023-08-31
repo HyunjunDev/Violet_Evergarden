@@ -16,6 +16,7 @@ public class DashModule : PlayerModule
     public override void Exit()
     {
         _dashSeq?.Kill();
+        DashEnd();
         _targetDashPower = _curDash = Vector2.zero;
         _excuting = false;
     }
@@ -54,14 +55,11 @@ public class DashModule : PlayerModule
         //Effect
         GameObject dashTrailParticle = PoolManager.Instance.Pop(EPoolType.HanaDashParticle).gameObject;
         dashTrailParticle.transform.position = _player.transform.position;
-        dashTrailParticle.transform.rotation = Utility.GetDashRotation(_targetDashPower, 90);
+        dashTrailParticle.transform.rotation = Utility.GetRotationByVector(_targetDashPower, 90);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
         dashFlowerParticle.transform.position = _player.transform.position;
         _player.playerRenderer.StartTrail(_player.DashDataSO.trailColor, _player.DashDataSO.trailCycle, _player.DashDataSO.duration);
-        CameraManager.Instance.ShakeCamera(_player.DashDataSO.frequency,
-            _player.DashDataSO.amplitude,
-            _player.DashDataSO.shakeTime,
-            _player.DashDataSO.easeType);
+        CameraManager.Instance.ShakeCamera(_player.DashDataSO.shakeCameraData);
 
         //Jump
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpEnd();

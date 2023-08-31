@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private DaggerDataSO _daggerDataSO = null;
     public DaggerDataSO DaggerDataSO => _daggerDataSO;
+    [SerializeField]
+    private ThrowDaggerDataSO _throwDaggerDataSO = null;
+    public ThrowDaggerDataSO ThrowDaggerDataSO => _throwDaggerDataSO;
     #endregion
 
     #region Renderer

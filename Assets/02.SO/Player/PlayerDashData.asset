@@ -18,7 +18,5 @@ MonoBehaviour:
   dashPower: 15
   dashTime: 0.15
   dashEase: 18
-  fre: 5
-  amp: 2.8
-  animationTime: 0.2
-  easeT: 1
+  dashRechargeTime: 0.5
+  shakeCameraData: {fileID: 11400000, guid: 59a9aab8bd1d0fa46ad793b2311920c6, type: 2}

@@ -49,9 +49,6 @@ public class TagModule : PlayerModule
             default:
                 break;
         }
-        CameraManager.Instance.ShakeCamera(_player.TagDataSO.frequency,
-            _player.TagDataSO.amplitude,
-            _player.TagDataSO.shakeTime,
-            _player.TagDataSO.easeType);
+        CameraManager.Instance.ShakeCamera(_player.TagDataSO.shakeCameraData);
     }
 }
