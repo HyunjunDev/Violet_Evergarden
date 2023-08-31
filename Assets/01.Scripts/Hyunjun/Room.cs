@@ -21,7 +21,8 @@ public class Room : MonoBehaviour
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             virtualCam.SetActive(false);
-            StartCoroutine(TimeDelay(timeDelay));
+            if (this.gameObject.activeSelf==true)
+                StartCoroutine(TimeDelay(timeDelay));
         }
     }
 
