@@ -16,14 +16,22 @@ public class ThrowDaggerModule : PlayerModule
 
     protected override void InitModule()
     {
+        _rechargeTime = _player.DashDataSO.dashRechargeTime;
+    }
+
+    protected override void OnGrounded()
+    {
+        base.OnGrounded();
+        _useable = true;
     }
 
     public void ThrowStart()
     {
-        if (_player.playerInput.NormalizedInputVector == Vector2.zero)
+        if (_player.playerInput.NormalizedInputVector == Vector2.zero || !_useable)
         {
             return;
         }
+        _useable = false;
 
         //SpawnDagger
         DaggerPoolable dagger = PoolManager.Instance.Pop(EPoolType.Dagger) as DaggerPoolable;
@@ -39,6 +47,8 @@ public class ThrowDaggerModule : PlayerModule
 
         //Shake Camera
         CameraManager.Instance.ShakeCamera(_player.ThrowDaggerDataSO.th_shakeCameraData);
+
+        GroundedRecharge();
     }
 
     public void Landed(Vector2 hitPosition, Vector2 startPosition, Vector2 endPosition)

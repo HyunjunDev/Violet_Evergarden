@@ -40,7 +40,6 @@ public class JumpModule : PlayerModule
 
     protected override void InitModule()
     {
-        _player.playerCollider.onGrounded += OnGrounded;
         _player.playerCollider.onGroundExited += OnGroundExited;
     }
 
@@ -112,7 +111,7 @@ public class JumpModule : PlayerModule
         _jumpable = false;
     }
 
-    private void OnGrounded()
+    protected override void OnGrounded()
     {
         _excuting = false;
         JumpRecharge();
