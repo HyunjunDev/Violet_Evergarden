@@ -1,10 +1,11 @@
-local TestBranch = function ()
-     
+function DEBUG_TEXT(str)
+    Unity:DebugText(str)
 end
 
-local main = function()
-    BiggerPlayer(State.SelectedObj, State.Objs);
-    coroutine.yield();
+function SET_SCALE_OBJ(name, scale)
+    Unity:SetScaleObj(name,scale)
 end
 
-return main
+function HELP()
+    Unity:Help()
+end
