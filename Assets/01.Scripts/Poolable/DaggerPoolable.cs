@@ -41,7 +41,7 @@ public class DaggerPoolable : PoolableObject
         {
             Contact(hit);
         }
-        rb.velocity = _dir * _player.DaggerDataSO.speed;
+        rb.velocity = _dir * _player.DaggerDataSO.speed * _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger).throwSpeedMultiplier;
     }
 
     public void SetRotation()
