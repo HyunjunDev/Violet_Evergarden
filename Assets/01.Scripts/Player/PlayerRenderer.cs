@@ -10,6 +10,8 @@ public class PlayerRenderer : MonoBehaviour
     public EFlipState currentFlipState => _currentFlipState;
 
     private SpriteRenderer _spriteRenderer = null;
+    public SpriteRenderer spriteRenderer => _spriteRenderer;
+
     private Coroutine _rendererTrailCoroutine = null;
 
     private void Start()
@@ -49,20 +51,20 @@ public class PlayerRenderer : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    public void StartTrail(Color trailColor, float trailCycle, float duration)
+    public void StartTrail(float trailCycle, float duration, TrailDataSO data)
     {
         if (_rendererTrailCoroutine != null)
             StopCoroutine(_rendererTrailCoroutine);
-        _rendererTrailCoroutine = StartCoroutine(RendererTrailCoroutine(trailColor, trailCycle, duration));
+        _rendererTrailCoroutine = StartCoroutine(RendererTrailCoroutine(trailCycle, duration, data));
     }
 
-    private IEnumerator RendererTrailCoroutine(Color trailColor, float trailCycle, float duration)
+    private IEnumerator RendererTrailCoroutine(float trailCycle, float duration, TrailDataSO data)
     {
         float time = 0f;
         while (time <= duration)
         {
             TrailPoolable trailPoolable = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
-            trailPoolable.StartTrail(_spriteRenderer.sprite, trailColor, trailCycle, duration);
+            trailPoolable.StartTrail(_spriteRenderer.sprite, data);
             trailPoolable.transform.position = transform.position;
             trailPoolable.transform.localScale = transform.localScale;
             trailPoolable.transform.rotation = transform.rotation;

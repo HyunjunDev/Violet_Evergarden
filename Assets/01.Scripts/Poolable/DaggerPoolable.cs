@@ -46,13 +46,13 @@ public class DaggerPoolable : PoolableObject
 
     public void SetRotation()
     {
-        transform.rotation = Utility.GetDashRotation(_dir, 0f);
+        transform.rotation = Utility.GetRotationByVector(_dir, 0f);
     }
 
 
     public override void PopInit()
     {
-        if(_trailRenderer != null)
+        if (_trailRenderer != null)
         {
             _trailRenderer.Clear();
             _trailRenderer.BakeMesh(new Mesh());
@@ -92,19 +92,24 @@ public class DaggerPoolable : PoolableObject
         BoxCollider2D col = colliderObject.AddComponent<BoxCollider2D>();
         col.size = _player.playerCollider.Col.size;
         col.offset = _player.playerCollider.Col.offset;
+
+        Vector2 startPosition = _player.transform.position;
+        Vector2 endPosition = Vector3.zero;
         Vector2 distance = new Vector2(col.size.x * hit.normal.x, col.size.y * hit.normal.y) * 0.5f;
-        _player.transform.position = hit.point + distance;
+        endPosition = hit.point + distance;
+        _player.transform.position = endPosition;
+
         yield return new WaitForFixedUpdate();
         WallGrabModule wallGrabModule = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab);
         if (wallGrabModule != null)
         {
             wallGrabModule.TryWallGrab();
         }
-
-        GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
-        landedParticle.transform.position = _player.transform.position;
-
-
+        ThrowDaggerModule daggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
+        if (daggerModule != null)
+        {
+            daggerModule.Landed(hit.point, startPosition, endPosition);
+        }
 
         Destroy(colliderObject);
         PoolManager.Instance.Push(this);

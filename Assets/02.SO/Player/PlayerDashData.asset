@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2316b8795bfd84e4cb65d514e0c65537, type: 3}
   m_Name: PlayerDashData
   m_EditorClassIdentifier: 
-  trailColor: {r: 0.83137256, g: 0.30980393, b: 0.79607844, a: 1}
   trailCycle: 0.08
   duration: 0.2
+  trailData: {fileID: 11400000, guid: e382f059e64ca9944860d2d1955a746f, type: 2}
   dashPower: 15
   dashTime: 0.15
   dashEase: 18
-  fre: 5
-  amp: 2.8
-  animationTime: 0.2
-  easeT: 1
+  dashRechargeTime: 0.5
+  shakeCameraData: {fileID: 11400000, guid: 59a9aab8bd1d0fa46ad793b2311920c6, type: 2}

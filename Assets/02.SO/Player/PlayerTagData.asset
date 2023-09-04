@@ -14,7 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hanaAnimatorController: {fileID: 22100000, guid: 0fb3caad494efd944b80f1ef9044944d, type: 2}
   genAnimatorController: {fileID: 22100000, guid: a499b47105a3f2240850bf38b8094de4, type: 2}
-  frequency: 10
-  amplitude: 3
-  shakeTime: 0.2
-  easeType: 1
+  shakeCameraData: {fileID: 11400000, guid: 59a9aab8bd1d0fa46ad793b2311920c6, type: 2}

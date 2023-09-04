@@ -27,15 +27,15 @@ public class CameraManager : MonoSingleTon<CameraManager>
         _seq?.Kill();
     }
 
-    public void ShakeCamera(float frequency, float amplitude, float animationTime, Ease easeType)
+    public void ShakeCamera(ShakeCameraDataSO data)
     {
         _seq?.Kill();
-        _noise.m_AmplitudeGain = amplitude;
-        _noise.m_FrequencyGain = frequency;
+        _noise.m_AmplitudeGain = data.amplitude;
+        _noise.m_FrequencyGain = data.frequency;
         _seq = DOTween.Sequence();
-        _seq.Append(DOTween.To(() => amplitude,
-            x => _noise.m_AmplitudeGain = x, 0f, animationTime)).SetEase(easeType);
-        _seq.Join(DOTween.To(() => frequency,
-            x => _noise.m_FrequencyGain = x, 0f, animationTime)).SetEase(easeType);
+        _seq.Append(DOTween.To(() => data.amplitude,
+            x => _noise.m_AmplitudeGain = x, 0f, data.shakeTime)).SetEase(data.easeType);
+        _seq.Join(DOTween.To(() => data.frequency,
+            x => _noise.m_FrequencyGain = x, 0f, data.shakeTime)).SetEase(data.easeType);
     }
 }

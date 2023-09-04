@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Player/DashDataSO")]
 public class DashDataSO : ScriptableObject
 {
-    public Color trailColor = Color.white;
     public float trailCycle = 0.08f;
     public float duration = 0.2f;
+    public TrailDataSO trailData;
 
     [Space(20f)]
     public float dashPower = 10f;
@@ -14,9 +14,5 @@ public class DashDataSO : ScriptableObject
     public Ease dashEase = Ease.Linear;
     public float dashRechargeTime = 0.5f;
 
-    [Header("Camera")]
-    public float frequency = 10f;
-    public float amplitude = 3f;
-    public float shakeTime = 0.2f;
-    public Ease easeType = Ease.Linear;
+    public ShakeCameraDataSO shakeCameraData;
 }

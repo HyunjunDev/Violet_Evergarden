@@ -8,38 +8,36 @@ public class DashModule : PlayerModule
     private Vector2 _targetDashPower = Vector2.zero;
     private Vector2 _curDash = Vector2.zero;
 
-    private bool _dashable = true;
-    private Coroutine _groundDashRechargeCoroutine = null;
-
     private Sequence _dashSeq = null;
 
     public override void Exit()
     {
         _dashSeq?.Kill();
+        DashEnd();
         _targetDashPower = _curDash = Vector2.zero;
         _excuting = false;
     }
 
     protected override void InitModule()
     {
-        _player.playerCollider.onGrounded += OnGrounded;
+        _rechargeTime = _player.DashDataSO.dashRechargeTime;
     }
 
-    private void OnGrounded()
+    protected override void OnGrounded()
     {
-        _dashable = true;
+        _useable = true;
     }
 
     public void DashStart()
     {
         Vector2 input = _player.playerInput.NormalizedInputVector;
 
-        if (!(input.sqrMagnitude > 0f) || !_dashable || _locked)
+        if (!(input.sqrMagnitude > 0f) || !_useable || _locked)
         {
             return;
         }
 
-        _dashable = false; 
+        _useable = false; 
         _excuting = true;
 
         //Reset
@@ -54,14 +52,11 @@ public class DashModule : PlayerModule
         //Effect
         GameObject dashTrailParticle = PoolManager.Instance.Pop(EPoolType.HanaDashParticle).gameObject;
         dashTrailParticle.transform.position = _player.transform.position;
-        dashTrailParticle.transform.rotation = Utility.GetDashRotation(_targetDashPower, 90);
+        dashTrailParticle.transform.rotation = Utility.GetRotationByVector(_targetDashPower, 90);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
         dashFlowerParticle.transform.position = _player.transform.position;
-        _player.playerRenderer.StartTrail(_player.DashDataSO.trailColor, _player.DashDataSO.trailCycle, _player.DashDataSO.duration);
-        CameraManager.Instance.ShakeCamera(_player.DashDataSO.frequency,
-            _player.DashDataSO.amplitude,
-            _player.DashDataSO.shakeTime,
-            _player.DashDataSO.easeType);
+        _player.playerRenderer.StartTrail(_player.DashDataSO.trailCycle, _player.DashDataSO.duration, _player.DashDataSO.trailData);
+        CameraManager.Instance.ShakeCamera(_player.DashDataSO.shakeCameraData);
 
         //Jump
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpEnd();
@@ -87,22 +82,6 @@ public class DashModule : PlayerModule
         _player.playerAnimation.SetDashParameter(false);
         _player.LockModules(false, EPlayerModuleType.Jump);
         _excuting = false;
-        DashRecharge();
-    }
-
-    private void DashRecharge()
-    {
-        if (_groundDashRechargeCoroutine != null)
-            StopCoroutine(_groundDashRechargeCoroutine);
-        _groundDashRechargeCoroutine = StartCoroutine(GroundDashRechargeCoroutine());
-    }
-
-    private IEnumerator GroundDashRechargeCoroutine()
-    {
-        yield return new WaitForSeconds(_player.DashDataSO.dashRechargeTime);
-        if(_player.playerCollider.GetCollision(EBoundType.Down))
-        {
-            _dashable = true;
-        }
+        GroundedRecharge();
     }
 }

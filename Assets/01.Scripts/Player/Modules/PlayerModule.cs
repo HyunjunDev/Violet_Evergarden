@@ -19,6 +19,7 @@ public abstract class PlayerModule
     {
         _player = player;
         InitModule();
+        _player.playerCollider.onGrounded += OnGrounded;
     }
 
     protected abstract void InitModule();
@@ -36,4 +37,31 @@ public abstract class PlayerModule
     {
         _player.StopCoroutine(coroutine);
     }
+
+    protected virtual void OnGrounded()
+    {
+
+    }
+
+    #region GroundedRecharge
+    protected bool _useable = true;
+    protected Coroutine _groundedRechargeCoroutine = null;
+    protected float _rechargeTime = 0f;
+
+    protected void GroundedRecharge()
+    {
+        if (_groundedRechargeCoroutine != null)
+            StopCoroutine(_groundedRechargeCoroutine);
+        _groundedRechargeCoroutine = StartCoroutine(GroundDashRechargeCoroutine());
+    }
+
+    private IEnumerator GroundDashRechargeCoroutine()
+    {
+        yield return new WaitForSeconds(_rechargeTime);
+        if (_player.playerCollider.GetCollision(EBoundType.Down))
+        {
+            _useable = true;
+        }
+    }
+    #endregion
 }
