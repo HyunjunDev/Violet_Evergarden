@@ -28,6 +28,9 @@ public class DebugController : MonoBehaviour
 
     public static DebugCommand SET_SCALE_OBJ;
     public static DebugCommand HELP;
+    public static DebugCommand SET_DASH;
+    public static DebugCommand SET_SPEED;
+    public static DebugCommand SET_GRAVITY;
 
     public List<object> commandList;
 
@@ -54,9 +57,18 @@ public class DebugController : MonoBehaviour
 
         HELP = new DebugCommand("help", "Shows a list of commands", FuncType.HELP);
 
+        SET_DASH = new DebugCommand("set_dash", "¾ÃÀç¿±", FuncType.SET_DASH);
+
+        SET_SPEED = new DebugCommand("set_speed", "¾ÃÀç¿±2", FuncType.SET_SPEED);
+
+        SET_GRAVITY = new DebugCommand("set_gravity", "¾ÃÀç¿±2", FuncType.SET_GRAVITY);
+
         commandList = new List<object>
         {
             SET_SCALE_OBJ,
+            SET_DASH,
+            SET_SPEED,
+            SET_GRAVITY,
             HELP
         };
     }
@@ -152,6 +164,18 @@ public class DebugController : MonoBehaviour
                         if (properties.Length == 3)
                             RunLuaFunction(command.funcType.ToString(), properties[1], properties[2]);
                         break;
+                    case FuncType.SET_DASH:
+                        if (properties.Length == 2)
+                            RunLuaFunction(command.funcType.ToString(), properties[1]);
+                        break;
+                    case FuncType.SET_SPEED:
+                        if (properties.Length == 2)
+                            RunLuaFunction(command.funcType.ToString(), properties[1]);
+                        break;
+                    case FuncType.SET_GRAVITY:
+                        if (properties.Length == 2)
+                            RunLuaFunction(command.funcType.ToString(), properties[1]);
+                        break;
                     case FuncType.HELP:
                         if (properties.Length == 1)
                             RunLuaFunction(command.funcType.ToString());
@@ -181,6 +205,7 @@ public class DebugController : MonoBehaviour
         DynValue luaFunction = luaScript.Globals.Get(functionName);
         if (luaFunction != null && luaFunction.Type == DataType.Function)
         {
+            Debug.Log("·ç¾Æ ÇÔ¼ö ½ÇÇà");
             luaScript.Call(luaFunction, parameters);
         }
         else
