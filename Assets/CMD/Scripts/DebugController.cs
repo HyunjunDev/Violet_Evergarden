@@ -31,6 +31,8 @@ public class DebugController : MonoBehaviour
     public static DebugCommand SET_DASH;
     public static DebugCommand SET_SPEED;
     public static DebugCommand SET_GRAVITY;
+    public static DebugCommand SET_DAGGER_SPEED;
+    public static DebugCommand SET_COLOR;
 
     public List<object> commandList;
 
@@ -63,12 +65,18 @@ public class DebugController : MonoBehaviour
 
         SET_GRAVITY = new DebugCommand("set_gravity", "¾ÃÀç¿±2", FuncType.SET_GRAVITY);
 
+        SET_DAGGER_SPEED = new DebugCommand("set_dagger_speed", "¾ÃÀç¿±3", FuncType.SET_DAGGER_SPEED);
+
+        SET_COLOR = new DebugCommand("set_color", "¾ÃÀç¿±3", FuncType.SET_COLOR);
+
         commandList = new List<object>
         {
             SET_SCALE_OBJ,
             SET_DASH,
             SET_SPEED,
             SET_GRAVITY,
+            SET_DAGGER_SPEED,
+            SET_COLOR,
             HELP
         };
     }
@@ -173,6 +181,14 @@ public class DebugController : MonoBehaviour
                             RunLuaFunction(command.funcType.ToString(), properties[1]);
                         break;
                     case FuncType.SET_GRAVITY:
+                        if (properties.Length == 2)
+                            RunLuaFunction(command.funcType.ToString(), properties[1]);
+                        break;
+                    case FuncType.SET_DAGGER_SPEED:
+                        if (properties.Length == 2)
+                            RunLuaFunction(command.funcType.ToString(), properties[1]);
+                        break;
+                    case FuncType.SET_COLOR:
                         if (properties.Length == 2)
                             RunLuaFunction(command.funcType.ToString(), properties[1]);
                         break;
