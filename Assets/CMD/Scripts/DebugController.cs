@@ -26,7 +26,6 @@ public class DebugController : MonoBehaviour
 
     Vector2 scroll;
 
-    public static DebugCommand DEBUG_TEXT;
     public static DebugCommand SET_SCALE_OBJ;
     public static DebugCommand HELP;
 
@@ -51,15 +50,12 @@ public class DebugController : MonoBehaviour
     {
         instance = this;
 
-        DEBUG_TEXT = new DebugCommand("debug_text", "Debug chat", FuncType.DEBUG_TEXT);
-
         SET_SCALE_OBJ = new DebugCommand("set_scale", "Adjust the scale value of the desired object", FuncType.SET_SCALE_OBJ);
 
         HELP = new DebugCommand("help", "Shows a list of commands", FuncType.HELP);
 
         commandList = new List<object>
         {
-            DEBUG_TEXT,
             SET_SCALE_OBJ,
             HELP
         };
@@ -152,10 +148,6 @@ public class DebugController : MonoBehaviour
             {
                 switch(command.funcType)
                 {
-                    case FuncType.DEBUG_TEXT:
-                        if (properties.Length == 2)
-                            RunLuaFunction(command.funcType.ToString(), properties[1]);
-                        break;
                     case FuncType.SET_SCALE_OBJ:
                         if (properties.Length == 3)
                             RunLuaFunction(command.funcType.ToString(), properties[1], properties[2]);

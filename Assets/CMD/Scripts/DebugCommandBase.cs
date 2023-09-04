@@ -6,8 +6,8 @@ using UnityEngine;
 public enum FuncType
 {
     NONE,
-    DEBUG_TEXT,
     SET_SCALE_OBJ,
+    SET_DASH,
     HELP
 }
 

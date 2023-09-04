@@ -7,9 +7,7 @@ using System;
 public enum ObjectType
 {
     NONE,
-    PLAYER,
-    ENEMY,
-    MINIMAP
+    PLAYER
 }
 
 public class GameInfo
