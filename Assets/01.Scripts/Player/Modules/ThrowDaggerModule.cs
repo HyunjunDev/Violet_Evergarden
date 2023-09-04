@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class ThrowDaggerModule : PlayerModule
 {
@@ -27,7 +28,14 @@ public class ThrowDaggerModule : PlayerModule
 
     public void ThrowStart()
     {
-        if (_player.playerInput.NormalizedInputVector == Vector2.zero || !_useable)
+        Vector2 input = _player.playerInput.NormalizedInputVector;
+        if (!(input.sqrMagnitude > 0f))
+        {
+            input = _player.playerRenderer.currentFlipState == EFlipState.Left
+                ? _player.transform.right * -1f : _player.transform.right;
+        }
+
+        if (!_useable)
         {
             return;
         }
@@ -36,16 +44,16 @@ public class ThrowDaggerModule : PlayerModule
         //SpawnDagger
         DaggerPoolable dagger = PoolManager.Instance.Pop(EPoolType.Dagger) as DaggerPoolable;
         dagger.transform.localScale = _player.transform.localScale;
-        dagger.transform.position = new Vector3(_player.transform.position.x + _player.playerInput.NormalizedInputVector.x * 0.2f, _player.transform.position.y, 0);
-        dagger.Dir = _player.playerInput.NormalizedInputVector;
+        dagger.transform.position = new Vector3(_player.transform.position.x + input.x * 0.2f, _player.transform.position.y, 0);
+        dagger.Dir = input;
         dagger.Player = _player;
         dagger.SetRotation();
 
         //DaggerParticle
         GameObject throwDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenThrowDaggerParticle).gameObject;
         throwDaggerParticle.transform.localScale = _player.transform.localScale;
-        throwDaggerParticle.transform.position = _player.transform.position + (Vector3)(_player.playerInput.NormalizedInputVector * 0.8f);
-        throwDaggerParticle.transform.rotation = Utility.GetRotationByVector(_player.playerInput.NormalizedInputVector, 90);
+        throwDaggerParticle.transform.position = _player.transform.position + (Vector3)(input * 0.8f);
+        throwDaggerParticle.transform.rotation = Utility.GetRotationByVector(input, 90);
 
         //Shake Camera
         CameraManager.Instance.ShakeCamera(_player.ThrowDaggerDataSO.th_shakeCameraData);

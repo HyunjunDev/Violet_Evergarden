@@ -31,13 +31,18 @@ public class DashModule : PlayerModule
     public void DashStart()
     {
         Vector2 input = _player.playerInput.NormalizedInputVector;
+        if (!(input.sqrMagnitude > 0f))
+        {
+            input = _player.playerRenderer.currentFlipState == EFlipState.Left
+                ? _player.transform.right * -1f : _player.transform.right;
+        }
 
-        if (!(input.sqrMagnitude > 0f) || !_useable || _locked)
+        if (!_useable || _locked)
         {
             return;
         }
 
-        _useable = false; 
+        _useable = false;
         _excuting = true;
 
         //Reset
