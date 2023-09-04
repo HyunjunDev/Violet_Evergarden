@@ -47,8 +47,7 @@ public class TagModule : PlayerModule
                 _player.AttachModule(EPlayerModuleType.Dash, new DashModule());
                 _player.playerAnimation.ChangeAnimator(_player.TagDataSO.hanaAnimatorController);
                 GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
-                dashFlowerParticle.transform.position = _player.transform.position;
-                dashFlowerParticle.transform.localScale = _player.transform.localScale;
+                dashFlowerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
                 break;
             case ECharacterType.Gen:
                 _player.ExitModules(EPlayerModuleType.Dash);
@@ -57,8 +56,7 @@ public class TagModule : PlayerModule
                 _player.AttachModule(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
                 _player.playerAnimation.ChangeAnimator(_player.TagDataSO.genAnimatorController);
                 GameObject genDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerParticle).gameObject;
-                genDaggerParticle.transform.position = _player.transform.position;
-                genDaggerParticle.transform.localScale = _player.transform.localScale;
+                genDaggerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
                 break;
             default:
                 break;

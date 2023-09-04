@@ -192,4 +192,11 @@ public class Player : MonoBehaviour
         }
         return result;
     }
+
+    public Vector3 GetLocalScale()
+    {
+        Vector3 result = transform.localScale;
+        result.x *= _playerRenderer.currentFlipState == EFlipState.Left ? -1f : 1f;
+        return result;
+    }
 }

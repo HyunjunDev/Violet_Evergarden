@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Security;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -43,17 +44,16 @@ public class ThrowDaggerModule : PlayerModule
 
         //SpawnDagger
         DaggerPoolable dagger = PoolManager.Instance.Pop(EPoolType.Dagger) as DaggerPoolable;
-        dagger.transform.localScale = _player.transform.localScale;
-        dagger.transform.position = new Vector3(_player.transform.position.x + input.x * 0.2f, _player.transform.position.y, 0);
+        Vector2 daggerPosition = new Vector2(_player.transform.position.x + input.x * 0.2f, _player.transform.position.y);
+        dagger.transform.SetTransform(daggerPosition, _player.GetLocalScale());
         dagger.Dir = input;
         dagger.Player = _player;
         dagger.SetRotation();
 
         //DaggerParticle
         GameObject throwDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenThrowDaggerParticle).gameObject;
-        throwDaggerParticle.transform.localScale = _player.transform.localScale;
-        throwDaggerParticle.transform.position = _player.transform.position + (Vector3)(input * 0.8f);
-        throwDaggerParticle.transform.rotation = Utility.GetRotationByVector(input, 90);
+        Vector2 particlePosition = _player.transform.position + (Vector3)(input * 0.8f);
+        throwDaggerParticle.transform.SetTransform(particlePosition, _player.GetLocalScale(), Utility.GetRotationByVector(input, 90));
 
         //Shake Camera
         CameraManager.Instance.ShakeCamera(_player.ThrowDaggerDataSO.th_shakeCameraData);
@@ -65,8 +65,7 @@ public class ThrowDaggerModule : PlayerModule
     {
         //LandedParticle
         GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
-        landedParticle.transform.position = hitPosition;
-        landedParticle.transform.localScale = _player.transform.localScale;
+        landedParticle.transform.SetTransform(hitPosition, _player.GetLocalScale());
 
         //FadeUI
         UIManager.Instance.FadeStart(0.5f, 0f, 0.5f);
@@ -75,9 +74,8 @@ public class ThrowDaggerModule : PlayerModule
         float t = 0f;
         for (int i = 0; i < 4; i++)
         {
-            TrailPoolable trail = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
-            trail.transform.position = Vector2.Lerp(startPosition, endPosition, t);
-            trail.transform.localScale = _player.transform.localScale;
+            TrailPoolable trail = PoolManager.Instance.Pop<TrailPoolable>(EPoolType.DashTrail);
+            trail.transform.SetTransform(Vector2.Lerp(startPosition, endPosition, t), _player.GetLocalScale());
             trail.StartTrail(_player.playerRenderer.spriteRenderer.sprite, _player.ThrowDaggerDataSO.trailData);
             t += 0.25f;
         }

@@ -67,11 +67,8 @@ public class PlayerRenderer : MonoBehaviour
         while (time <= duration)
         {
             TrailPoolable trailPoolable = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
+            trailPoolable.transform.SetTransform(transform.position, _player.GetLocalScale());
             trailPoolable.StartTrail(_spriteRenderer.sprite, data);
-            trailPoolable.transform.position = transform.position;
-            trailPoolable.transform.localScale = transform.localScale;
-            trailPoolable.transform.rotation = transform.rotation;
-            trailPoolable.transform.localScale = _player.transform.localScale;
             yield return new WaitForSeconds(trailCycle);
             time += trailCycle;
         }

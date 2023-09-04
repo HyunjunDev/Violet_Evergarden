@@ -19,4 +19,10 @@ public static class Utility
         }
         return target;
     }
+
+    public static void SetTransform(this Transform targetTrm, Vector2 position, Vector3 localScale, Quaternion rotation = default(Quaternion))
+    {
+        targetTrm.SetPositionAndRotation(position, rotation);
+        targetTrm.localScale = localScale;
+    }
 }
