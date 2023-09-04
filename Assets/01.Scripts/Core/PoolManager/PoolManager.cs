@@ -21,16 +21,16 @@ public class PoolManager : MonoSingleTon<PoolManager>
             _rootTrm = transform;
         }
 
-        for (int i = 0; i< _poolDataSO.poolDatas.Count; i++)
+        for (int i = 0; i < _poolDataSO.poolDatas.Count; i++)
         {
             _poolDic.Add(_poolDataSO.poolDatas[i].poolType, new Queue<PoolableObject>());
 
-            for(int j = 0; j < _poolDataSO.poolDatas[i].spawnCount; j++)
+            for (int j = 0; j < _poolDataSO.poolDatas[i].spawnCount; j++)
             {
                 PoolableObject poolable = Instantiate(_poolDataSO.poolDatas[i].obj, _rootTrm);
                 poolable.poolType = _poolDataSO.poolDatas[i].poolType;
                 poolable.StartInit();
-                poolable.name =  poolable.name.Replace("(Clone)", "");
+                poolable.name = poolable.name.Replace("(Clone)", "");
                 poolable.gameObject.SetActive(false);
                 _poolDic[poolable.poolType].Enqueue(poolable);
             }
@@ -79,14 +79,14 @@ public class PoolManager : MonoSingleTon<PoolManager>
     }
 
     /// <summary>
-    /// type에 맞게 Pop한 뒤 T 컴포넌트를 찾아 반환합니다.
+    /// type에 맞게 Pop한 뒤 T로 형변환합니다.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="type"></param>
     /// <returns></returns>
-    public T Pop<T>(EPoolType type)
+    public T Pop<T>(EPoolType type) where T : PoolableObject
     {
-        return Pop(type).GetComponent<T>();
+        return Pop(type) as T;
     }
 
     /// <summary>

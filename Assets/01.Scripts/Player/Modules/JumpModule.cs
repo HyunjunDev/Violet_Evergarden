@@ -5,6 +5,8 @@ using UnityEngine.XR;
 
 public class JumpModule : PlayerModule
 {
+    public float jumpMultiplier = 1f;
+
     private float _fallSpeed = 0f;
     public float fallSpeed => _fallSpeed;
 
@@ -56,7 +58,7 @@ public class JumpModule : PlayerModule
         {
             return;
         }*/
-        if(_jumpDownCoroutine != null)
+        if (_jumpDownCoroutine != null)
         {
             StopCoroutine(_jumpDownCoroutine);
         }
@@ -86,7 +88,7 @@ public class JumpModule : PlayerModule
 
     private void OnGroundExited()
     {
-        if(_player.CheckExcutingModules(EPlayerModuleType.Dash))
+        if (_player.CheckExcutingModules(EPlayerModuleType.Dash))
         {
             _jumpable = false;
             return;
@@ -118,8 +120,7 @@ public class JumpModule : PlayerModule
         Vector2 spawnPoint = _player.transform.position;
         spawnPoint.y -= 0.3f;
         GameObject landingParticle = PoolManager.Instance.Pop(EPoolType.LandingParticle).gameObject;
-        landingParticle.transform.position = spawnPoint;
-        landingParticle.transform.localScale = _player.transform.localScale;
+        landingParticle.transform.SetTransform(spawnPoint, _player.GetLocalScale());
     }
 
     private void CalculateJumpApex()
@@ -185,14 +186,13 @@ public class JumpModule : PlayerModule
         }
 
         GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;
-        jumpParticle.transform.SetPositionAndRotation(spawnPoint, rot);
-        jumpParticle.transform.localScale = _player.transform.localScale;
+        jumpParticle.transform.SetTransform(spawnPoint, _player.GetLocalScale(), rot);
 
         _player.playerAnimation.JumpAnimation();
         Exit();
         _excuting = true;
         _jumpDown = false;
         _jumpable = false;
-        _player.movingController.currentVerticalSpeed = _player.JumpDataSO.jumpPower;
+        _player.movingController.currentVerticalSpeed = _player.JumpDataSO.jumpPower * jumpMultiplier;
     }
 }
