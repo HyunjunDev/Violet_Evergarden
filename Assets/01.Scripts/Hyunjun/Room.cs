@@ -6,6 +6,8 @@ public class Room : MonoBehaviour
 {
     public GameObject virtualCam;
 
+    public Vector3 spawnPosition;
+
     public float timeDelay = 0.25f;
 
     public void OnTriggerEnter2D(Collider2D collision)
