@@ -14,9 +14,12 @@ public class PlayerRenderer : MonoBehaviour
 
     private Coroutine _rendererTrailCoroutine = null;
 
+    private Player _player = null;
+
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _player = transform.parent.GetComponent<Player>();
     }
 
     public void MoveInputFlip(float moveX)
@@ -68,6 +71,7 @@ public class PlayerRenderer : MonoBehaviour
             trailPoolable.transform.position = transform.position;
             trailPoolable.transform.localScale = transform.localScale;
             trailPoolable.transform.rotation = transform.rotation;
+            trailPoolable.transform.localScale = _player.transform.localScale;
             yield return new WaitForSeconds(trailCycle);
             time += trailCycle;
         }
