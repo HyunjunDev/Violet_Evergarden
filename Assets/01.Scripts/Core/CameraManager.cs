@@ -15,7 +15,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void ShakeCamera(ShakeCameraDataSO data)
     {
-        CinemachineVirtualCamera vCam = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
+        ICinemachineCamera cam = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+        if(cam == null)
+        {
+            return;
+        }
+        CinemachineVirtualCamera vCam = cam.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
         CinemachineBasicMultiChannelPerlin noise = vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         _seq?.Kill();
         noise.m_AmplitudeGain = data.amplitude;

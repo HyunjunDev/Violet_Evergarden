@@ -8,29 +8,24 @@ using UnityEngine.Experimental.AI;
 public class DaggerPoolable : PoolableObject
 {
     private Player _player;
-    public Player Player
-    {
-        get { return _player; }
-        set { _player = value; }
-    }
-
+    private ThrowDaggerModule _daggerModule = null;
     private Vector2 _dir;
-    public Vector2 Dir
-    {
-        get { return _dir; }
-        set { _dir = value; }
-    }
-
     private Rigidbody2D rb;
 
     private Coroutine _contactCoroutine = null;
-
     private TrailRenderer _trailRenderer = null;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         _trailRenderer = GetComponent<TrailRenderer>();
+    }
+
+    public void SettingDagger(Vector2 dir, Player player)
+    {
+        _player = player;
+        _dir = dir;
+        _daggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
     }
 
     private void FixedUpdate()
@@ -41,7 +36,10 @@ public class DaggerPoolable : PoolableObject
         {
             Contact(hit);
         }
-        rb.velocity = _dir * _player.DaggerDataSO.speed * _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger).throwSpeedMultiplier;
+        if (_daggerModule != null)
+        {
+            rb.velocity = _dir * _player.DaggerDataSO.speed * _daggerModule.throwSpeedMultiplier;
+        }
     }
 
     public void SetRotation()
@@ -105,13 +103,33 @@ public class DaggerPoolable : PoolableObject
         {
             wallGrabModule.TryWallGrab();
         }
-        ThrowDaggerModule daggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
-        if (daggerModule != null)
-        {
-            daggerModule.Landed(hit.point, startPosition, endPosition);
-        }
+
+        Landed(hit.point, startPosition, endPosition);
 
         Destroy(colliderObject);
         PoolManager.Instance.Push(this);
+    }
+
+    public void Landed(Vector2 hitPosition, Vector2 startPosition, Vector2 endPosition)
+    {
+        //LandedParticle
+        GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
+        landedParticle.transform.SetTransform(hitPosition, _player.GetLocalScale());
+
+        //FadeUI
+        UIManager.Instance.FadeStart(0.5f, 0f, 0.5f);
+
+        //Trail
+        float t = 0f;
+        for (int i = 0; i < 4; i++)
+        {
+            TrailPoolable trail = PoolManager.Instance.Pop<TrailPoolable>(EPoolType.DashTrail);
+            trail.transform.SetTransform(Vector2.Lerp(startPosition, endPosition, t), _player.GetLocalScale());
+            trail.StartTrail(_player.playerRenderer.spriteRenderer.sprite, _player.ThrowDaggerDataSO.trailData);
+            t += 0.25f;
+        }
+
+        //Shake Camera
+        CameraManager.Instance.ShakeCamera(_player.ThrowDaggerDataSO.la_shakeCameraData);
     }
 }
