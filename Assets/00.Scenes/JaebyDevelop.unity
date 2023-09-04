@@ -11528,22 +11528,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4518338165993786059, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _throwDaggerDataSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 5de644f2d2afe404794a5a686ec5f60f, type: 2}
-    - target: {fileID: 6449601249071655941, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6449601249071655941, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6570791546331159667, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -289933764, guid: 7db0357587b86ee4f9d383c2e20ddc6d, type: 3}
     - target: {fileID: 8541631066545923107, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
       propertyPath: m_RootOrder
       value: 6
