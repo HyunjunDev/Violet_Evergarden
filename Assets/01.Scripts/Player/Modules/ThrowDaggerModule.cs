@@ -35,6 +35,7 @@ public class ThrowDaggerModule : PlayerModule
 
         //SpawnDagger
         DaggerPoolable dagger = PoolManager.Instance.Pop(EPoolType.Dagger) as DaggerPoolable;
+        dagger.transform.localScale = _player.transform.localScale;
         dagger.transform.position = new Vector3(_player.transform.position.x + _player.playerInput.NormalizedInputVector.x * 0.2f, _player.transform.position.y, 0);
         dagger.Dir = _player.playerInput.NormalizedInputVector;
         dagger.Player = _player;
@@ -42,6 +43,7 @@ public class ThrowDaggerModule : PlayerModule
 
         //DaggerParticle
         GameObject throwDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenThrowDaggerParticle).gameObject;
+        throwDaggerParticle.transform.localScale = _player.transform.localScale;
         throwDaggerParticle.transform.position = _player.transform.position + (Vector3)(_player.playerInput.NormalizedInputVector * 0.8f);
         throwDaggerParticle.transform.rotation = Utility.GetRotationByVector(_player.playerInput.NormalizedInputVector, 90);
 
@@ -56,6 +58,7 @@ public class ThrowDaggerModule : PlayerModule
         //LandedParticle
         GameObject landedParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerLandedParticle).gameObject;
         landedParticle.transform.position = hitPosition;
+        landedParticle.transform.localScale = _player.transform.localScale;
 
         //FadeUI
         UIManager.Instance.FadeStart(0.5f, 0f, 0.5f);
@@ -66,6 +69,7 @@ public class ThrowDaggerModule : PlayerModule
         {
             TrailPoolable trail = PoolManager.Instance.Pop(EPoolType.DashTrail) as TrailPoolable;
             trail.transform.position = Vector2.Lerp(startPosition, endPosition, t);
+            trail.transform.localScale = _player.transform.localScale;
             trail.StartTrail(_player.playerRenderer.spriteRenderer.sprite, _player.ThrowDaggerDataSO.trailData);
             t += 0.25f;
         }

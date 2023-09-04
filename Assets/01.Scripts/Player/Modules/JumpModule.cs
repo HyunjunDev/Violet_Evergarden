@@ -119,6 +119,7 @@ public class JumpModule : PlayerModule
         spawnPoint.y -= 0.3f;
         GameObject landingParticle = PoolManager.Instance.Pop(EPoolType.LandingParticle).gameObject;
         landingParticle.transform.position = spawnPoint;
+        landingParticle.transform.localScale = _player.transform.localScale;
     }
 
     private void CalculateJumpApex()
@@ -185,6 +186,7 @@ public class JumpModule : PlayerModule
 
         GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;
         jumpParticle.transform.SetPositionAndRotation(spawnPoint, rot);
+        jumpParticle.transform.localScale = _player.transform.localScale;
 
         _player.playerAnimation.JumpAnimation();
         Exit();
