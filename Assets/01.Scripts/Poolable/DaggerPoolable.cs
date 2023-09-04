@@ -8,7 +8,6 @@ using UnityEngine.Experimental.AI;
 public class DaggerPoolable : PoolableObject
 {
     private Player _player;
-    private ThrowDaggerModule _daggerModule = null;
     private Vector2 _dir;
     private Rigidbody2D rb;
 
@@ -25,7 +24,6 @@ public class DaggerPoolable : PoolableObject
     {
         _player = player;
         _dir = dir;
-        _daggerModule = _player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger);
     }
 
     private void FixedUpdate()
@@ -36,10 +34,7 @@ public class DaggerPoolable : PoolableObject
         {
             Contact(hit);
         }
-        if (_daggerModule != null)
-        {
-            rb.velocity = _dir * _player.DaggerDataSO.speed * _daggerModule.throwSpeedMultiplier;
-        }
+        rb.velocity = _dir * _player.DaggerDataSO.speed * _player.MultiplierDataSO.throwSpeedMultiplier;
     }
 
     public void SetRotation()

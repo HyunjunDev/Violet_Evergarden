@@ -6,8 +6,6 @@ using UnityEngine.Windows;
 
 public class ThrowDaggerModule : PlayerModule
 {
-    public float throwSpeedMultiplier = 1f;
-
     public override void Exit()
     {
     }

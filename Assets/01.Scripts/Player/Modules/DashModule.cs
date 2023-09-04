@@ -5,8 +5,6 @@ using DG.Tweening;
 
 public class DashModule : PlayerModule
 {
-    public float dashMultiplier = 1f;
-
     private Vector2 _targetDashPower = Vector2.zero;
     private Vector2 _curDash = Vector2.zero;
 
@@ -72,7 +70,7 @@ public class DashModule : PlayerModule
         //DashSeq
         _dashSeq?.Kill();
         _dashSeq = DOTween.Sequence();
-        _dashSeq.Append(DOTween.To(() => _curDash, SettingDashSpeed, _targetDashPower * dashMultiplier, _player.DashDataSO.dashTime))
+        _dashSeq.Append(DOTween.To(() => _curDash, SettingDashSpeed, _targetDashPower * _player.MultiplierDataSO.dashMultiplier, _player.DashDataSO.dashTime))
             .SetEase(_player.DashDataSO.dashEase);
         _dashSeq.AppendCallback(DashEnd);
     }

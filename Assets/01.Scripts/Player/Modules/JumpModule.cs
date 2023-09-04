@@ -5,8 +5,6 @@ using UnityEngine.XR;
 
 public class JumpModule : PlayerModule
 {
-    public float jumpMultiplier = 1f;
-
     private float _fallSpeed = 0f;
     public float fallSpeed => _fallSpeed;
 
@@ -193,6 +191,6 @@ public class JumpModule : PlayerModule
         _excuting = true;
         _jumpDown = false;
         _jumpable = false;
-        _player.movingController.currentVerticalSpeed = _player.JumpDataSO.jumpPower * jumpMultiplier;
+        _player.movingController.currentVerticalSpeed = _player.JumpDataSO.jumpPower * _player.MultiplierDataSO.jumpMultiplier;
     }
 }

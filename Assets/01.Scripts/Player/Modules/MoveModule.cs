@@ -18,11 +18,11 @@ public class MoveModule : PlayerModule
         if(xInput != 0f)
         {
             // Set horizontal move speed
-            _player.movingController.currentHorizontalSpeed += xInput * _player.MovementDataSO.acceleration * Time.deltaTime;
+            _player.movingController.currentHorizontalSpeed += xInput * _player.MovementDataSO.acceleration * _player.MultiplierDataSO.speedMultiplier * Time.deltaTime;
 
             // clamped by max frame movement
             _player.movingController.currentHorizontalSpeed = Mathf.Clamp(_player.movingController.currentHorizontalSpeed, 
-                -_player.MovementDataSO.moveClamp, _player.MovementDataSO.moveClamp);
+                -_player.MovementDataSO.moveClamp, _player.MovementDataSO.moveClamp * _player.MultiplierDataSO.speedMultiplier);
 
             // apexBonus 적용
             float apexBonus = 0f;
@@ -31,13 +31,13 @@ public class MoveModule : PlayerModule
                 apexBonus = Mathf.Sign(xInput) * _player.MovementDataSO.apexBonus * _player.GetModule<JumpModule>(EPlayerModuleType.Jump).apexPoint;
             }
 
-            _player.movingController.currentHorizontalSpeed += apexBonus * Time.deltaTime;
+            _player.movingController.currentHorizontalSpeed += apexBonus * _player.MultiplierDataSO.speedMultiplier * Time.deltaTime;
         }
         else
         {
             // 만약 이동하지 않았다면 가속 줄어들기
             _player.movingController.currentHorizontalSpeed = Mathf.MoveTowards(_player.movingController.currentHorizontalSpeed, 
-                0, _player.MovementDataSO.deAcceleration * Time.deltaTime);
+                0, _player.MovementDataSO.deAcceleration * _player.MultiplierDataSO.speedMultiplier * Time.deltaTime);
         }
 
         // 왼쪽이나 오른쪽 닿았을 때
@@ -46,6 +46,11 @@ public class MoveModule : PlayerModule
         {
             _player.movingController.currentHorizontalSpeed = 0;
         }
+    }
+
+    public void ResetHorizontalSpeed()
+    {
+        _player.movingController.currentHorizontalSpeed = 0f;
     }
 
     public override void Exit()
