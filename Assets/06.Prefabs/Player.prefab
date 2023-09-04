@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 6449601249071655941}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4518338165993786059
 MonoBehaviour:
@@ -50,14 +50,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startCharcterType: 0
-  _hanaAnimatorController: {fileID: 22100000, guid: 0fb3caad494efd944b80f1ef9044944d, type: 2}
-  _genAnimatorController: {fileID: 22100000, guid: a499b47105a3f2240850bf38b8094de4, type: 2}
   _dashDataSO: {fileID: 11400000, guid: 16d699ec7838c8a499a373fc4025046e, type: 2}
   _movementDataSO: {fileID: 11400000, guid: 81f95a354caf6894f86e05302e4e0730, type: 2}
   _gravityDataSO: {fileID: 11400000, guid: 74fbfca1b8d8169429be0dae4c42684b, type: 2}
   _jumpDataSO: {fileID: 11400000, guid: 49528dca1719e0443862e16a4839edd5, type: 2}
   _tagDataSO: {fileID: 11400000, guid: 5b044fbb1339156479fe1a1ac7fb12d0, type: 2}
   _daggerDataSO: {fileID: 11400000, guid: 0c9006676949ee7469bd3814d70415da, type: 2}
+  _throwDaggerDataSO: {fileID: 11400000, guid: 5de644f2d2afe404794a5a686ec5f60f, type: 2}
 --- !u!114 &5491729354542080619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 904590081
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: 2032682812, guid: 597c718b0b0ecc74a995a6d21ab1f71d, type: 3}
+  m_Sprite: {fileID: -289933764, guid: 7db0357587b86ee4f9d383c2e20ddc6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
