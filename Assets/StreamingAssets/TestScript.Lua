@@ -14,6 +14,9 @@ function SET_GRAVITY(scale)
     Unity:SetGravityPlayer(scale)
 end
 
+function SET_DAGGER_SPEED(scale)
+    Unity:SetDaggerSpeed(scale)
+end
 
 function HELP()
     Unity:Help()
