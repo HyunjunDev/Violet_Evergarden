@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public abstract class Obstacle : MonoBehaviour, IReStartable
 {
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-    }
+    [SerializeField]
+    protected LayerMask collisionLayer;
+
+    public abstract void ReStart();
 }
