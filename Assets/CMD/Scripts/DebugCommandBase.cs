@@ -8,6 +8,11 @@ public enum FuncType
     NONE,
     SET_SCALE_OBJ,
     SET_DASH,
+    SET_SPEED,
+    SET_JUMP,
+    SET_GRAVITY,
+    SET_DAGGER_SPEED,
+    SET_COLOR,
     HELP
 }
 

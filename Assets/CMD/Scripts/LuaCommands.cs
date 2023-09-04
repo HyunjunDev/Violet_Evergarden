@@ -28,12 +28,6 @@ public class GameInfo
 
 public class UnityAPI
 {
-    public void DebugText(string str)
-    {
-        if (str != null)
-            LuaCommands.Instance.DebugText(str);
-    }
-
     public void SetScaleObj(string _name, string _scale)
     {
         ObjectType objType = ObjectType.NONE;
@@ -42,6 +36,27 @@ public class UnityAPI
         {
             LuaCommands.Instance.SetScaleObj(objType, scale);
         }
+    }
+
+    public void SetDashPlayer(string _scale)
+    {
+        float scale = 1f;
+        if (float.TryParse(_scale, out scale))
+            LuaCommands.Instance.SetDashPlayer(scale);
+    }
+
+    public void SetSpeedPlayer(string _scale)
+    {
+        float scale = 1f;
+        if (float.TryParse(_scale, out scale))
+            LuaCommands.Instance.SetSpeedPlayer(scale);
+    }
+
+    public void SetGravityPlayer(string _scale)
+    {
+        float scale = 1f;
+        if (float.TryParse(_scale, out scale))
+            LuaCommands.Instance.SetGravityPlayer(scale);
     }
 
     public void Help()
@@ -75,14 +90,27 @@ public class LuaCommands : MonoBehaviour
         }
     }
 
-    public void DebugText(string str)
-    {
-        Debug.Log(str);
-    }
-
     public void SetScaleObj(ObjectType objType, float scale)
     {
         gameinfo.Objs[objType].transform.localScale = new Vector3(scale, scale, scale);
+    }
+
+    public void SetDashPlayer(float scale)
+    {
+        Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
+        player.GetModule<DashModule>(EPlayerModuleType.Dash).dashMultiplier = scale;
+    }
+
+    public void SetSpeedPlayer(float scale)
+    {
+        Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
+        player.GetModule<MoveModule>(EPlayerModuleType.Move).moveMultiplier = scale;
+    }
+
+    public void SetGravityPlayer(float scale)
+    {
+        Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
+        player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityMultiplier = scale;
     }
 
     public void Help()
