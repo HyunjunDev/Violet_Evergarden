@@ -20,6 +20,7 @@ public abstract class PlayerModule
         _player = player;
         InitModule();
         _player.playerCollider.onGrounded += OnGrounded;
+        _player.playerCollider.onGroundExited += OnGroundExited;
     }
 
     protected abstract void InitModule();
@@ -39,6 +40,11 @@ public abstract class PlayerModule
     }
 
     protected virtual void OnGrounded()
+    {
+
+    }
+
+    protected virtual void OnGroundExited()
     {
 
     }

@@ -84,7 +84,7 @@ public class JumpModule : PlayerModule
         _excuting = false;
     }
 
-    private void OnGroundExited()
+    protected override void OnGroundExited()
     {
         if (_player.CheckExcutingModules(EPlayerModuleType.Dash))
         {
