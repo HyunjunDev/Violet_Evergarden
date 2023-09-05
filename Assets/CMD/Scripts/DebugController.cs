@@ -2,7 +2,9 @@ using MoonSharp.Interpreter;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DebugController : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class DebugController : MonoBehaviour
     }
 
     string input;
+    TextEditor editor;
+     
 
     Vector2 scroll;
 
@@ -114,6 +118,7 @@ public class DebugController : MonoBehaviour
         GUIStyle gUIStyle = new GUIStyle(GUI.skin.textField);
         gUIStyle.fontSize = UnityEngine.Screen.width / 55;
 
+
         if (showHelp)
         {
             GUI.Box(new Rect(0, y, Screen.width, 150),"");
@@ -152,9 +157,36 @@ public class DebugController : MonoBehaviour
                 OnToggleDebug();
             }
         }
+
+
         GUI.SetNextControlName("");
         input = GUI.TextField(new Rect(10f, y + 10f, Screen.width - 20f, 45f), input, gUIStyle);
         GUI.FocusControl("");
+
+        if (showHelp)
+        {
+            if (input != "")
+            {
+                showHelp = false;
+                editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
+
+                Debug.Log(editor + " " + editor.text);
+
+                editor.SelectNone();
+                editor.MoveTextEnd();
+            }
+        }
+
+
+        for (int i = 0; i < commandList.Count; i++)
+        {
+            DebugCommand command = commandList[i] as DebugCommand;
+
+            if (command.commandId.ToString().Contains(input))
+            {
+                Debug.Log(command.commandId);
+            }
+        }
     }
 
     private void HandleInput()
@@ -221,7 +253,6 @@ public class DebugController : MonoBehaviour
         DynValue luaFunction = luaScript.Globals.Get(functionName);
         if (luaFunction != null && luaFunction.Type == DataType.Function)
         {
-            Debug.Log("루아 함수 실행");
             luaScript.Call(luaFunction, parameters);
         }
         else

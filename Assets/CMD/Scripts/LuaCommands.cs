@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoonSharp.Interpreter;
 using System;
+using UnityEngine.UIElements;
 
 public enum ObjectType
 {
@@ -68,7 +69,9 @@ public class UnityAPI
 
     public void SetColorPlayer(string _colorValue)
     {
-
+        Color color;
+        if (ColorUtility.TryParseHtmlString(_colorValue, out color))
+            LuaCommands.Instance.SetColorPlayer(color);
     }
 
     public void Help()
@@ -110,32 +113,33 @@ public class LuaCommands : MonoBehaviour
     public void SetDashPlayer(float scale)
     {
         Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
-        player.GetModule<DashModule>(EPlayerModuleType.Dash).dashMultiplier = scale;
+        player.MultiplierDataSO.dashMultiplier = scale;
     }
 
     public void SetSpeedPlayer(float scale)
     {
         Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
-        player.GetModule<MoveModule>(EPlayerModuleType.Move).moveMultiplier = scale;
+        player.GetModule<MoveModule>(EPlayerModuleType.Move).ResetHorizontalSpeed();
+        player.MultiplierDataSO.speedMultiplier = scale;
     }
 
     public void SetGravityPlayer(float scale)
     {
         Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
-        player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityMultiplier = scale;
+        player.MultiplierDataSO.gravityMultiplier = scale;
     }
 
     public void SetDaggerSpeed(float scale)
     {
         Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
-        player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger).throwSpeedMultiplier = scale;
+        player.MultiplierDataSO.throwSpeedMultiplier = scale;
     }
 
-    public void SetColorPlayer(string rgbValue)
+    public void SetColorPlayer(Color color)
     {
         Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
-        Color color;
-        ColorUtility.TryParseHtmlString(rgbValue, out color);
+        player.GetComponentInChildren<SpriteRenderer>().color = color;
+        player.DashDataSO.trailData.trailColor = color;
     }
 
     public void Help()
