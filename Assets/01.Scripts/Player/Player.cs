@@ -205,6 +205,10 @@ public class Player : MonoBehaviour, IReStartable
 
     public void ReStart()
     {
+        _playerAnimation.DeathAnimation();
+        ExitModules(GetAllModuleType());
+        _playerInput.InputLock = true;
+        CameraManager.Instance.ShakeCamera(_dashDataSO.shakeCameraData);
         Debug.Log("player 부활");
     }
 }

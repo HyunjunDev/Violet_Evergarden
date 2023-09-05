@@ -5,7 +5,7 @@ using UnityEngine;
 public class TagModule : PlayerModule
 {
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
-
+    public ECharacterType CurrentCharacterType => _currentCharacterType;
 
     public override void Exit()
     {

@@ -6,6 +6,19 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private Player _player = null;
+    private bool _inputLock = false;
+    public bool InputLock
+    {
+        get => _inputLock;
+        set
+        {
+            _inputLock = value;
+            if (_inputLock)
+            {
+                _inputVector = Vector2.zero;
+            }
+        }
+    }
 
     private Vector2 _inputVector = Vector2.zero;
     public Vector2 InputVector => _inputVector;
@@ -18,6 +31,10 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if (_inputLock)
+        {
+            return;
+        }
         GetInput();
     }
 

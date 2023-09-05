@@ -40564,18 +40564,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1850306479145172988, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4518338165993786059, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _daggerDataSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 0c9006676949ee7469bd3814d70415da, type: 2}
-    - target: {fileID: 4518338165993786059, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _startCharcterType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8541631066545923107, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -40619,22 +40607,6 @@ PrefabInstance:
     - target: {fileID: 8541631066545923107, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634364684210297021, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _upLayer.m_Bits
-      value: 1281
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634364684210297021, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _downLayer.m_Bits
-      value: 1281
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634364684210297021, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _leftLayer.m_Bits
-      value: 1281
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634364684210297021, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
-      propertyPath: _rightLayer.m_Bits
-      value: 1281
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
