@@ -9,6 +9,10 @@ public class FallObstacle : Obstacle
     public float maxGravity = 9.8f; // 최대 중력 가속도
     public float fallSpeed = 0.1f; // 초기 떨어지는 속도
 
+    private Vector3 startPos;
+    private float startGravity;
+    private float startFallSpeed;
+
     [SerializeField]
     private bool isGrounded = false;
 
@@ -21,15 +25,27 @@ public class FallObstacle : Obstacle
 
     public override void ReStart()
     {
-        
+        transform.position = startPos;
+        isGrounded = false;
+        isPlayerIn = false;
+        gravity = startGravity;
+        fallSpeed = startFallSpeed;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
         {
-            Debug.Log("닿음");
+            
         }
+    }
+
+    private void Awake()
+    {
+        MapManager.Instance.onPlayerDead.AddListener(ReStart);
+        startPos = transform.position;
+        startGravity = gravity;
+        startFallSpeed = fallSpeed;
     }
 
     public void Update()

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IReStartable
 {
     [SerializeField]
     private ECharacterType _startCharcterType = ECharacterType.Hana;
@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
         _modules.Add(EPlayerModuleType.Jump, new JumpModule());
         _modules.Add(EPlayerModuleType.Death, new DeathModule());
         _modules.Add(EPlayerModuleType.Tag, new TagModule());
+
+        MapManager.Instance.onPlayerDead.AddListener(ReStart);
         foreach (var module in _modules.Values)
         {
             module.SettingModule(this);
@@ -199,5 +201,10 @@ public class Player : MonoBehaviour
         Vector3 result = transform.localScale;
         result.x *= _playerRenderer.currentFlipState == EFlipState.Left ? -1f : 1f;
         return result;
+    }
+
+    public void ReStart()
+    {
+        Debug.Log("player 부활");
     }
 }

@@ -479,7 +479,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &97857792
 Rigidbody2D:
@@ -940,7 +940,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &175634543
 Rigidbody2D:
@@ -2632,7 +2632,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &401734568
 Rigidbody2D:
@@ -2992,7 +2992,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &445862622
 Rigidbody2D:
@@ -3112,7 +3112,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &476544006
 Rigidbody2D:
@@ -12908,7 +12908,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &564745168
 Rigidbody2D:
@@ -13079,7 +13079,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &619626991
 Rigidbody2D:
@@ -13303,7 +13303,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &655171646
 Rigidbody2D:
@@ -13386,7 +13386,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &667584556
 Rigidbody2D:
@@ -13480,7 +13480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693288439}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.650002, y: -4.68, z: -10}
+  m_LocalPosition: {x: -15.95, y: -3.19, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13999,7 +13999,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &791917634
 Rigidbody2D:
@@ -14395,7 +14395,7 @@ MonoBehaviour:
   - {fileID: 1056911764}
   - {fileID: 1325551440}
   - {fileID: 655171645}
-  delayInSeconds: 0.15
+  delayInSeconds: 0.25
 --- !u!1 &824249688
 GameObject:
   m_ObjectHideFlags: 0
@@ -14928,7 +14928,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &970788335
 Rigidbody2D:
@@ -15044,7 +15044,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1003506861
 Rigidbody2D:
@@ -15337,7 +15337,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1044662271
 Rigidbody2D:
@@ -15550,7 +15550,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1056911765
 Rigidbody2D:
@@ -15633,7 +15633,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1064407642
 Rigidbody2D:
@@ -15981,7 +15981,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1113149592
 Rigidbody2D:
@@ -18618,7 +18618,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1210599592
 Rigidbody2D:
@@ -18785,7 +18785,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1238285795
 Rigidbody2D:
@@ -18943,7 +18943,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1270359078
 Rigidbody2D:
@@ -19232,7 +19232,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1309262970
 Rigidbody2D:
@@ -19315,7 +19315,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1321313180
 Rigidbody2D:
@@ -19398,7 +19398,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1325551441
 Rigidbody2D:
@@ -19826,7 +19826,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1355193679
 Rigidbody2D:
@@ -20166,7 +20166,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1416491891
 Rigidbody2D:
@@ -20428,7 +20428,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1495517733
 Rigidbody2D:
@@ -20798,7 +20798,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1620070592
 Rigidbody2D:
@@ -21141,7 +21141,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1654527727
 Rigidbody2D:
@@ -27445,7 +27445,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1770278618
 Rigidbody2D:
@@ -27528,7 +27528,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1773864382
 Rigidbody2D:
@@ -27741,7 +27741,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1833505566
 Rigidbody2D:
@@ -27870,11 +27870,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8541631066545923107, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.2
+      value: -15.5
       objectReference: {fileID: 0}
     - target: {fileID: 8541631066545923107, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.29
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 8541631066545923107, guid: 9240e7e9360ac7549b638f439b14e512, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28321,7 +28321,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1893688376
 Rigidbody2D:
@@ -28624,7 +28624,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1950583250
 Rigidbody2D:
@@ -28889,7 +28889,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &1995583520
 Rigidbody2D:
@@ -29404,7 +29404,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &2063929403
 Rigidbody2D:
@@ -29617,7 +29617,7 @@ MonoBehaviour:
     m_Bits: 0
   gravity: 3
   maxGravity: 10
-  fallSpeed: 1
+  fallSpeed: 5
   isGrounded: 0
 --- !u!50 &2119533234
 Rigidbody2D:
