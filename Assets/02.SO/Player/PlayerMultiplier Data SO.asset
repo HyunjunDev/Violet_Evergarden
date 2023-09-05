@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f679a5c940f2ff04abca468f9b983497, type: 3}
-  m_Name: HanaTrailData
+  m_Script: {fileID: 11500000, guid: 1ef8ad4856e1a574493752dcf6e2bab3, type: 3}
+  m_Name: PlayerMultiplier Data SO
   m_EditorClassIdentifier: 
-  trailColor: {r: 1, g: 1, b: 1, a: 1}
-  duration: 0
-  fadeOutTime: 0.5
+  gravityMultiplier: 0.5
+  dashMultiplier: 2
+  jumpMultiplier: 1
+  throwSpeedMultiplier: 5
+  speedMultiplier: 1
