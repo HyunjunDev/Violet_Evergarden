@@ -59,6 +59,18 @@ public class UnityAPI
             LuaCommands.Instance.SetGravityPlayer(scale);
     }
 
+    public void SetDaggerSpeed(string _scale)
+    {
+        float scale = 1f;
+        if (float.TryParse(_scale, out scale))
+            LuaCommands.Instance.SetDaggerSpeed(scale);
+    }
+
+    public void SetColorPlayer(string _colorValue)
+    {
+
+    }
+
     public void Help()
     {
         LuaCommands.Instance.Help();
@@ -111,6 +123,19 @@ public class LuaCommands : MonoBehaviour
     {
         Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
         player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityMultiplier = scale;
+    }
+
+    public void SetDaggerSpeed(float scale)
+    {
+        Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
+        player.GetModule<ThrowDaggerModule>(EPlayerModuleType.ThrowDagger).throwSpeedMultiplier = scale;
+    }
+
+    public void SetColorPlayer(string rgbValue)
+    {
+        Player player = gameinfo.Objs[ObjectType.PLAYER].GetComponent<Player>();
+        Color color;
+        ColorUtility.TryParseHtmlString(rgbValue, out color);
     }
 
     public void Help()
