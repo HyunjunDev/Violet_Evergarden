@@ -84,4 +84,39 @@ public class PlayerAnimation : MonoBehaviour
     {
         _animator.Play("Idle");
     }
+
+    public void SpawnDeathEffect()
+    {
+        switch (_player.GetModule<TagModule>(EPlayerModuleType.Tag).CurrentCharacterType)
+        {
+            case ECharacterType.Hana:
+                GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
+                dashFlowerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+                break;
+            case ECharacterType.Gen:
+                GameObject genDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerParticle).gameObject;
+                genDaggerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+                break;
+            default:
+                break;
+        }
+        CameraManager.Instance.ShakeCamera(_player.TagDataSO.shakeCameraData);
+    }
+
+    public void StartDeathFade()
+    {
+        StartCoroutine(DeathFadeCoroutine());
+    }
+
+    private IEnumerator DeathFadeCoroutine()
+    {
+        UIManager.Instance.FadeStart(0f, 1f, 0.4f);
+        yield return new WaitForSeconds(0.4f);
+        _player.transform.position = MapManager.Instance.GetRespawnPosition();
+        yield return new WaitForSeconds(0.2f);
+        UIManager.Instance.FadeStart(1f, 0f, 0.4f);
+        yield return new WaitForSeconds(0.15f);
+        _player.playerInput.InputLock = false;
+        _player.restarting = false;
+    }
 }

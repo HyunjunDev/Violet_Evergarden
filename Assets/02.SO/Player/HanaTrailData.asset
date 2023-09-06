@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f679a5c940f2ff04abca468f9b983497, type: 3}
   m_Name: HanaTrailData
   m_EditorClassIdentifier: 
-  trailColor: {r: 1, g: 1, b: 1, a: 1}
+  trailColor: {r: 0.83137256, g: 0.30980393, b: 0.79607844, a: 1}
   duration: 0
   fadeOutTime: 0.5
