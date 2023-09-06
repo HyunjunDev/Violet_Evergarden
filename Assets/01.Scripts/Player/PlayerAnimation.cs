@@ -117,5 +117,6 @@ public class PlayerAnimation : MonoBehaviour
         UIManager.Instance.FadeStart(1f, 0f, 0.4f);
         yield return new WaitForSeconds(0.15f);
         _player.playerInput.InputLock = false;
+        _player.restarting = false;
     }
 }

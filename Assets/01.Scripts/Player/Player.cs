@@ -56,6 +56,8 @@ public class Player : MonoBehaviour, IReStartable
     private MovingController _movingController = null;
     public MovingController movingController => _movingController;
 
+    public bool restarting = false;
+
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
@@ -205,10 +207,10 @@ public class Player : MonoBehaviour, IReStartable
 
     public void ReStart()
     {
+        restarting = true;
         _playerAnimation.DeathAnimation();
         ExitModules(GetAllModuleType());
         _playerInput.InputLock = true;
         CameraManager.Instance.ShakeCamera(_dashDataSO.shakeCameraData);
-        Debug.Log("player 부활");
     }
 }
