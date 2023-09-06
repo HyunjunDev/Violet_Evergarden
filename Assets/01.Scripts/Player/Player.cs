@@ -205,6 +205,5 @@ public class Player : MonoBehaviour, IReStartable
 
     public void ReStart()
     {
-        Debug.Log("player 부활");
     }
 }

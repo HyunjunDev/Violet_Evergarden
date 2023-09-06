@@ -28,7 +28,6 @@ public class ParticlePool : PoolableObject
     {
         if(_particleSystem.particleCount == 0 && _timer >= _minLifeTime)
         {
-            Debug.Log("Push");
             PoolManager.Instance.Push(this);
         }
         _timer += Time.deltaTime;
