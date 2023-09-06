@@ -207,6 +207,10 @@ public class Player : MonoBehaviour, IReStartable
 
     public void ReStart()
     {
+        if(restarting)
+        {
+            return;
+        }
         restarting = true;
         _playerAnimation.DeathAnimation();
         ExitModules(GetAllModuleType());
