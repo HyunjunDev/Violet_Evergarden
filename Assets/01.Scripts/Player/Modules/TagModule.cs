@@ -8,7 +8,8 @@ public class TagModule : PlayerModule
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
     public ECharacterType CurrentCharacterType => _currentCharacterType;
 
-    public Action<ECharacterType> onTaged = null;
+    private Action<ECharacterType> _onTaged = null;
+    public Action<ECharacterType> onTaged { get => _onTaged; set => _onTaged = value; }
 
     public override void Exit()
     {
@@ -17,13 +18,19 @@ public class TagModule : PlayerModule
 
     protected override void InitModule()
     {
-        _rechargeTime = _player.DashDataSO.dashRechargeTime;
+        _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
+    }
+
+    public override void UpdateModule()
+    {
+        base.UpdateModule();
+        UIManager.Instance.SetFillUI(EFillUIType.Tag, _curRechargeTime, _maxRechargeTime);
     }
 
     protected override void OnGrounded()
     {
         base.OnGrounded();
-        _useable = true;
+        SetUseable(true);
     }
 
     public void TagWithInput()
@@ -32,7 +39,7 @@ public class TagModule : PlayerModule
         {
             return;
         }
-        _useable = false;
+        SetUseable(false);
         _currentCharacterType = (ECharacterType)((int)(_currentCharacterType + 1) % ((int)ECharacterType.Size));
         TagCharacter(_currentCharacterType);
         GroundedRecharge();
@@ -65,6 +72,7 @@ public class TagModule : PlayerModule
                 break;
         }
         onTaged?.Invoke(_currentCharacterType);
+        UIManager.Instance.SetTagUI(_currentCharacterType);
         CameraManager.Instance.ShakeCamera(_player.TagDataSO.shakeCameraData);
     }
 }

@@ -13,17 +13,18 @@ public class ThrowDaggerModule : PlayerModule
     public override void UpdateModule()
     {
         base.UpdateModule();
+        UIManager.Instance.SetFillUI(EFillUIType.Special, _curRechargeTime, _maxRechargeTime);
     }
 
     protected override void InitModule()
     {
-        _rechargeTime = _player.DashDataSO.dashRechargeTime;
+        _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
     }
 
     protected override void OnGrounded()
     {
         base.OnGrounded();
-        _useable = true;
+        SetUseable(true);
     }
 
     public void ThrowStart()
@@ -39,7 +40,7 @@ public class ThrowDaggerModule : PlayerModule
         {
             return;
         }
-        _useable = false;
+        SetUseable(false);
 
         //SpawnDagger
         DaggerPoolable dagger = PoolManager.Instance.Pop(EPoolType.Dagger) as DaggerPoolable;

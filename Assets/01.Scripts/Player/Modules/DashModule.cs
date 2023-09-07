@@ -20,12 +20,18 @@ public class DashModule : PlayerModule
 
     protected override void InitModule()
     {
-        _rechargeTime = _player.DashDataSO.dashRechargeTime;
+        _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
     }
 
     protected override void OnGrounded()
     {
-        _useable = true;
+        SetUseable(true);
+    }
+
+    public override void UpdateModule()
+    {
+        base.UpdateModule();
+        UIManager.Instance.SetFillUI(EFillUIType.Special, _curRechargeTime, _maxRechargeTime);
     }
 
     public void DashStart()
@@ -42,7 +48,7 @@ public class DashModule : PlayerModule
             return;
         }
 
-        _useable = false;
+        SetUseable(false);
         _excuting = true;
 
         //Reset
