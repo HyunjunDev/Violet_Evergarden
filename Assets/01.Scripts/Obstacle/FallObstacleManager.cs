@@ -45,7 +45,6 @@ public class FallObstacleManager : MonoBehaviour, IReStartable
     public void ReStart()
     {
         isFirst = true;
-        Debug.Log("¾ÈµÅ");
         if(coroutine!=null)
         {
             StopCoroutine(coroutine);
