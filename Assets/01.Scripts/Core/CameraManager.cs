@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CameraManager : MonoSingleTon<CameraManager>
 {
+    private CinemachineVirtualCamera _lastVCam = null;
     private Sequence _seq = null;
 
     public void ResetCamera()
@@ -15,6 +16,13 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void ShakeCamera(ShakeCameraDataSO data)
     {
+        if(_lastVCam != null)
+        {
+            CinemachineBasicMultiChannelPerlin lastNoise = _lastVCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            lastNoise.m_AmplitudeGain = 0f;
+            lastNoise.m_FrequencyGain = 0f;
+        }
+
         ICinemachineCamera cam = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
         if(cam == null)
         {
@@ -22,6 +30,8 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
         CinemachineVirtualCamera vCam = cam.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
         CinemachineBasicMultiChannelPerlin noise = vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _lastVCam = vCam;
+
         _seq?.Kill();
         noise.m_AmplitudeGain = data.amplitude;
         noise.m_FrequencyGain = data.frequency;
