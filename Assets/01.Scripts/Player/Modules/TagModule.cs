@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class TagModule : PlayerModule
 {
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
     public ECharacterType CurrentCharacterType => _currentCharacterType;
+
+    public Action<ECharacterType> onTaged = null;
 
     public override void Exit()
     {
@@ -61,6 +64,7 @@ public class TagModule : PlayerModule
             default:
                 break;
         }
+        onTaged?.Invoke(_currentCharacterType);
         CameraManager.Instance.ShakeCamera(_player.TagDataSO.shakeCameraData);
     }
 }
