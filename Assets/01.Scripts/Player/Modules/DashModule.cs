@@ -21,6 +21,8 @@ public class DashModule : PlayerModule
     protected override void InitModule()
     {
         _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
+
+        SetUseable(true);
     }
 
     protected override void OnGrounded()

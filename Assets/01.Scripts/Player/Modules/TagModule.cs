@@ -71,6 +71,7 @@ public class TagModule : PlayerModule
             default:
                 break;
         }
+
         onTaged?.Invoke(_currentCharacterType);
         UIManager.Instance.SetTagUI(_currentCharacterType);
         CameraManager.Instance.ShakeCamera(_player.TagDataSO.shakeCameraData);

@@ -19,6 +19,8 @@ public class ThrowDaggerModule : PlayerModule
     protected override void InitModule()
     {
         _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
+
+        SetUseable(true);
     }
 
     protected override void OnGrounded()

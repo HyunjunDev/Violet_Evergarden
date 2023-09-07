@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -13,15 +15,10 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        _player.playerCollider.onGrounded += () => _animator.SetBool("IsGround", true);
-        _player.playerCollider.onGroundExited += () => _animator.SetBool("IsGround", false);
-    }
-
     private void Update()
     {
         _animator.SetFloat("YVelocity", _player.rigid.velocity.y);
+        _animator.SetBool("IsGround", _player.playerCollider.GetCollision(EBoundType.Down));
     }
 
     public void ChangeAnimator(RuntimeAnimatorController runtimeAnimatorController)
@@ -49,7 +46,6 @@ public class PlayerAnimation : MonoBehaviour
     public void JumpAnimation()
     {
         _animator.SetFloat("YVelocity", 0f);
-        _animator.Rebind();
         _animator.SetTrigger("Jump");
     }
 
