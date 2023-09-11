@@ -16,6 +16,7 @@ public class DashModule : PlayerModule
         DashEnd();
         _targetDashPower = _curDash = Vector2.zero;
         _excuting = false;
+        _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     protected override void InitModule()
@@ -50,6 +51,7 @@ public class DashModule : PlayerModule
             return;
         }
 
+        _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Dash");
         SetUseable(false);
         _excuting = true;
 
@@ -96,5 +98,6 @@ public class DashModule : PlayerModule
         _player.LockModules(false, EPlayerModuleType.Jump);
         _excuting = false;
         GroundedRecharge();
+        _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }
