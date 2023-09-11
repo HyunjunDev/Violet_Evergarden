@@ -31,15 +31,16 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if (_inputLock)
-        {
-            return;
-        }
         GetInput();
     }
 
     private void GetInput()
     {
+        if (_inputLock || Time.timeScale < 0.01f)
+        {
+            return;
+        }
+
         _inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         TagModule tagModule = _player.GetModule<TagModule>(EPlayerModuleType.Tag);
