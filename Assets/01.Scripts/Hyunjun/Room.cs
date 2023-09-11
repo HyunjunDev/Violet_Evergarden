@@ -16,23 +16,15 @@ public class Room : MonoBehaviour
     [SerializeField]
     private float timeDelay = 0.4f;
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void ChangeRoom()
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
-        {
-            Debug.Log("On");
-            MapManager.Instance.ChangeRoom(this);
-        }
+        MapManager.Instance.ChangeRoom(this);
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public void StartTimeDelay()
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
-        {
-            Debug.Log("Ex");
-            if (this.gameObject.activeSelf == true)
-                StartCoroutine(TimeDelay(timeDelay));
-        }
+        if (this.gameObject.activeSelf == true)
+            StartCoroutine(TimeDelay(timeDelay));
     }
 
     public Vector2 GetSpawnPoint()
