@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public GameObject virtualCam;
+    [SerializeField]
+    private Transform spawnPosition = null;
+    public PolygonCollider2D cameraAreaCollider = null;
+    [Header("Editor Only")]
+    [SerializeField]
+    private Collider2D _cameraAreaColliderGrid = null;
+    [SerializeField]
+    private LayerMask _groundMask = 0;
 
-    public Vector3 spawnPosition;
-
-    public float timeDelay = 0.25f;
+    [SerializeField]
+    private float timeDelay = 0.4f;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && !collision.isTrigger)
+        if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            virtualCam.SetActive(true);
+            Debug.Log("On");
+            MapManager.Instance.ChangeRoom(this);
         }
     }
 
@@ -22,17 +29,66 @@ public class Room : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            virtualCam.SetActive(false);
-            if (this.gameObject.activeSelf==true)
+            Debug.Log("Ex");
+            if (this.gameObject.activeSelf == true)
                 StartCoroutine(TimeDelay(timeDelay));
         }
     }
 
+    public Vector2 GetSpawnPoint()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(spawnPosition.position, Vector2.down, _groundMask);
+        if (hit.collider != null)
+        {
+            return hit.point;
+        }
+        return Vector2.zero;
+    }
 
     IEnumerator TimeDelay(float time)
     {
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(time);
         Time.timeScale = 1.0f;
+    }
+
+    [ContextMenu("카메라 영역 굽기")]
+    public void BakeCameraArea()
+    {
+        if (cameraAreaCollider == null || _cameraAreaColliderGrid == null)
+        {
+            return;
+        }
+        List<Vector2> points = new List<Vector2>();
+        Vector2 center = (Vector2)_cameraAreaColliderGrid.bounds.center;
+        Vector2 expend = _cameraAreaColliderGrid.bounds.size * 0.5f;
+        Vector2 leftTop = center + new Vector2(-expend.x, expend.y);
+        Vector2 leftBottom = center + new Vector2(-expend.x, -expend.y);
+        Vector2 rightTop = center + new Vector2(expend.x, expend.y);
+        Vector2 rightBottom = center + new Vector2(expend.x, -expend.y);
+        points.Add(leftTop);
+        points.Add(leftBottom);
+        points.Add(rightBottom);
+        points.Add(rightTop);
+        cameraAreaCollider.SetPath(0, points);
+        CameraManager.Instance.BakeCurrentConfiner(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_cameraAreaColliderGrid == null)
+        {
+            return;
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(_cameraAreaColliderGrid.bounds.center, _cameraAreaColliderGrid.bounds.size);
+
+        RaycastHit2D hit = Physics2D.Raycast(spawnPosition.position, Vector2.down, _groundMask);
+        if(hit.collider != null)
+        {
+            Gizmos.DrawLine(spawnPosition.position, hit.point);
+            Gizmos.DrawWireSphere(hit.point, 0.15f);
+            Gizmos.DrawWireCube(hit.point + new Vector2(-0.02f, 0.525f), new Vector2(0.66f, 1.05f));
+        }
     }
 }

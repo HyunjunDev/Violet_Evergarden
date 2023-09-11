@@ -208,7 +208,7 @@ public class Player : MonoBehaviour, IReStartable
     public Vector2 GetMiddlePosition()
     {
         Vector2 result = transform.position;
-        result.y += 0.5f;
+        result.y += 0.525f;
         return result;
     }
 

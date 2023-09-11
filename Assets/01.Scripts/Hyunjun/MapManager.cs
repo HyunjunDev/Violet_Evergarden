@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,18 +11,17 @@ public class MapManager : MonoSingleTon<MapManager>
     [SerializeField]
     private List<Room> rooms = new List<Room>();
 
-    
+    private Room _currentRoom = null;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-       
+        ChangeRoom(rooms[0]);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeRoom(Room room)
     {
-        
+        _currentRoom = room;
+        CameraManager.Instance.ChangeRoomCamera(room.cameraAreaCollider);
     }
 
     public void ReSpawn()
@@ -42,7 +42,7 @@ public class MapManager : MonoSingleTon<MapManager>
         {
             if (room.transform.GetChild(0).gameObject.activeSelf)
             {
-                result = room.spawnPosition;
+                result = room.GetSpawnPoint();
             }
         }
         return result;

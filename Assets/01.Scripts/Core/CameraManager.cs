@@ -7,11 +7,41 @@ using UnityEngine;
 public class CameraManager : MonoSingleTon<CameraManager>
 {
     private CinemachineVirtualCamera _lastVCam = null;
+    public CinemachineVirtualCamera LastVCam => _lastVCam;
     private Sequence _seq = null;
+
+    [SerializeField]
+    private List<CinemachineVirtualCamera> _vCams = new List<CinemachineVirtualCamera>();
+    private int _camIndex = 0;
 
     public void ResetCamera()
     {
         _seq?.Kill();
+    }
+
+    public void ChangeRoomCamera(PolygonCollider2D cameraAreaCollider)
+    {
+        CinemachineVirtualCamera vCam = _vCams[_camIndex];
+        CinemachineConfiner2D confiner = vCam.GetComponent<CinemachineConfiner2D>();
+        confiner.m_BoundingShape2D = cameraAreaCollider;
+        _camIndex = (_camIndex + 1) % _vCams.Count;
+        vCam.gameObject.SetActive(true);
+        for(int i = 0; i < _vCams.Count; i++)
+        {
+            if (_vCams[i] == vCam)
+            {
+                continue;
+            }
+            _vCams[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void BakeCurrentConfiner(Room room)
+    {
+        CinemachineVirtualCamera vCam = _vCams[0];
+        CinemachineConfiner2D confiner = vCam.GetComponent<CinemachineConfiner2D>();
+        confiner.m_BoundingShape2D = room.cameraAreaCollider;
+        confiner.InvalidateCache();
     }
 
     public void ShakeCamera(ShakeCameraDataSO data)
