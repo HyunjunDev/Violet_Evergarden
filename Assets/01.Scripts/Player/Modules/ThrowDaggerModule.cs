@@ -46,14 +46,15 @@ public class ThrowDaggerModule : PlayerModule
 
         //SpawnDagger
         DaggerPoolable dagger = PoolManager.Instance.Pop(EPoolType.Dagger) as DaggerPoolable;
-        Vector2 daggerPosition = new Vector2(_player.transform.position.x + input.x * 0.2f, _player.transform.position.y);
+        Vector2 daggerPosition = _player.GetMiddlePosition();
+        daggerPosition.x += input.x * 0.2f;
         dagger.transform.SetTransform(daggerPosition, _player.GetLocalScale());
         dagger.SettingDagger(input, _player);
         dagger.SetRotation();
 
         //DaggerParticle
         GameObject throwDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenThrowDaggerParticle).gameObject;
-        Vector2 particlePosition = _player.transform.position + (Vector3)(input * 0.8f);
+        Vector2 particlePosition = _player.GetMiddlePosition() + input * 0.35f;
         throwDaggerParticle.transform.SetTransform(particlePosition, _player.GetLocalScale(), Utility.GetRotationByVector(input, 90));
 
         //Shake Camera

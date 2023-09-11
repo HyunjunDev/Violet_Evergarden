@@ -87,11 +87,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             case ECharacterType.Hana:
                 GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
-                dashFlowerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+                dashFlowerParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
                 break;
             case ECharacterType.Gen:
                 GameObject genDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerParticle).gameObject;
-                genDaggerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+                genDaggerParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
                 break;
             default:
                 break;

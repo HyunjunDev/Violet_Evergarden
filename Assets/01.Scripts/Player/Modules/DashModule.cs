@@ -64,10 +64,10 @@ public class DashModule : PlayerModule
 
         //Effect
         GameObject dashTrailParticle = PoolManager.Instance.Pop(EPoolType.HanaDashParticle).gameObject;
-        dashTrailParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+        dashTrailParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
         dashTrailParticle.transform.rotation = Utility.GetRotationByVector(_targetDashPower, 90);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
-        dashFlowerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+        dashFlowerParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
         _player.playerRenderer.StartTrail(_player.DashDataSO.trailCycle, _player.DashDataSO.duration, _player.DashDataSO.trailData);
         CameraManager.Instance.ShakeCamera(_player.DashDataSO.shakeCameraData);
 

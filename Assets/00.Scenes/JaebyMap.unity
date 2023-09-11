@@ -574,6 +574,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -1121,6 +1124,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -8756,6 +8762,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -9124,6 +9133,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -9242,6 +9254,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -19057,6 +19072,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -19239,6 +19257,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -19454,6 +19475,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -19535,6 +19559,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -20051,6 +20078,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -21000,6 +21030,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -21212,6 +21245,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -21507,6 +21543,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -21720,6 +21759,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -21801,6 +21843,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -22149,6 +22194,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -22541,6 +22589,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -22792,6 +22843,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -22873,6 +22927,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -23164,6 +23221,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -23247,6 +23307,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -23328,6 +23391,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -23758,6 +23824,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -24008,6 +24077,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -24270,6 +24342,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -24725,6 +24800,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -25066,6 +25144,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -40143,6 +40224,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -40224,6 +40308,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -40437,6 +40524,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -41024,6 +41114,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -41327,6 +41420,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -41581,6 +41677,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3
@@ -42204,6 +42303,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   gravity: 3
   maxGravity: 10
   fallSpeed: 1
@@ -42415,6 +42517,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
     serializedVersion: 2
     m_Bits: 0
   gravity: 3

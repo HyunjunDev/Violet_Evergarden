@@ -58,6 +58,7 @@ MonoBehaviour:
   _daggerDataSO: {fileID: 11400000, guid: 0c9006676949ee7469bd3814d70415da, type: 2}
   _throwDaggerDataSO: {fileID: 11400000, guid: 5de644f2d2afe404794a5a686ec5f60f, type: 2}
   _multiplierDataSO: {fileID: 11400000, guid: f9e40fa0c97e113499b4333c03db513b, type: 2}
+  restarting: 0
 --- !u!114 &5491729354542080619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ SpriteRenderer:
   m_SortingLayerID: 904590081
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: -289933764, guid: 7db0357587b86ee4f9d383c2e20ddc6d, type: 3}
+  m_Sprite: {fileID: 1333078055, guid: 597c718b0b0ecc74a995a6d21ab1f71d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -302,10 +303,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: 0.18}
+  m_Offset: {x: -0.02, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 3.047619, y: 3.047619}
     newSize: {x: 2.6666667, y: 2.6666667}
     adaptiveTilingThreshold: 0.5
