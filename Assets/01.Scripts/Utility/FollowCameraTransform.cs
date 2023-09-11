@@ -11,7 +11,7 @@ public class FollowCameraTransform : MonoBehaviour
         _targetTrm = Camera.main.transform;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         Vector2 position = _targetTrm.position;
         transform.position = position;
