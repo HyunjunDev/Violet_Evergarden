@@ -24,27 +24,12 @@ public class MapManager : MonoSingleTon<MapManager>
         CameraManager.Instance.ChangeRoomCamera(room.cameraAreaCollider);
     }
 
-    public void ReSpawn()
-    {
-        /*foreach(var room in rooms)
-        {
-            if(room.transform.GetChild(0).gameObject.activeSelf)
-            {
-                //GameManager.Instance.Player.transform.position = room.spawnPosition;
-            }
-        }*/
-    }
-
     public Vector3 GetRespawnPosition()
     {
-        Vector3 result = Vector3.zero;
-        foreach (var room in rooms)
+        if(_currentRoom == null)
         {
-            if (room.transform.GetChild(0).gameObject.activeSelf)
-            {
-                result = room.GetSpawnPoint();
-            }
+            return Vector3.zero;
         }
-        return result;
+        return _currentRoom.GetSpawnPoint();
     }
 }

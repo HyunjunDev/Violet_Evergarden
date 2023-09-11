@@ -11,6 +11,7 @@ public class RoomChanger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
+            _room.StartTimeDelay();
             _room.ChangeRoom();
         }
     }
@@ -19,7 +20,6 @@ public class RoomChanger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            _room.StartTimeDelay();
         }
     }
 }
