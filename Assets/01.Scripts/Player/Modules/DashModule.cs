@@ -16,16 +16,25 @@ public class DashModule : PlayerModule
         DashEnd();
         _targetDashPower = _curDash = Vector2.zero;
         _excuting = false;
+        _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     protected override void InitModule()
     {
-        _rechargeTime = _player.DashDataSO.dashRechargeTime;
+        _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
+
+        SetUseable(true);
     }
 
     protected override void OnGrounded()
     {
-        _useable = true;
+        SetUseable(true);
+    }
+
+    public override void UpdateModule()
+    {
+        base.UpdateModule();
+        UIManager.Instance.SetFillUI(EFillUIType.Special, _curRechargeTime, _maxRechargeTime);
     }
 
     public void DashStart()
@@ -42,7 +51,8 @@ public class DashModule : PlayerModule
             return;
         }
 
-        _useable = false;
+        _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Dash");
+        SetUseable(false);
         _excuting = true;
 
         //Reset
@@ -56,10 +66,10 @@ public class DashModule : PlayerModule
 
         //Effect
         GameObject dashTrailParticle = PoolManager.Instance.Pop(EPoolType.HanaDashParticle).gameObject;
-        dashTrailParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+        dashTrailParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
         dashTrailParticle.transform.rotation = Utility.GetRotationByVector(_targetDashPower, 90);
         GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
-        dashFlowerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+        dashFlowerParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
         _player.playerRenderer.StartTrail(_player.DashDataSO.trailCycle, _player.DashDataSO.duration, _player.DashDataSO.trailData);
         CameraManager.Instance.ShakeCamera(_player.DashDataSO.shakeCameraData);
 
@@ -88,5 +98,6 @@ public class DashModule : PlayerModule
         _player.LockModules(false, EPlayerModuleType.Jump);
         _excuting = false;
         GroundedRecharge();
+        _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }

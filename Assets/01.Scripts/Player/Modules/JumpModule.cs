@@ -115,10 +115,8 @@ public class JumpModule : PlayerModule
     {
         _excuting = false;
         JumpRecharge();
-        Vector2 spawnPoint = _player.transform.position;
-        spawnPoint.y -= 0.3f;
         GameObject landingParticle = PoolManager.Instance.Pop(EPoolType.LandingParticle).gameObject;
-        landingParticle.transform.SetTransform(spawnPoint, _player.GetLocalScale());
+        landingParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
     }
 
     private void CalculateJumpApex()
@@ -177,10 +175,7 @@ public class JumpModule : PlayerModule
             bool isLeft = _player.GetModule<WallGrabModule>(EPlayerModuleType.WallGrab).EnterWallFlipState == EFlipState.Left;
             rot = Quaternion.Euler(0f, 0f, isLeft ? -90f : 90f);
             spawnPoint.x += isLeft ? -0.25f : 0.25f;
-        }
-        else
-        {
-            spawnPoint.y -= 0.3f;
+            spawnPoint.y += 0.45f;
         }
 
         GameObject jumpParticle = PoolManager.Instance.Pop(EPoolType.JumpParticle).gameObject;

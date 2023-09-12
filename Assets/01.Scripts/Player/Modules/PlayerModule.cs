@@ -50,9 +50,23 @@ public abstract class PlayerModule
     }
 
     #region GroundedRecharge
-    protected bool _useable = true;
+    protected bool _useable { get; private set; }
     protected Coroutine _groundedRechargeCoroutine = null;
-    protected float _rechargeTime = 0f;
+    protected float _maxRechargeTime = 0f;
+    protected float _curRechargeTime = 0f;
+
+    protected void SetUseable(bool useableValue)
+    {
+        _useable = useableValue;
+        if(useableValue)
+        {
+            _curRechargeTime = _maxRechargeTime;
+        }
+        else
+        {
+            _curRechargeTime = 0f;
+        }
+    }
 
     protected void GroundedRecharge()
     {
@@ -63,10 +77,17 @@ public abstract class PlayerModule
 
     private IEnumerator GroundDashRechargeCoroutine()
     {
-        yield return new WaitForSeconds(_rechargeTime);
+        _curRechargeTime = 0f;
+        while (_curRechargeTime <= _maxRechargeTime)
+        {
+            _curRechargeTime += Time.deltaTime;
+            yield return null;
+        }
+        _curRechargeTime = _maxRechargeTime;
+
         if (_player.playerCollider.GetCollision(EBoundType.Down))
         {
-            _useable = true;
+            SetUseable(true);
         }
     }
     #endregion

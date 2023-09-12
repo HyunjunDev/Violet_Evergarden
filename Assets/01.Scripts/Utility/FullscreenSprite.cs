@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FullscreenSprite : MonoBehaviour
 {
+    [SerializeField]
+    private Vector2 _expendAmount = Vector2.zero;
+
     void Awake()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,6 +25,7 @@ public class FullscreenSprite : MonoBehaviour
             scale *= cameraSize.y / spriteSize.y;
         }
 
+        scale += _expendAmount;
         //transform.position = Vector2.zero; // Optional
         transform.localScale = scale;
     }

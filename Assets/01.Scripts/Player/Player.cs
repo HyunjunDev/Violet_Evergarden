@@ -205,8 +205,19 @@ public class Player : MonoBehaviour, IReStartable
         return result;
     }
 
+    public Vector2 GetMiddlePosition()
+    {
+        Vector2 result = transform.position;
+        result.y += 0.525f;
+        return result;
+    }
+
     public void ReStart()
     {
+        if(restarting)
+        {
+            return;
+        }
         restarting = true;
         _playerAnimation.DeathAnimation();
         ExitModules(GetAllModuleType());

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class TagModule : PlayerModule
     private ECharacterType _currentCharacterType = ECharacterType.Hana;
     public ECharacterType CurrentCharacterType => _currentCharacterType;
 
+    private Action<ECharacterType> _onTaged = null;
+    public Action<ECharacterType> onTaged { get => _onTaged; set => _onTaged = value; }
+
     public override void Exit()
     {
 
@@ -14,13 +18,19 @@ public class TagModule : PlayerModule
 
     protected override void InitModule()
     {
-        _rechargeTime = _player.DashDataSO.dashRechargeTime;
+        _maxRechargeTime = _player.DashDataSO.dashRechargeTime;
+    }
+
+    public override void UpdateModule()
+    {
+        base.UpdateModule();
+        UIManager.Instance.SetFillUI(EFillUIType.Tag, _curRechargeTime, _maxRechargeTime);
     }
 
     protected override void OnGrounded()
     {
         base.OnGrounded();
-        _useable = true;
+        SetUseable(true);
     }
 
     public void TagWithInput()
@@ -29,7 +39,7 @@ public class TagModule : PlayerModule
         {
             return;
         }
-        _useable = false;
+        SetUseable(false);
         _currentCharacterType = (ECharacterType)((int)(_currentCharacterType + 1) % ((int)ECharacterType.Size));
         TagCharacter(_currentCharacterType);
         GroundedRecharge();
@@ -47,7 +57,7 @@ public class TagModule : PlayerModule
                 _player.AttachModule(EPlayerModuleType.Dash, new DashModule());
                 _player.playerAnimation.ChangeAnimator(_player.TagDataSO.hanaAnimatorController);
                 GameObject dashFlowerParticle = PoolManager.Instance.Pop(EPoolType.HanaFlowerParticle).gameObject;
-                dashFlowerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+                dashFlowerParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
                 break;
             case ECharacterType.Gen:
                 _player.ExitModules(EPlayerModuleType.Dash);
@@ -56,11 +66,14 @@ public class TagModule : PlayerModule
                 _player.AttachModule(EPlayerModuleType.ThrowDagger, new ThrowDaggerModule());
                 _player.playerAnimation.ChangeAnimator(_player.TagDataSO.genAnimatorController);
                 GameObject genDaggerParticle = PoolManager.Instance.Pop(EPoolType.GenDaggerParticle).gameObject;
-                genDaggerParticle.transform.SetTransform(_player.transform.position, _player.GetLocalScale());
+                genDaggerParticle.transform.SetTransform(_player.GetMiddlePosition(), _player.GetLocalScale());
                 break;
             default:
                 break;
         }
+
+        onTaged?.Invoke(_currentCharacterType);
+        UIManager.Instance.SetTagUI(_currentCharacterType);
         CameraManager.Instance.ShakeCamera(_player.TagDataSO.shakeCameraData);
     }
 }

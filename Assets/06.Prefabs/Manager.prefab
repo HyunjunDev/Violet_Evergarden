@@ -86,7 +86,7 @@ Transform:
   - {fileID: 5519887031895894604}
   - {fileID: 440691587491332782}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &253372182892186975
 MonoBehaviour:
@@ -282,23 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerDead:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 841669238396895478}
-        m_TargetAssemblyTypeName: MapManager, Assembly-CSharp
-        m_MethodName: ReSpawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   rooms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &8617745878598263924
 GameObject:
@@ -344,3 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adf2344698a3a24fa7ec8c50fc8c149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _vCams:
+  - {fileID: 0}
+  - {fileID: 0}
