@@ -2506,35 +2506,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: -19.5
+      value: -19.45
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: 12.5
+      value: 12.45
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -19.5
+      value: -19.45
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: -6
+      value: -5.95
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: 18.49997
+      value: 18.44997
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: -6
+      value: -5.95
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: 18.49997
+      value: 18.44997
       objectReference: {fileID: 0}
     - target: {fileID: 764323878095658967, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: 12.5
+      value: 12.45
       objectReference: {fileID: 0}
     - target: {fileID: 1907262641710713237, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
@@ -17910,7 +17910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8201944963971415061, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8201944963971415061, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
       propertyPath: m_LocalPosition.x

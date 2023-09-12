@@ -54,6 +54,8 @@ public class Room : MonoBehaviour
         List<Vector2> points = new List<Vector2>();
         Vector2 center = _cameraAreaColliderGrid.bounds.center - transform.position;
         Vector2 expend = _cameraAreaColliderGrid.bounds.size * 0.5f;
+        expend.x -= 0.05f;
+        expend.y -= 0.05f;
         Vector2 leftTop = center + new Vector2(-expend.x, expend.y);
         Vector2 leftBottom = center + new Vector2(-expend.x, -expend.y);
         Vector2 rightTop = center + new Vector2(expend.x, expend.y);

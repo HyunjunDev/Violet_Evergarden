@@ -9,17 +9,10 @@ public class RoomChanger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (collision.CompareTag("MapChanger"))
         {
-            _room.StartTimeDelay();
             _room.ChangeRoom();
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
-        {
+            _room.StartTimeDelay();
         }
     }
 }
