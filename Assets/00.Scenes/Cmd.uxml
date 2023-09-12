@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Uss/Ang.uss?fileID=7433441132597879392&amp;guid=906849a952ab3d14591b112e6c6edf18&amp;type=3#Ang" />
+    <ui:VisualElement name="Cmd" class="Cmd" style="align-items: stretch; justify-content: flex-start; display: flex;">
+        <ui:VisualElement name="parent" style="flex-grow: 1; background-color: rgba(255, 0, 0, 0);">
+            <ui:VisualElement name="child" focusable="false" style="flex-grow: 0; background-color: rgba(255, 255, 255, 0); width: 100%; height: 100%;">
+                <ui:TextField name="inputField" max-length="-1" hide-mobile-input="false" style="background-color: rgba(0, 0, 0, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-background-image-tint-color: rgb(255, 255, 255); color: rgb(0, 0, 0); opacity: 1; height: 50px; font-size: 25px; width: auto;" />
+                <ui:ScrollView name="ScrollView" style="-unity-background-image-tint-color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: flex-start; flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-direction: column;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="friend1" class="Transparent" style="flex-grow: 1; background-color: rgba(0, 255, 132, 0); display: flex;" />
+        <ui:VisualElement name="frind2" class="Transparent" style="display: flex;" />
+    </ui:VisualElement>
+</ui:UXML>

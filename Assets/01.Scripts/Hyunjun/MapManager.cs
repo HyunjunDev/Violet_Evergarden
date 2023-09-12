@@ -15,7 +15,7 @@ public class MapManager : MonoSingleTon<MapManager>
     // Start is called before the first frame update
     void Start()
     {
-       
+        
     }
 
     // Update is called once per frame
@@ -24,22 +24,12 @@ public class MapManager : MonoSingleTon<MapManager>
         
     }
 
-    public void ReSpawn()
-    {
-        foreach(var room in rooms)
-        {
-            if(room.transform.GetChild(0).gameObject.activeSelf)
-            {
-                //GameManager.Instance.Player.transform.position = room.spawnPosition;
-            }
-        }
-    }
-
     public Vector3 GetRespawnPosition()
     {
         Vector3 result = Vector3.zero;
         foreach (var room in rooms)
         {
+            Debug.Log(room.transform.GetChild(0).gameObject.name);
             if (room.transform.GetChild(0).gameObject.activeSelf)
             {
                 result = room.spawnPosition;

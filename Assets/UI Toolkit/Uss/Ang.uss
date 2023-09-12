@@ -1,0 +1,35 @@
+.Cmd {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+}
+
+.Transparent {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0);
+    display: none;
+}
+
+.Label {
+    -unity-font-style: bold;
+    font-size: 15px;
+    color: rgb(0, 248, 50);
+    background-color: rgb(0, 0, 0);
+    -unity-slice-scale: 1px;
+    flex-shrink: 1;
+    -unity-text-outline-color: rgba(255, 255, 255, 0);
+}
+
+#inputField > #unity-text-input {
+    background-color: rgb(0, 0, 0);
+    color: rgb(0, 255, 51);
+    -unity-font: url('project://database/Assets/DungGeunMo.ttf?fileID=12800000&guid=b0517e9b7c846cd4b96a374d0e283ece&type=3#DungGeunMo');
+    -unity-font-definition: initial;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 0;
+    margin-left: 0;
+    padding-right: 0;
+    width: auto;
+    height: auto;
+}

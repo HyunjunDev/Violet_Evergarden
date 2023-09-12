@@ -144,6 +144,7 @@ public class LuaCommands : MonoBehaviour
 
     public void Help()
     {
+        Debug.Log("Help");
         DebugController.Instance.ShowHelp = true;
     }
 }

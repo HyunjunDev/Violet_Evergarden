@@ -48,7 +48,7 @@ public class FallObstacle : Obstacle
         {
             Debug.Log("플레이어 들어옴");
             collision.transform.parent.SetParent(transform);
-            collision.transform.parent.position = new Vector3(collision.transform.parent.position.x, transform.position.y + transform.localScale.y * 0.39f, collision.transform.parent.position.z);
+            collision.transform.parent.position = new Vector3(collision.transform.parent.position.x, transform.position.y + transform.GetComponentInChildren<BoxCollider2D>().size.y * 0.5f, collision.transform.parent.position.z);
         }
     }
 
