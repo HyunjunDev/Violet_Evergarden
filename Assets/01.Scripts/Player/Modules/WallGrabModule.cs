@@ -8,12 +8,18 @@ public class WallGrabModule : PlayerModule
     private EFlipState _enterWallFlipState = EFlipState.None;
     public EFlipState EnterWallFlipState => _enterWallFlipState;
 
+    private Coroutine _wallExitCoroutine = null;
+
     public override void Exit()
     {
         _excuting = false;
         _keepTimer = 0f;
         _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 1f;
         _player.playerCollider.onGroundExited?.Invoke();
+        if (_wallExitCoroutine != null)
+        {
+            StopCoroutine(_wallExitCoroutine);
+        }
     }
 
     protected override void InitModule()
@@ -36,7 +42,7 @@ public class WallGrabModule : PlayerModule
 
         if (!_player.playerCollider.GetCollision(EBoundType.Left) && !_player.playerCollider.GetCollision(EBoundType.Right))
         {
-            Exit();
+            WallExit();
         }
     }
 
@@ -53,5 +59,23 @@ public class WallGrabModule : PlayerModule
             _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 0.1f;
             _enterWallFlipState = _player.playerRenderer.currentFlipState;
         }
+    }
+
+    private void WallExit()
+    {
+        if(_wallExitCoroutine != null)
+        {
+            StopCoroutine(_wallExitCoroutine);
+        }
+        _wallExitCoroutine = StartCoroutine(WallExitCoroutine());
+    }
+
+    private IEnumerator WallExitCoroutine()
+    {
+        _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 1f;
+        yield return new WaitForSeconds(_player.JumpDataSO.wallCoyoteTime);
+        _excuting = false;
+        _keepTimer = 0f;
+        _player.playerCollider.onGroundExited?.Invoke();
     }
 }
