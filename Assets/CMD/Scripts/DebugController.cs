@@ -149,9 +149,8 @@ public class DebugController : MonoBehaviour
 
                 string label = $"{command.commandId} - {command.CommandDescription}";
                 Label labelTmp = new Label(label);
-                labelTmp.AddToClassList("Label");
-
                 _scrollView.Add(labelTmp);
+                labelTmp.AddToClassList("Label");
             }
         }
 
@@ -168,9 +167,8 @@ public class DebugController : MonoBehaviour
                     Debug.Log(command.commandId);
                     string label = $"{command.commandId} - {command.CommandDescription}";
                     Label labelTmp = new Label(label);
-                    labelTmp.AddToClassList("Label");
-
                     _scrollView.Add(labelTmp);
+                    labelTmp.AddToClassList("Label");
                 }
             }
         }

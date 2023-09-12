@@ -8,7 +8,7 @@ public class DeathArea : MonoBehaviour
     {
         if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
         {
-            MapManager.Instance.onPlayerDead.Invoke();
+            EventManager.Instance.onPlayerDead.Invoke();
         }
     }
 }

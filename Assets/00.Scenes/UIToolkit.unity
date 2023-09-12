@@ -1352,8 +1352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a225d2aba831c849a5864bf329cc20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 937351792}
-  spawnPosition: {x: 82.84, y: 0.66, z: 0}
+  spawnPosition: {fileID: 0}
+  cameraAreaCollider: {fileID: 0}
+  _cameraAreaColliderGrid: {fileID: 0}
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   timeDelay: 0.4
 --- !u!60 &293695419
 PolygonCollider2D:
@@ -1489,8 +1493,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a225d2aba831c849a5864bf329cc20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 613220853}
-  spawnPosition: {x: 45.05, y: -1.2, z: 0}
+  spawnPosition: {fileID: 0}
+  cameraAreaCollider: {fileID: 0}
+  _cameraAreaColliderGrid: {fileID: 0}
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   timeDelay: 0.4
 --- !u!60 &354469265
 PolygonCollider2D:
@@ -1642,6 +1650,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 565773369298603239, guid: c291e4fa9f93d35448159f707d2d18f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 602075056799312612, guid: c291e4fa9f93d35448159f707d2d18f4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1726,9 +1738,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2733476091065816982, guid: c291e4fa9f93d35448159f707d2d18f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8657167817601007811, guid: c291e4fa9f93d35448159f707d2d18f4, type: 3}
       propertyPath: m_Name
       value: OverlayCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657167817601007811, guid: c291e4fa9f93d35448159f707d2d18f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1814,8 +1834,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a225d2aba831c849a5864bf329cc20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 1371053488}
-  spawnPosition: {x: 12.84, y: -5.85, z: 0}
+  spawnPosition: {fileID: 0}
+  cameraAreaCollider: {fileID: 0}
+  _cameraAreaColliderGrid: {fileID: 0}
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   timeDelay: 0.4
 --- !u!60 &425443652
 PolygonCollider2D:
@@ -11394,8 +11418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a225d2aba831c849a5864bf329cc20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 693288439}
-  spawnPosition: {x: -16.29, y: -4.24, z: 0}
+  spawnPosition: {fileID: 0}
+  cameraAreaCollider: {fileID: 0}
+  _cameraAreaColliderGrid: {fileID: 0}
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   timeDelay: 0.4
 --- !u!1 &511129214
 GameObject:

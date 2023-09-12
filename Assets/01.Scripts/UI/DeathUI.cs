@@ -11,7 +11,7 @@ public class DeathUI : MonoBehaviour
     private void Start()
     {
         _text = transform.Find("contentText").GetComponent<TextMeshProUGUI>();
-        MapManager.Instance.onPlayerDead.AddListener(DeathCountUp);
+        EventManager.Instance.onPlayerDead.AddListener(DeathCountUp);
     }
 
     private void DeathCountUp()
