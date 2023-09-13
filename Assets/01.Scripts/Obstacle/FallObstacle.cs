@@ -45,7 +45,7 @@ public class FallObstacle : Obstacle
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.transform.parent.SetParent(transform);
-            collision.transform.parent.position = new Vector3(collision.transform.parent.position.x, transform.position.y + transform.GetComponentInChildren<BoxCollider2D>().size.y * 0.35f, collision.transform.parent.position.z);
+            collision.transform.parent.position = new Vector3(collision.transform.parent.position.x, transform.position.y + transform.localScale.y * 0.5f, collision.transform.parent.position.z);
         }
     }
 
@@ -64,10 +64,10 @@ public class FallObstacle : Obstacle
             RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - transform.localScale.y * 0.5f, transform.position.z), Vector2.down, collision.transform.GetComponentInChildren<BoxCollider2D>().size.y * collision.transform.localScale.y, groundLayer);
             if (groundHit.collider != null)
             {
-                if (collision.transform.position.x >= transform.position.x - transform.localScale.x * 0.5f - collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x  && collision.transform.position.x <= transform.position.x + transform.localScale.x * 0.5f + collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x )
+                if (collision.transform.position.x > transform.position.x - transform.localScale.x * 0.5f - collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x && collision.transform.position.x < transform.position.x + transform.localScale.x * 0.5f + collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x )
                 {
-                    Debug.Log("충돌했어요구르트아줌마");
-                    EventManager.Instance.onPlayerDead.Invoke();
+                    if (collision.transform.position.y <= transform.position.y-transform.localScale.y*0.5f- collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x)
+                        EventManager.Instance.onPlayerDead.Invoke();
                 }
             }
         }
@@ -83,10 +83,21 @@ public class FallObstacle : Obstacle
 
             transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
 
-            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - transform.localScale.y * 0.5f, transform.position.z), Vector2.down, 0.1f, groundLayer);
+            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector2.down, transform.localScale.y * 0.5f + 0.1f, groundLayer);
+
+            // Ray 시작점
+            Vector2 rayStart = new Vector2(transform.position.x, transform.position.y);
+
+            // Ray 방향
+            Vector2 rayDirection = Vector2.down * (transform.localScale.y * 0.5f + 0.1f);
+
+            // Ray를 시각화
+            Debug.DrawRay(rayStart, rayDirection, Color.red);
 
             if (groundHit.collider != null)
             {
+                Debug.Log(groundHit.transform.name);
+                
                 isGrounded = true;
             }
         }
@@ -103,6 +114,7 @@ public class FallObstacle : Obstacle
 
     public void Update()
     {
+        //Debug.Log(isPlayerIn + " " + isGrounded);
         Gravity();
     }
 }

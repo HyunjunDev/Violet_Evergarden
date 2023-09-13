@@ -36,7 +36,8 @@ public class FallObstacleManager : MonoBehaviour, IReStartable
     {
         foreach (var obj in fallObj)
         {
-            obj.IsPlayerIn = true;
+            if (obj != null)
+                obj.IsPlayerIn = true;
             yield return new WaitForSeconds(delayInSeconds);
         }
         coroutine = null;
