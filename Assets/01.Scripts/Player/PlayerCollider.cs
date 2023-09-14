@@ -18,6 +18,8 @@ public class PlayerCollider : MonoBehaviour
     private LayerMask _rightLayer = 0;
     [SerializeField]
     private LayerMask _upLayer = 0;
+    public LayerMask DownLayer => _downLayer;
+
     [SerializeField]
     private int _detectorCount = 3;
     [SerializeField]

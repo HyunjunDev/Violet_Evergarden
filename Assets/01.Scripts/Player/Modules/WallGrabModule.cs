@@ -14,12 +14,12 @@ public class WallGrabModule : PlayerModule
     {
         _excuting = false;
         _keepTimer = 0f;
-        _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 1f;
         _player.playerCollider.onGroundExited?.Invoke();
         if (_wallExitCoroutine != null)
         {
             StopCoroutine(_wallExitCoroutine);
         }
+        _player.GetModule<GravityModule>(EPlayerModuleType.Gravity).gravityModifier = 1f;
     }
 
     protected override void InitModule()
@@ -29,13 +29,13 @@ public class WallGrabModule : PlayerModule
     public override void UpdateModule()
     {
         base.UpdateModule();
-        if(!_excuting)
+        if (!_excuting)
         {
             return;
         }
 
         _keepTimer += Time.deltaTime;
-        if(_keepTimer <= Time.fixedDeltaTime * 3f)
+        if (_keepTimer <= Time.fixedDeltaTime * 3f)
         {
             return;
         }
@@ -49,9 +49,14 @@ public class WallGrabModule : PlayerModule
     public void TryWallGrab()
     {
         _player.playerCollider.CheckCollision();
-        if (_player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right)
+        bool isHorizontal = _player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right);
+        if (isHorizontal
             || !_player.playerCollider.GetCollision(EBoundType.Up) || !_player.playerCollider.GetCollision(EBoundType.Down))
         {
+            if (isHorizontal)
+            {
+                _player.playerAnimation.WallGrabAnimation();
+            }
             _player.movingController.ResetMovingManager();
             _excuting = true;
             _keepTimer = 0f;
@@ -63,7 +68,7 @@ public class WallGrabModule : PlayerModule
 
     private void WallExit()
     {
-        if(_wallExitCoroutine != null)
+        if (_wallExitCoroutine != null)
         {
             StopCoroutine(_wallExitCoroutine);
         }
