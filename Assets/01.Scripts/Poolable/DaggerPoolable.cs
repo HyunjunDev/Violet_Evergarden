@@ -91,6 +91,11 @@ public class DaggerPoolable : PoolableObject
         Vector2 endPosition = Vector3.zero;
         Vector2 distance = new Vector2(col.size.x * hit.normal.x, col.size.y * hit.normal.y) * 0.5f;
         endPosition = hit.point + distance;
+        RaycastHit2D topHit = Physics2D.Raycast(endPosition, Vector2.up, col.size.y);
+        if(topHit.collider != null)
+        {
+            endPosition.y = topHit.point.y - col.size.y;
+        }
         _player.transform.position = endPosition;
 
         yield return new WaitForFixedUpdate();
