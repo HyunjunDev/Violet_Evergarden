@@ -8,4 +8,6 @@ public class EventManager : MonoSingleTon<EventManager>
     public UnityEvent onPlayerDead;
 
     public UnityEvent onFadeIn;
+
+    public UnityEvent onPlayerSpawn;
 }

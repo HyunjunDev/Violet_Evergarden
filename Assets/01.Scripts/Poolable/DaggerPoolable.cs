@@ -7,9 +7,18 @@ public class DaggerPoolable : PoolableObject
     private Player _player;
     private Vector2 _dir;
     private Rigidbody2D rb;
+    private Vector2 arrivePos = Vector2.zero;
 
     private Coroutine _contactCoroutine = null;
     private TrailRenderer _trailRenderer = null;
+
+    public Vector2 ArrivePos
+    {
+        get { return arrivePos; } set {  arrivePos = value; }
+    }
+
+    public Player Player { get { return _player; } }
+
 
     private void Awake()
     {
@@ -19,6 +28,7 @@ public class DaggerPoolable : PoolableObject
 
     public void SettingDagger(Vector2 dir, Player player)
     {
+        arrivePos = Vector2.zero;
         _player = player;
         _dir = dir;
     }
@@ -33,6 +43,7 @@ public class DaggerPoolable : PoolableObject
         Debug.DrawRay(transform.position, transform.right * 0.1f, Color.red);
         if (hit.collider != null)
         {
+            arrivePos = hit.point;
             Contact(hit);
         }
         rb.velocity = _dir * _player.DaggerDataSO.speed * _player.MultiplierDataSO.throwSpeedMultiplier;
