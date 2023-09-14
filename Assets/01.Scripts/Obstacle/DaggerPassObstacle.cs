@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DaggerPassObstacle : MonoBehaviour
+public class DaggerPassObstacle : Obstacle
 {
 
     private void Start()
@@ -28,5 +28,10 @@ public class DaggerPassObstacle : MonoBehaviour
                 }
             }
         }
+    }
+
+    public override void ReStart()
+    {
+        throw new System.NotImplementedException();
     }
 }
