@@ -30,6 +30,11 @@ public class PlayerAnimation : MonoBehaviour
         _animator.runtimeAnimatorController = runtimeAnimatorController;
     }
 
+    public void RebindAnimation()
+    {
+        _animator.Rebind();
+    }
+
     public void DeathAnimation()
     {
         _animator.Rebind();
@@ -47,11 +52,13 @@ public class PlayerAnimation : MonoBehaviour
     {
         _animator.SetFloat("YVelocity", 0f);
         _animator.SetTrigger("Jump");
+        _animator.Update(0);
     }
 
     public void MoveInputAnimation(float moveX)
     {
         _animator.SetBool("Move", moveX != 0f);
+        _animator.Update(0);
     }
 
     public void DashAnimation()
@@ -69,16 +76,31 @@ public class PlayerAnimation : MonoBehaviour
         {
             _animator.Play("Dash");
         }
+        _animator.Update(0);
     }
 
     public void SetDashParameter(bool value)
     {
         _animator.SetBool("Dash", value);
+        _animator.Update(0);
     }
 
     public void IdleAnimation()
     {
         _animator.Play("Idle");
+        _animator.Update(0);
+    }
+
+    public void WallGrabAnimation()
+    {
+        _animator.Play("Fall");
+        _animator.Update(0);
+    }
+
+    public void UpLayerReset()
+    {
+        _animator.Play("UpLayerEmpty");
+        _animator.Update(0);
     }
 
     public void SpawnDeathEffect()
@@ -115,6 +137,7 @@ public class PlayerAnimation : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         _player.playerInput.InputLock = false;
         _player.restarting = false;
+        _player.playerAnimation.RebindAnimation();
         EventManager.Instance.onPlayerSpawn.Invoke();
     }
 }
