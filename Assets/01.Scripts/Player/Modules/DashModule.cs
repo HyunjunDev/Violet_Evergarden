@@ -76,7 +76,7 @@ public class DashModule : PlayerModule
 
         //Jump
         _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpEnd();
-        _player.LockModules(true, EPlayerModuleType.Jump);
+        _player.LockModules(true, EPlayerModuleType.Jump, EPlayerModuleType.Move);
 
         //DashSeq
         _dashSeq?.Kill();
@@ -96,7 +96,7 @@ public class DashModule : PlayerModule
     private void DashEnd()
     {
         _player.playerAnimation.SetDashParameter(false);
-        _player.LockModules(false, EPlayerModuleType.Jump);
+        _player.LockModules(false, EPlayerModuleType.Jump, EPlayerModuleType.Move);
         _excuting = false;
         GroundedRecharge();
         _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
