@@ -28,7 +28,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     [SerializeField]
     private TextMeshProUGUI _dialogText = null;
 
-    private void Start()
+    private void Awake()
     {
         _sb = new StringBuilder();
         _dialogCanvas.SetActive(false);
