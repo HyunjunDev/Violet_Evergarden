@@ -5,7 +5,8 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField]
-    private Transform spawnPosition = null;
+    private List<Transform> spawnPosition = null;
+    private int spawnCount = 0;
     public PolygonCollider2D cameraAreaCollider = null;
     [Header("Editor Only")]
     [SerializeField]
@@ -15,6 +16,12 @@ public class Room : MonoBehaviour
 
     [SerializeField]
     private float timeDelay = 0.4f;
+
+    public int SpawnCount
+    {
+        get { return spawnCount; }
+        set { spawnCount = value; }
+    }
 
     public void ChangeRoom()
     {
@@ -29,7 +36,7 @@ public class Room : MonoBehaviour
 
     public Vector2 GetSpawnPoint()
     {
-        RaycastHit2D hit = Physics2D.Raycast(spawnPosition.position, Vector2.down, _groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(spawnPosition[spawnCount].position, Vector2.down, _groundMask);
         if (hit.collider != null)
         {
             return hit.point;
@@ -77,10 +84,10 @@ public class Room : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(_cameraAreaColliderGrid.bounds.center, _cameraAreaColliderGrid.bounds.size);
 
-        RaycastHit2D hit = Physics2D.Raycast(spawnPosition.position, Vector2.down, _groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(spawnPosition[spawnCount].position, Vector2.down, _groundMask);
         if(hit.collider != null)
         {
-            Gizmos.DrawLine(spawnPosition.position, hit.point);
+            Gizmos.DrawLine(spawnPosition[spawnCount].position, hit.point);
             Gizmos.DrawWireSphere(hit.point, 0.15f);
             Gizmos.DrawWireCube(hit.point + new Vector2(-0.02f, 0.525f), new Vector2(0.66f, 1.05f));
         }
