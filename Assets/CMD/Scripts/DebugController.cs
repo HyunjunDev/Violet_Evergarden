@@ -1,4 +1,5 @@
 using MoonSharp.Interpreter;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,14 +10,18 @@ using UnityEngine.UIElements;
 public class DebugController : MonoBehaviour
 {
     [SerializeField]
+    private VisualTreeAsset _cmdTemplate;
+    [SerializeField]
+    private UIDocument _document;
+    private ScrollView _scrollView;
+    private TextField _inputField;
+    private VisualElement _root;
+
+    [SerializeField]
     private string loadFile;
 
     private Script luaScript;
 
-    private static DebugController instance;
-    public static DebugController Instance => instance;
-
-    bool showConsole;
     bool showHelp;
     public bool ShowHelp
     {
@@ -24,11 +29,8 @@ public class DebugController : MonoBehaviour
         set { showHelp = value; }
     }
 
-    string input;
-    TextEditor editor;
-     
-
-    Vector2 scroll;
+    private static DebugController instance;
+    public static DebugController Instance => instance;
 
     public static DebugCommand SET_SCALE_OBJ;
     public static DebugCommand HELP;
@@ -40,24 +42,19 @@ public class DebugController : MonoBehaviour
 
     public List<object> commandList;
 
-
-    public void OnToggleDebug()
-    {
-        showConsole = !showConsole;
-    }
-
-    public void OnReturn()
-    {
-        if(showConsole)
-        {
-            HandleInput();
-            input = "";
-        }
-    }
+    private string autocompleteCmd;
 
     private void Awake()
     {
         instance = this;
+
+        _root = _document.rootVisualElement;
+
+        _scrollView = _root.Q<ScrollView>("ScrollView");
+        _inputField = _root.Q<TextField>("inputField");
+
+        //_inputField.selectAllOnMouseUp = false;
+        //_inputField.selectAllOnFocus = false;
 
         SET_SCALE_OBJ = new DebugCommand("set_scale", "Adjust the scale value of the desired object", FuncType.SET_SCALE_OBJ);
 
@@ -87,6 +84,8 @@ public class DebugController : MonoBehaviour
 
     private void Start()
     {
+        _root.style.display = DisplayStyle.None;
+
         UserData.RegisterAssembly();
         UserData.RegisterType<UnityAPI>();
 
@@ -98,105 +97,133 @@ public class DebugController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.BackQuote))
+        if(Input.GetKeyDown(KeyCode.BackQuote)&& _root.style.display==DisplayStyle.None)
         {
-            OnToggleDebug();
+            OnCmd();
+        }
+        else if (Input.GetKeyDown(KeyCode.BackQuote) && _root.style.display == DisplayStyle.Flex)
+        {
+            OffCmd();
+        }
+
+        if (_root.style.display == DisplayStyle.Flex)
+        {
+            _inputField.RegisterCallback<KeyDownEvent>(OnKeyDown);
+            OnUIToolkit();
         }
     }
 
-
-    private void OnGUI()
+    IEnumerator DelayFocus()
     {
-        if(!showConsole)
-        {
-            input = "";
-            return;
-        }
+        _inputField.value = string.Empty;
+        yield return new WaitForSecondsRealtime(.1f);
+        _inputField.Blur();
+        _inputField.Focus();
+    }
 
-        float y = 0f;
+    public void OnCmd()
+    {
+        Time.timeScale = 0.0f;
+        _scrollView.Clear();
+        showHelp = false;
+        _root.style.display = DisplayStyle.Flex;
+        StartCoroutine(DelayFocus());
+    }
 
-        GUIStyle gUIStyle = new GUIStyle(GUI.skin.textField);
-        gUIStyle.fontSize = UnityEngine.Screen.width / 55;
+    public void OffCmd()
+    {
+        Time.timeScale = 1.0f;
+        _root.style.display = DisplayStyle.None;
+    }
 
+    private void OnUIToolkit()
+    {
+        autocompleteCmd = string.Empty;
+        _scrollView.Clear();
 
         if (showHelp)
         {
-            GUI.Box(new Rect(0, y, Screen.width, 150),"");
-
-            Rect viewport = new Rect(0, 0, Screen.width - 30, 45 * commandList.Count);
-
-            scroll = GUI.BeginScrollView(new Rect(0, y + 5f, Screen.width, 150), scroll, viewport);
-
-            for(int i=0;i<commandList.Count; i++)
+            for (int i = 0; i < commandList.Count; i++)
             {
                 DebugCommand command = commandList[i] as DebugCommand;
 
                 string label = $"{command.commandId} - {command.CommandDescription}";
+                Label labelTmp = new Label(label);
+                labelTmp.AddToClassList("Label");
 
-                Rect labelRect = new Rect(5, 45 * i, viewport.width, 45);
-
-                GUI.Label(labelRect, label, gUIStyle);
-            }
-            GUI.EndScrollView();
-
-
-            y += 150;
-        }
-
-        GUI.Box(new Rect(0, y, Screen.width, 60), "");
-        GUI.backgroundColor = new Color(0, 0, 0, 0);
-        if (GUI.GetNameOfFocusedControl() == "")
-        {
-            if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return))
-            {
-                OnReturn();
-            }
-
-            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.BackQuote)
-            {
-                OnToggleDebug();
+                _scrollView.Add(labelTmp);
             }
         }
 
-
-        GUI.SetNextControlName("");
-        input = GUI.TextField(new Rect(10f, y + 10f, Screen.width - 20f, 45f), input, gUIStyle);
-        GUI.FocusControl("");
-
-        if (showHelp)
+        if(!showHelp&& _inputField.value != string.Empty)
         {
-            if (input != "")
+            for (int i = 0; i < commandList.Count; i++)
             {
-                showHelp = false;
-                editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
+                DebugCommand command = commandList[i] as DebugCommand;
 
-                Debug.Log(editor + " " + editor.text);
+                if (command.commandId.ToString().Contains(_inputField.value))
+                {
+                    if (autocompleteCmd == string.Empty)
+                        autocompleteCmd = command.commandId.ToString();
+                    Debug.Log(command.commandId);
+                    string label = $"{command.commandId} - {command.CommandDescription}";
+                    Label labelTmp = new Label(label);
+                    labelTmp.AddToClassList("Label");
 
-                editor.SelectNone();
-                editor.MoveTextEnd();
-            }
-        }
-
-
-        for (int i = 0; i < commandList.Count; i++)
-        {
-            DebugCommand command = commandList[i] as DebugCommand;
-
-            if (command.commandId.ToString().Contains(input))
-            {
-                Debug.Log(command.commandId);
+                    _scrollView.Add(labelTmp);
+                }
             }
         }
     }
 
+    private void OnKeyDown(KeyDownEvent evt)
+    {
+        Debug.Log(1);
+        if (evt.keyCode == KeyCode.Return)
+        {
+            HandleInput();
+            StartCoroutine(DelayFocus());
+        }
+        else if(evt.keyCode==KeyCode.Tab)
+        {
+            Debug.Log(2);
+            if (autocompleteCmd != string.Empty)
+            {
+                _inputField.value = autocompleteCmd;
+                _inputField.cursorIndex = _inputField.value.Length;
+                _inputField.selectIndex = _inputField.value.Length;
+                _inputField.selectAllOnMouseUp = false;
+                _inputField.selectAllOnFocus = false;
+                _inputField.textSelection.isSelectable = false;
+                StartCoroutine(DelayFocus2());
+            }
+        }
+        else if(evt.keyCode!=KeyCode.None)
+        {
+            Debug.Log(3);
+            if (showHelp)
+            {
+                showHelp = false;
+            }
+        }
+    }
+
+    IEnumerator DelayFocus2()
+    {
+        yield return new WaitForSecondsRealtime(.1f);
+        _inputField.textSelection.isSelectable = true;
+        _inputField.Blur();
+        _inputField.Focus();
+    }
+
     private void HandleInput()
     {
-        string[] properties = input.Split(' '); 
+        string[] properties = _inputField.value.Split(' '); 
         for (int i = 0; i < commandList.Count; i++)
         {
             DebugCommand command = commandList[i] as DebugCommand;
 
-            if(input.Contains(command.commandId))
+            if(_inputField.value.Contains(command.commandId))
             {
                 switch(command.funcType)
                 {
