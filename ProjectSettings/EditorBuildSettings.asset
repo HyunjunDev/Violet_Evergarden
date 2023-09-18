@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/JaebyCompanySplashSet/Splash.unity
     guid: b39a6e12c13224742bb728b29192acc4
   - enabled: 1
-    path: Assets/00.Scenes/JaebyCmdMap.unity
-    guid: b24d13ac16bc19645b41d3a4e1a84084
+    path: Assets/00.Scenes/Main.unity
+    guid: 9596e22c965cddc41a876b3b6fffe004
   m_configObjects: {}
