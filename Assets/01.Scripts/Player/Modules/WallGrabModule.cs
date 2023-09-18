@@ -50,13 +50,13 @@ public class WallGrabModule : PlayerModule
     {
         _player.playerCollider.CheckCollision();
         bool isHorizontal = _player.playerCollider.GetCollision(EBoundType.Left) || _player.playerCollider.GetCollision(EBoundType.Right);
-        if (isHorizontal
-            || !_player.playerCollider.GetCollision(EBoundType.Up) || !_player.playerCollider.GetCollision(EBoundType.Down))
+        if (_player.playerCollider.GetCollision(EBoundType.Up))
         {
-            if (isHorizontal)
-            {
-                _player.playerAnimation.WallGrabAnimation();
-            }
+            _player.GetModule<JumpModule>(EPlayerModuleType.Jump).jumpable = false;
+        }
+        else if (isHorizontal)
+        {
+            _player.playerAnimation.WallGrabAnimation();
             _player.movingController.ResetMovingManager();
             _excuting = true;
             _keepTimer = 0f;

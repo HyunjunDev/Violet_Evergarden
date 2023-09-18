@@ -149,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5839570014159220458}
   - component: {fileID: 6567128763448182324}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MapChanger
   m_TagString: MapChanger
   m_Icon: {fileID: 0}
