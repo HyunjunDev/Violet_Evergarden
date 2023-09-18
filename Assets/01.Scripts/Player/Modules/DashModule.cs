@@ -52,6 +52,7 @@ public class DashModule : PlayerModule
         }
 
         _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Dash");
+        _player.gameObject.layer = LayerMask.NameToLayer("Dash");
         SetUseable(false);
         _excuting = true;
 
@@ -99,5 +100,6 @@ public class DashModule : PlayerModule
         _excuting = false;
         GroundedRecharge();
         _player.playerRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
+        _player.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }

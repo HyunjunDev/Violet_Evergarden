@@ -5,7 +5,6 @@ using UnityEngine;
 public class FallObstacle : Obstacle
 {
     public LayerMask groundLayer;
-    public LayerMask playerLayer;
     public float gravity = 2.0f; // 초기 중력 가속도
     public float maxGravity = 9.8f; // 최대 중력 가속도
     public float fallSpeed = 0.1f; // 초기 떨어지는 속도
@@ -35,35 +34,79 @@ public class FallObstacle : Obstacle
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("플레이어 들어옴");
             collision.transform.parent.SetParent(transform);
         }
     }
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("플레이어 들어옴");
             collision.transform.parent.SetParent(transform);
-            collision.transform.parent.position = new Vector3(collision.transform.parent.position.x, transform.position.y + transform.GetComponentInChildren<BoxCollider2D>().size.y * 0.5f, collision.transform.parent.position.z);
+            collision.transform.parent.position = new Vector3(collision.transform.parent.position.x, transform.position.y + transform.localScale.y * 0.5f, collision.transform.parent.position.z);
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("플레이어 나감");
             collision.transform.parent.SetParent(null);
         }
     }
 
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - transform.localScale.y * 0.5f, transform.position.z), Vector2.down, collision.transform.GetComponentInChildren<BoxCollider2D>().size.y * collision.transform.localScale.y, groundLayer);
+            if (groundHit.collider != null)
+            {
+                if (collision.transform.position.x > transform.position.x - transform.localScale.x * 0.5f - collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x && collision.transform.position.x < transform.position.x + transform.localScale.x * 0.5f + collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x )
+                {
+                    if (collision.transform.position.y <= transform.position.y-transform.localScale.y*0.5f- collision.transform.GetComponentInChildren<BoxCollider2D>().size.x * collision.transform.localScale.x)
+                        EventManager.Instance.onPlayerDead.Invoke();
+                }
+            }
+        }
+    }
+
+    public void Gravity()
+    {
+        if (isPlayerIn && !isGrounded)
+        {
+            fallSpeed += gravity * Time.deltaTime;
+
+            fallSpeed = Mathf.Min(fallSpeed, maxGravity);
+
+            transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+
+            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector2.down, transform.localScale.y * 0.5f + 0.1f, groundLayer);
+
+            // Ray 시작점
+            Vector2 rayStart = new Vector2(transform.position.x, transform.position.y);
+
+            // Ray 방향
+            Vector2 rayDirection = Vector2.down * (transform.localScale.y * 0.5f + 0.1f);
+
+            // Ray를 시각화
+            Debug.DrawRay(rayStart, rayDirection, Color.red);
+
+            if (groundHit.collider != null)
+            {
+                Debug.Log(groundHit.transform.name);
+                
+                isGrounded = true;
+            }
+        }
+    }
+
+
     private void Awake()
     {
-        MapManager.Instance.onPlayerDead.AddListener(ReStart);
+        EventManager.Instance.onFadeIn.AddListener(ReStart);
         startPos = transform.position;
         startGravity = gravity;
         startFallSpeed = fallSpeed;
@@ -71,22 +114,7 @@ public class FallObstacle : Obstacle
 
     public void Update()
     {
-        if (isPlayerIn&&!isGrounded) 
-        {
-            fallSpeed += gravity * Time.deltaTime;
-
-            // 중력 가속도가 최대 중력 가속도를 초과하지 않도록 제한합니다.
-            fallSpeed = Mathf.Min(fallSpeed, maxGravity);
-
-            transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
-
-            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - transform.localScale.y * 0.5f, transform.position.z), Vector2.down, 0.1f, groundLayer);
-
-            // ground 레이어와 충돌했다면 멈추도록 합니다.
-            if (groundHit.collider != null)
-            {
-                isGrounded = true;
-            }
-        }
+        //Debug.Log(isPlayerIn + " " + isGrounded);
+        Gravity();
     }
 }

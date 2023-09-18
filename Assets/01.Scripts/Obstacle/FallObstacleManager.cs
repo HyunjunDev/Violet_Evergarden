@@ -15,12 +15,12 @@ public class FallObstacleManager : MonoBehaviour, IReStartable
 
     private void Awake()
     {
-        MapManager.Instance.onPlayerDead.AddListener(ReStart);
+        EventManager.Instance.onFadeIn.AddListener(ReStart);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (1 << collision.gameObject.layer== LayerMask.GetMask("Player")&&isFirst)
+        if (collision.gameObject.CompareTag("Player") && isFirst)
         {
             if (coroutine != null)
             {
@@ -36,7 +36,8 @@ public class FallObstacleManager : MonoBehaviour, IReStartable
     {
         foreach (var obj in fallObj)
         {
-            obj.IsPlayerIn = true;
+            if (obj != null)
+                obj.IsPlayerIn = true;
             yield return new WaitForSeconds(delayInSeconds);
         }
         coroutine = null;

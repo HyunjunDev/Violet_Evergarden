@@ -6,9 +6,9 @@ public class DeathArea : MonoBehaviour
 {
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            MapManager.Instance.onPlayerDead.Invoke();
+            EventManager.Instance.onPlayerDead.Invoke();
         }
     }
 }

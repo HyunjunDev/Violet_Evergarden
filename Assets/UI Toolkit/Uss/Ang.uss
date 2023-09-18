@@ -19,6 +19,14 @@
     -unity-slice-scale: 1px;
     flex-shrink: 1;
     -unity-text-outline-color: rgba(255, 255, 255, 0);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 #inputField > #unity-text-input {
@@ -32,4 +40,5 @@
     padding-right: 0;
     width: auto;
     height: auto;
+    flex-shrink: 1;
 }

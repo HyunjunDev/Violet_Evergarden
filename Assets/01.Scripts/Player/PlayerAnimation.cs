@@ -130,6 +130,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         UIManager.Instance.FadeStart(0f, 1f, 0.4f);
         yield return new WaitForSeconds(0.4f);
+        EventManager.Instance.onFadeIn.Invoke();
         _player.transform.position = MapManager.Instance.GetRespawnPosition();
         yield return new WaitForSeconds(0.2f);
         UIManager.Instance.FadeStart(1f, 0f, 0.4f);
@@ -137,5 +138,6 @@ public class PlayerAnimation : MonoBehaviour
         _player.playerInput.InputLock = false;
         _player.restarting = false;
         _player.playerAnimation.RebindAnimation();
+        EventManager.Instance.onPlayerSpawn.Invoke();
     }
 }

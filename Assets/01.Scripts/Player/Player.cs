@@ -73,7 +73,7 @@ public class Player : MonoBehaviour, IReStartable
         _modules.Add(EPlayerModuleType.Death, new DeathModule());
         _modules.Add(EPlayerModuleType.Tag, new TagModule());
 
-        MapManager.Instance.onPlayerDead.AddListener(ReStart);
+        EventManager.Instance.onPlayerDead.AddListener(ReStart);
         foreach (var module in _modules.Values)
         {
             module.SettingModule(this);
