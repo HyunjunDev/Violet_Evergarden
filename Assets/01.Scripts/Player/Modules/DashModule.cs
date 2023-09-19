@@ -57,7 +57,8 @@ public class DashModule : PlayerModule
         _excuting = true;
 
         //Reset
-        _player.movingController.ResetMovingManager();
+        _player.PlayerStopForce();
+        //_player.movingController.ResetMovingManager();
         _player.playerAnimation.DashAnimation();
         _player.playerAnimation.SetDashParameter(true);
 

@@ -2145,11 +2145,11 @@ RectTransform:
   - {fileID: 3285293758855759737}
   - {fileID: 5902525735925790359}
   - {fileID: 3922982101973889720}
+  - {fileID: 3780640781458394572}
   - {fileID: 7218104248161941662}
   - {fileID: 2195228822974340980}
-  - {fileID: 3780640781458394572}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

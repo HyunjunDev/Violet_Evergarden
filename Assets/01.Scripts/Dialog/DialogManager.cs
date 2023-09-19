@@ -86,8 +86,15 @@ public class DialogManager : MonoSingleTon<DialogManager>
     /// <returns></returns>
     public bool DialogStart(DialogDataSO data, Action callback)
     {
-        if (_dialogLock || _excuting)
+        if (_dialogLock || data == null)
             return false;
+        if(_excuting)
+        {
+            if(_dialogCoroutine != null)
+            {
+                StopCoroutine(_dialogCoroutine);
+            }
+        }
         _excuting = true;
         _input = false;
         _dialogCanvas.SetActive(true);

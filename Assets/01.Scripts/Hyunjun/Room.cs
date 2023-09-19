@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Room : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Room : MonoBehaviour
     [SerializeField]
     private float timeDelay = 0.4f;
 
+    [SerializeField]
+    private UnityEvent onEnterRoom = null;
+
     public int SpawnCount
     {
         get { return spawnCount; }
@@ -26,6 +30,7 @@ public class Room : MonoBehaviour
     public void ChangeRoom()
     {
         MapManager.Instance.ChangeRoom(this);
+        onEnterRoom?.Invoke();
     }
 
     public void StartTimeDelay()

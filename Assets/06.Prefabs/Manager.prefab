@@ -239,6 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startDialog: {fileID: 11400000, guid: b7722489edd39a74f9d26e2f4b514440, type: 2}
+  _dashDialog: {fileID: 11400000, guid: 9fdc34c1323a30746b731a5db2e37adc, type: 2}
+  _tagDialog: {fileID: 11400000, guid: 65333f3fc31275747a48d627ef9e52d5, type: 2}
 --- !u!1 &6909665735410308146
 GameObject:
   m_ObjectHideFlags: 0

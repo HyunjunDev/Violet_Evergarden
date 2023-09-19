@@ -35,7 +35,7 @@ public class TagModule : PlayerModule
 
     public void TagWithInput()
     {
-        if(!_useable)
+        if(!_useable || _locked)
         {
             return;
         }
