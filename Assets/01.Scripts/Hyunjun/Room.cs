@@ -16,10 +16,8 @@ public class Room : MonoBehaviour
     private LayerMask _groundMask = 0;
 
     [SerializeField]
-    private float timeDelay = 0.4f;
-
-    [SerializeField]
-    private UnityEvent onEnterRoom = null;
+    private UnityEvent _onEnterRoom = null;
+    public UnityEvent OnEnterRoom => _onEnterRoom;
 
     public int SpawnCount
     {
@@ -30,13 +28,6 @@ public class Room : MonoBehaviour
     public void ChangeRoom()
     {
         MapManager.Instance.ChangeRoom(this);
-        onEnterRoom?.Invoke();
-    }
-
-    public void StartTimeDelay()
-    {
-        if (this.gameObject.activeSelf == true)
-            StartCoroutine(TimeDelay(timeDelay));
     }
 
     public Vector2 GetSpawnPoint()
@@ -47,13 +38,6 @@ public class Room : MonoBehaviour
             return hit.point;
         }
         return Vector2.zero;
-    }
-
-    IEnumerator TimeDelay(float time)
-    {
-        Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(time);
-        Time.timeScale = 1.0f;
     }
 
     [ContextMenu("카메라 영역 굽기")]

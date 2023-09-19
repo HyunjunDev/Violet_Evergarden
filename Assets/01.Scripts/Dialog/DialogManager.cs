@@ -85,6 +85,10 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         if (data == null)
             return false;
+        if(_dialogCoroutine != null)
+        {
+            DialogForceExit();
+        }
         _excuting = true;
         _input = false;
         _dialogCanvas.SetActive(true);
