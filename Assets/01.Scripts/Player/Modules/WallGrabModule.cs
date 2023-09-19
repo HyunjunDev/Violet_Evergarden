@@ -57,7 +57,8 @@ public class WallGrabModule : PlayerModule
         else if (isHorizontal)
         {
             _player.playerAnimation.WallGrabAnimation();
-            _player.movingController.ResetMovingManager();
+            _player.PlayerStopForce();
+            //_player.movingController.ResetMovingManager();
             _excuting = true;
             _keepTimer = 0f;
             _player.GetModule<JumpModule>(EPlayerModuleType.Jump).JumpRecharge();

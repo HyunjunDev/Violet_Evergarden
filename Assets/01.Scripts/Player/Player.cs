@@ -212,6 +212,13 @@ public class Player : MonoBehaviour, IReStartable
         return result;
     }
 
+    public void PlayerStopForce()
+    {
+        ExitModules(EPlayerModuleType.Move, EPlayerModuleType.Jump, EPlayerModuleType.Dash);
+        _movingController.ResetMovingManager();
+        _playerAnimation.RebindAnimation();
+    }
+
     public void ReStart()
     {
         if(restarting)

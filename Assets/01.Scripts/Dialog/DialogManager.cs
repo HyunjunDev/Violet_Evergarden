@@ -15,7 +15,6 @@ public class DialogManager : MonoSingleTon<DialogManager>
 
     [SerializeField]
     private float _dialogCooltime = 0.6f;
-    private bool _dialogLock = false;
 
     [SerializeField]
     private GameObject _dialogCanvas = null;
@@ -28,7 +27,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     [SerializeField]
     private TextMeshProUGUI _dialogText = null;
 
-    private void Start()
+    private void Awake()
     {
         _sb = new StringBuilder();
         _dialogCanvas.SetActive(false);
@@ -38,7 +37,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         if (!_excuting || _input)
             return;
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
             _input = true;
         }
@@ -62,8 +61,6 @@ public class DialogManager : MonoSingleTon<DialogManager>
         _excuting = false;
         _input = false;
         _dialogCanvas.SetActive(false);
-        if (!_dialogLock)
-            StartCoroutine(DialogCooltimeCoroutine());
     }
 
 
@@ -86,7 +83,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     /// <returns></returns>
     public bool DialogStart(DialogDataSO data, Action callback)
     {
-        if (_dialogLock || _excuting)
+        if (data == null)
             return false;
         _excuting = true;
         _input = false;
@@ -116,7 +113,6 @@ public class DialogManager : MonoSingleTon<DialogManager>
                     if (_input)
                     {
                         _input = false;
-                        Debug.Log("พฦคำ");
                         _dialogText.SetText(targetText);
                         break;
                     }
@@ -133,12 +129,5 @@ public class DialogManager : MonoSingleTon<DialogManager>
 
         DialogEnd();
         callback?.Invoke();
-    }
-
-    private IEnumerator DialogCooltimeCoroutine()
-    {
-        _dialogLock = true;
-        yield return new WaitForSeconds(_dialogCooltime);
-        _dialogLock = false;
     }
 }
