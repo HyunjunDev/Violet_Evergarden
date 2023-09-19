@@ -15,7 +15,6 @@ public class DialogManager : MonoSingleTon<DialogManager>
 
     [SerializeField]
     private float _dialogCooltime = 0.6f;
-    private bool _dialogLock = false;
 
     [SerializeField]
     private GameObject _dialogCanvas = null;
@@ -62,8 +61,6 @@ public class DialogManager : MonoSingleTon<DialogManager>
         _excuting = false;
         _input = false;
         _dialogCanvas.SetActive(false);
-        if (!_dialogLock)
-            StartCoroutine(DialogCooltimeCoroutine());
     }
 
 
@@ -86,15 +83,8 @@ public class DialogManager : MonoSingleTon<DialogManager>
     /// <returns></returns>
     public bool DialogStart(DialogDataSO data, Action callback)
     {
-        if (_dialogLock || data == null)
+        if (data == null)
             return false;
-        if(_excuting)
-        {
-            if(_dialogCoroutine != null)
-            {
-                StopCoroutine(_dialogCoroutine);
-            }
-        }
         _excuting = true;
         _input = false;
         _dialogCanvas.SetActive(true);
@@ -139,12 +129,5 @@ public class DialogManager : MonoSingleTon<DialogManager>
 
         DialogEnd();
         callback?.Invoke();
-    }
-
-    private IEnumerator DialogCooltimeCoroutine()
-    {
-        _dialogLock = true;
-        yield return new WaitForSeconds(_dialogCooltime);
-        _dialogLock = false;
     }
 }

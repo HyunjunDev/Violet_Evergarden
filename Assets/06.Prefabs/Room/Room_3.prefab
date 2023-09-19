@@ -18208,6 +18208,30 @@ PrefabInstance:
       propertyPath: spawnPosition.Array.data[0]
       value: 
       objectReference: {fileID: 7817467322867354646}
+    - target: {fileID: 8806696356122694212, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
+      propertyPath: onEnterRoom.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806696356122694212, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
+      propertyPath: onEnterRoom.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806696356122694212, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
+      propertyPath: onEnterRoom.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806696356122694212, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
+      propertyPath: onEnterRoom.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TagDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806696356122694212, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
+      propertyPath: onEnterRoom.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TutorialManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806696356122694212, guid: d0faddb56e4cfe246af1ca35c46b9183, type: 3}
+      propertyPath: onEnterRoom.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
