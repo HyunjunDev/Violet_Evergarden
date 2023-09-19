@@ -38,7 +38,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         if (!_excuting || _input)
             return;
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
             _input = true;
         }
@@ -116,7 +116,6 @@ public class DialogManager : MonoSingleTon<DialogManager>
                     if (_input)
                     {
                         _input = false;
-                        Debug.Log("พฦคำ");
                         _dialogText.SetText(targetText);
                         break;
                     }
