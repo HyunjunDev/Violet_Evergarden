@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DeathArea : MonoBehaviour
 {
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !EventManager.Instance.IsDeading)
         {
             EventManager.Instance.onPlayerDead.Invoke();
         }
