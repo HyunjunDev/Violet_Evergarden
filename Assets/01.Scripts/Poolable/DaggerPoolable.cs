@@ -41,7 +41,7 @@ public class DaggerPoolable : PoolableObject
         }
         RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.right * -0.25f, transform.right, 0.35f, _player.DaggerDataSO.layerMask);
         Debug.DrawRay(transform.position, transform.right * 0.1f, Color.red);
-        if (hit.collider != null)
+        if (hit.collider != null && gameObject.activeSelf)
         {
             arrivePos = hit.point;
             Contact(hit);
