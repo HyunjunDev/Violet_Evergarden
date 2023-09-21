@@ -83,7 +83,7 @@ public class FallObstacle : Obstacle
 
             transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
 
-            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector2.down, transform.localScale.y * 0.5f + 0.1f, groundLayer);
+            RaycastHit2D groundHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector2.down, transform.localScale.y * 0.5f + 0.05f, groundLayer);
 
             // Ray Ω√¿€¡°
             Vector2 rayStart = new Vector2(transform.position.x, transform.position.y);
