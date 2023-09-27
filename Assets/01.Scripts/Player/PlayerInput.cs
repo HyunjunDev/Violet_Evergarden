@@ -36,6 +36,12 @@ public class PlayerInput : MonoBehaviour
 
     private void GetInput()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            EventManager.Instance.onPlayerDead.Invoke();
+        }
+
+
         if (_inputLock || Time.timeScale < 0.01f)
         {
             return;
